@@ -9,6 +9,9 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue';
 
+// lazy load
+// const HelloWorld = () => import('@/components/HelloWorld');
+
 export default {
   name: 'home',
   components: {
