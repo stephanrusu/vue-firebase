@@ -4,7 +4,7 @@ import 'buefy/lib/buefy.css';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import './styles/bulma.scss'; // custom styles entry point
+// import './styles/bulma.scss'; // custom styles entry point
 
 Vue.use(Buefy);
 

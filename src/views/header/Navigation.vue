@@ -10,15 +10,27 @@
     </div>
     <div class='navbar-menu'>
       <div class='navbar-end'>
-        <router-link class='navbar-item' to='/'>Home</router-link>
-        <router-link class='navbar-item' to='/about'>About</router-link>
+        <router-link class='navbar-item' active-class='is-active' to='/messages' exact>
+          Messages
+        </router-link>
+        <router-link class='navbar-item' active-class='is-active' to='/sponsors' exact>
+          Sponsors
+        </router-link>
+        <router-link class='navbar-item' active-class='is-active' to='/pharmacies' exact>
+          Pharmacies
+        </router-link>
+        <router-link class='navbar-item' active-class='is-active' to='/notifications' exact>
+          Notifications
+        </router-link>
+        <router-link class='navbar-item' active-class='is-active' to='/topics' exact>
+          Topics
+        </router-link>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-
 export default {
   name: 'Navigation',
 };
