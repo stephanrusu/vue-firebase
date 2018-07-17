@@ -1,7 +1,7 @@
 <template>
-  <div class='column'>
-    <PageHeader title='Topics' :results='10'/>
-    Topics
+  <div class="column">
+    <PageHeader :title="title" :results="10"/>
+    {{ title }}
   </div>
 </template>
 
@@ -10,6 +10,9 @@ import PageHeader from '@/components/header/PageHeader.vue';
 
 export default {
   name: 'Topics',
+  data: () => ({
+    title: 'Topics',
+  }),
   components: {
     PageHeader,
   },

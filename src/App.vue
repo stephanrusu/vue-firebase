@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Navigation />
-    <div class='container'>
-      <div class='columns'>
+    <div class="container">
+      <div class="columns">
         <router-view/>
       </div>
     </div>

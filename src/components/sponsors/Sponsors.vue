@@ -1,7 +1,7 @@
 <template>
-  <div class='column'>
-    <PageHeader title='Sponsors' :results='10'/>
-    Sponsors
+  <div class="column">
+    <PageHeader :title="title" :results="10"/>
+    {{ title }}
   </div>
 </template>
 
@@ -10,6 +10,9 @@ import PageHeader from '@/components/header/PageHeader.vue';
 
 export default {
   name: 'Sponsors',
+  data: () => ({
+    title: 'Sponsors',
+  }),
   components: {
     PageHeader,
   },
