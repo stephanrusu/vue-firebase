@@ -10,19 +10,19 @@
     </div>
     <div class='navbar-menu'>
       <div class='navbar-end'>
-        <router-link class='navbar-item' active-class='is-active' to='/messages' exact>
+        <router-link class='navbar-item' active-class='is-active' :to='routes.ROUTE_MESSAGES' exact>
           Messages
         </router-link>
-        <router-link class='navbar-item' active-class='is-active' to='/sponsors' exact>
+        <router-link class='navbar-item' active-class='is-active' :to='routes.ROUTE_SPONSORS' exact>
           Sponsors
         </router-link>
-        <router-link class='navbar-item' active-class='is-active' to='/pharmacies' exact>
+        <router-link class='navbar-item' active-class='is-active' :to='routes.ROUTE_PHARMACIES' exact>
           Pharmacies
         </router-link>
-        <router-link class='navbar-item' active-class='is-active' to='/notifications' exact>
+        <router-link class='navbar-item' active-class='is-active' :to='routes.ROUTE_NOTIFICATIONS' exact>
           Notifications
         </router-link>
-        <router-link class='navbar-item' active-class='is-active' to='/topics' exact>
+        <router-link class='navbar-item' active-class='is-active' :to='routes.ROUTE_TOPICS' exact>
           Topics
         </router-link>
       </div>
@@ -31,7 +31,14 @@
 </template>
 
 <script>
+import * as routes from '@/constants/';
+
 export default {
   name: 'Navigation',
+  data: () => {
+    return {
+      routes,
+    };
+  },
 };
 </script>

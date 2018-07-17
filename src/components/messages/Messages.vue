@@ -1,6 +1,6 @@
 <template>
   <div class='column'>
-    <PageHeader title='Messages' results='10'/>
+    <PageHeader title='Messages' :results='10'/>
     {{ message }}
   </div>
 </template>
@@ -19,6 +19,6 @@ export default {
 };
 </script>
 
-<style lang='sass'>
+<style lang='scss'>
 
 </style>

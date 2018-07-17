@@ -8,6 +8,7 @@ export const TYPE_LOGIN = 'login';
 export const TYPE_REGISTER = 'register';
 export const TYPE_LOGOUT = 'logout';
 export const TYPE_AUTH = 'auth';
+export const TYPE_HOME = 'home';
 
 export const ROUTE_HOME = '/';
 export const ROUTE_MESSAGES = `/${TYPE_MESSAGES}`;

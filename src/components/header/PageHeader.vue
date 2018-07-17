@@ -28,7 +28,12 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.hero {
+  margin: 1.5rem 0;
 
-<style>
-
+  .hero-body {
+    padding: 1.5rem;
+  }
+}
 </style>
