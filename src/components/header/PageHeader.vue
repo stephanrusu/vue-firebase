@@ -1,7 +1,7 @@
 <template>
   <section class="hero is-primary">
     <div class="hero-body">
-      <div class="container">
+      <div class="container has-text-centered">
         <h1 class="title">
           {{ title }}
         </h1>
@@ -31,6 +31,7 @@ export default {
 <style lang="scss">
 .hero {
   margin: 1.5rem 0;
+  border-radius: 5px;
 
   .hero-body {
     padding: 1.5rem;

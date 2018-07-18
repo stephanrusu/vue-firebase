@@ -1,9 +1,8 @@
 <template>
   <div class="column">
-    <PageHeader :results="messages.length" :title="title" />
-    {{ title }}
+    <PageHeader :title="title" :results="messages.length" />
     <div class="list-items">
-      <div class="list-item" v-for="item of messages" :key="item['.key']">
+      <div class="list-item" v-for="item in messages" :key="item['.key']">
         <div>{{ item.title }}</div>
         <div>{{ item.message }}</div>
       </div>
@@ -17,18 +16,14 @@ import { database } from '@/firebase';
 
 export default {
   name: 'Messages',
-  components: {
-    PageHeader,
-  },
   data: () => ({
     title: 'Messages',
   }),
+  components: {
+    PageHeader,
+  },
   firebase: {
     messages: database.ref('messages'),
   },
 };
 </script>
-
-<style lang="scss">
-
-</style>

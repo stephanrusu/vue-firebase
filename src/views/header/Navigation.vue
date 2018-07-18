@@ -40,3 +40,12 @@ export default {
   name: 'Navigation',
 };
 </script>
+
+<style lang="scss">
+.navbar {
+  &.has-shadow {
+    box-shadow: 5px 5px 0 0 #f5f5f5;
+  }
+}
+</style>
+
