@@ -1,17 +1,14 @@
 <template>
   <div class="column">
     <page-header :title="title" :results="topics.length" />
-    <div class="list-items">
-      <div class="list-item" v-for="item in topics" :key="item['.key']">
-        <div>{{ item.title }}</div>
-      </div>
-    </div>
+    <topics-list :itemsList="topics" />
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
 import { database } from '@/firebase';
+import TopicsList from '@/views/topics/TopicsList.vue';
 
 export default {
   name: 'Topics',
@@ -20,6 +17,7 @@ export default {
   }),
   components: {
     PageHeader,
+    TopicsList,
   },
   firebase: {
     topics: database.ref('topics'),

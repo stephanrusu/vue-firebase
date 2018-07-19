@@ -8,7 +8,7 @@
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
 import { database } from '@/firebase';
-import MessagesList from './MessagesList.vue';
+import MessagesList from '@/views/messages/MessagesList.vue';
 
 export default {
   name: 'Messages',

@@ -35,8 +35,9 @@ export default {
 
 .tag {
   margin: 0.75rem;
+  min-width: 75px;
 
-  .is-high {
+  &.is-high {
     background-color: $orange;
     color: $white;
   }

@@ -42,9 +42,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../styles/extend/variables';
 .navbar {
   &.has-shadow {
     box-shadow: 5px 5px 0 0 #f5f5f5;
+  }
+  .navbar-item {
+    &:not(.is-active) {
+      color: lighten($grey, 10%);
+    }
   }
 }
 </style>

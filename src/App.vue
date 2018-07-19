@@ -23,7 +23,7 @@ export default {
 <style lang="scss">
 @import './styles/bulma'; // custom styles entry point
 
-body {
+html, body {
   background-color: $mist;
 }
 
@@ -34,7 +34,11 @@ body {
   &:last-child {
     margin-bottom: 0;
   }
-
+  .card-header {
+    .card-header-title {
+      font-weight: 400;
+    }
+  }
   .card-content {
     padding: {
       left: 0.75rem;

@@ -8,7 +8,7 @@
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
 import { database } from '@/firebase';
-import NotificationsList from './NotificationsList.vue';
+import NotificationsList from '@/views/notifications/NotificationsList.vue';
 
 export default {
   name: 'Notifications',
