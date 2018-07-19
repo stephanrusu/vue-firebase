@@ -16,16 +16,7 @@
 <script>
 export default {
   name: 'PageHeader',
-  props: {
-    title: {
-      type: String,
-      default: 'Page',
-    },
-    results: {
-      type: Number,
-      default: 0,
-    },
-  },
+  props: ['title', 'results'],
 };
 </script>
 <style lang="scss">
