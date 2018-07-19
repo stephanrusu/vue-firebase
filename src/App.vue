@@ -21,8 +21,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import './styles/bulma'; // custom styles entry point
+
 body {
-  background-color: #fbfdff;
+  background-color: $mist;
 }
 
 .card {

@@ -1,13 +1,7 @@
 <template>
   <div class="column">
-    <PageHeader :title="title" :results="notifications.length"/>
-    <NotificationsList />
-    <div class="list-items">
-      <div class="list-item" v-for="item of notifications" :key="item['.key']">
-        <div>{{ item.title }}</div>
-        <div>{{ item.description }}</div>
-      </div>
-    </div>
+    <page-header :title="title" :results="notifications.length" />
+    <notifications-list :itemsList="notifications" />
   </div>
 </template>
 

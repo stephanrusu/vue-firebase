@@ -4,22 +4,22 @@
       <p class="card-header-title">
         {{ message.title }}
       </p>
-      <span class="tag is-capitalized" :class="`is-${legend[message.importance].level}`">
+      <b-tag :type="`is-${legend[message.importance].level}`" class="is-capitalized">
         {{ legend[message.importance].label }}
-      </span>
+      </b-tag>
     </header>
     <div class="card-content">
       <div class="content">
-        {{ message.message }}
+        <p>{{ message.message }}</p>
       </div>
     </div>
-    <div class="card-footer">
-      <span class="card-footer-item">
-        Created:&emsp;<b>{{ message.date | moment('HH:MM DD MMM, YYYY') }}</b>
+    <footer class="card-footer">
+      <span class="card-footer-item has-justify-content-start">
+        Created:&ensp;<b>{{ message.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
       <a href="#" class="card-footer-item">Edit</a>
       <a href="#" class="card-footer-item">Delete</a>
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -30,8 +30,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
-  .tag {
-    margin: 0.75rem;
+<style lang="scss" scoped>
+@import '../../styles/extend/variables';
+
+.tag {
+  margin: 0.75rem;
+
+  .is-high {
+    background-color: $orange;
+    color: $white;
   }
+}
 </style>

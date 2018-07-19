@@ -1,6 +1,6 @@
 <template>
   <div class="column">
-    <PageHeader :title="title" :results="sponsors.length"/>
+    <page-header :title="title" :results="sponsors.length" />
     <div class="list-items">
       <div class="list-item" v-for="item in sponsors" :key="item['.key']">
         <div>{{ item.title }}</div>

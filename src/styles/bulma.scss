@@ -1,10 +1,5 @@
-@import "extendVariables";
-@import "~bulma/sass/utilities/initial-variables";
+@import "extend/variables";
+@import "extend/utilities";
 @import "~buefy/src/scss/utils/_all";
 @import "~bulma/bulma";
 @import "~buefy/src/scss/buefy";
-
-.tag.is-high {
-  background-color: $orange;
-  color: $white;
-}

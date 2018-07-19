@@ -1,13 +1,13 @@
 <template>
-  <section class="hero is-primary">
+  <section class="hero is-info">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h1 class="title">
+        <p class="title">
           {{ title }}
-        </h1>
-        <h2 class="subtitle">
+        </p>
+        <p class="subtitle">
           {{ results }} results
-        </h2>
+        </p>
       </div>
     </div>
   </section>
@@ -26,6 +26,13 @@ export default {
 
   .hero-body {
     padding: 1.5rem;
+
+    .title {
+      font-size: 1.5rem;
+    }
+    .subtitle {
+      font-size: 1rem;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="column">
-    <PageHeader :title="title" :results="messages.length" />
-    <MessagesList :itemsList="messages" :legend="legend"/>
+    <page-header :title="title" :results="messages.length" />
+    <messages-list :itemsList="messages" :legend="legend" />
   </div>
 </template>
 
