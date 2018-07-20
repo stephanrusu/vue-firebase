@@ -1,19 +1,18 @@
 <template>
   <div class="column">
     <page-header :title="title" :results="messages.length" />
-    <messages-list :itemsList="messages" :legend="legend" />
+    <router-view :legend="legend"></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
 import { database } from '@/firebase';
-import MessagesList from '@/views/messages/MessagesList.vue';
 
 export default {
   name: 'Messages',
   data: () => ({
-    title: 'Messages',
+    title: 'messages',
     legend: {
       1: { level: 'light', label: 'informative' },
       2: { level: 'success', label: 'low' },
@@ -24,7 +23,6 @@ export default {
   }),
   components: {
     PageHeader,
-    MessagesList,
   },
   firebase: {
     messages: database.ref('messages'),

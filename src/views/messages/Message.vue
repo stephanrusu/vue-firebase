@@ -17,7 +17,7 @@
       <span class="card-footer-item create-date has-justify-content-start">
         Created:&ensp;<b>{{ message.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
-      <a href="#" class="card-footer-item">Edit</a>
+      <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">Edit</router-link>
       <a href="#" class="card-footer-item">Delete</a>
     </footer>
   </div>
@@ -26,7 +26,7 @@
 <script>
 export default {
   name: 'Message',
-  props: ['message', 'legend'],
+  props: ['message', 'legend', 'editId'],
 };
 </script>
 

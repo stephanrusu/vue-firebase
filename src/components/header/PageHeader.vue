@@ -29,6 +29,7 @@ export default {
 
     .title {
       font-size: 1.5rem;
+      text-transform: capitalize;
     }
     .subtitle {
       font-size: 1rem;
