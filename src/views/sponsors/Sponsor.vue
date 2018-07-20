@@ -6,7 +6,7 @@
       </p>
     </header>
     <footer class="card-footer">
-      <span class="card-footer-item has-justify-content-start">
+      <span class="card-footer-item create-date has-justify-content-start">
         Created:&ensp;<b>{{ sponsor.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
       <a href="#" class="card-footer-item">Edit</a>
@@ -22,7 +22,3 @@ export default {
   props: ['sponsor'],
 };
 </script>
-
-<style>
-
-</style>

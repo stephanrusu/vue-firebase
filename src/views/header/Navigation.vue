@@ -1,48 +1,64 @@
 <template>
   <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" >
-    <div class="navbar-brand">
-      <router-link :to="{ name: 'home' }" class="navbar-item" >Pollen</router-link>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" >
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
-      </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-end">
-        <router-link :to="{ name: 'messages' }"
-          class="navbar-item" active-class="is-active" exact >
-            Messages
-        </router-link>
-        <router-link :to="{ name: 'sponsors' }"
-          class="navbar-item" active-class="is-active" exact >
-            Sponsors
-        </router-link>
-        <router-link :to="{ name: 'pharmacies' }"
-          class="navbar-item" active-class="is-active" exact >
-            Pharmacies
-        </router-link>
-        <router-link :to="{ name: 'notifications' }"
-          class="navbar-item" active-class="is-active" exact >
-            Notifications
-        </router-link>
-        <router-link :to="{ name: 'topics' }"
-          class="navbar-item" active-class="is-active" exact >
-            Topics
-        </router-link>
+      <div class="container">
+        <div class="navbar-brand">
+          <router-link :to="{ name: 'home' }"
+            :class="{ 'is-active': isMobileActive }"
+            class="navbar-item">
+            Pollen
+          </router-link>
+          <a role="button" class="navbar-burger"
+            aria-label="menu" aria-expanded="false" @click="toggleMenu">
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </a>
+        </div>
+        <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
+          <div class="navbar-end">
+            <router-link :to="{ name: 'messages' }"
+              class="navbar-item" active-class="is-active" exact >
+                Messages
+            </router-link>
+            <router-link :to="{ name: 'sponsors' }"
+              class="navbar-item" active-class="is-active" exact >
+                Sponsors
+            </router-link>
+            <router-link :to="{ name: 'pharmacies' }"
+              class="navbar-item" active-class="is-active" exact >
+                Pharmacies
+            </router-link>
+            <router-link :to="{ name: 'notifications' }"
+              class="navbar-item" active-class="is-active" exact >
+                Notifications
+            </router-link>
+            <router-link :to="{ name: 'topics' }"
+              class="navbar-item" active-class="is-active" exact >
+                Topics
+            </router-link>
+          </div>
+        </div>
       </div>
-    </div>
   </nav>
 </template>
 
 <script>
 export default {
   name: 'Navigation',
+  data: () => ({
+    isMobileActive: false,
+  }),
+  methods: {
+    toggleMenu() {
+      this.isMobileActive = !this.isMobileActive;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 @import '../../styles/extend/variables';
+
 .navbar {
   &.has-shadow {
     box-shadow: 5px 5px 0 0 #f5f5f5;
@@ -54,4 +70,3 @@ export default {
   }
 }
 </style>
-

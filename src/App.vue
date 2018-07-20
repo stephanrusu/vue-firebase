@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <Navigation />
-    <div class="container">
-      <div class="columns">
-        <router-view/>
+    <section class="section is-extra-low">
+      <div class="container">
+        <div class="columns">
+          <router-view/>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -34,15 +36,22 @@ html, body {
   &:last-child {
     margin-bottom: 0;
   }
-  .card-header {
-    .card-header-title {
-      font-weight: 400;
-    }
-  }
+
   .card-content {
     padding: {
       left: 0.75rem;
       right: 0.75rem;
+    }
+  }
+
+  .card-footer {
+    // flex-direction: column;
+
+    // @include from($tablet) {
+    //   flex-direction: row;
+    // }
+    .create-date {
+      flex-basis: 75%;
     }
   }
 }
