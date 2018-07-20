@@ -18,7 +18,7 @@
         Created:&ensp;<b>{{ message.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
       <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">Edit</router-link>
-      <a href="#" class="card-footer-item">Delete</a>
+      <a href="#" class="card-footer-item" @click="deleteMessage">Delete</a>
     </footer>
   </div>
 </template>
@@ -27,6 +27,11 @@
 export default {
   name: 'Message',
   props: ['message', 'legend', 'editId'],
+  methods: {
+    deleteMessage() {
+      this.$emit('deleteMessage', this.editId);
+    },
+  },
 };
 </script>
 

@@ -1,15 +1,18 @@
 <template>
   <div class="card-list">
-    <pharmacy-card v-for="item in itemsList" :key="item['.key']" :pharmacy="item" />
+    <pharmacy-card v-for="item in pharmacies" :key="item['.key']" :pharmacy="item" />
   </div>
 </template>
 
 <script>
 import PharmacyCard from '@/views/pharmacies/Pharmacy.vue';
+import { database } from '@/firebase';
 
 export default {
   name: 'PharmaciesList',
-  props: ['itemsList'],
+  firebase: {
+    pharmacies: database.ref('pharmacies'),
+  },
   components: {
     PharmacyCard,
   },

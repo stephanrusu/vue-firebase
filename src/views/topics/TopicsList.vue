@@ -1,15 +1,18 @@
 <template>
   <div class="card-list">
-    <topic-card v-for="item in itemsList" :key="item['.key']" :topic="item" />
+    <topic-card v-for="item in topics" :key="item['.key']" :topic="item" />
   </div>
 </template>
 
 <script>
 import TopicCard from '@/views/topics/Topic.vue';
+import { database } from '@/firebase';
 
 export default {
   name: 'TopicsList',
-  props: ['itemsList'],
+  firebase: {
+    topics: database.ref('topics'),
+  },
   components: {
     TopicCard,
   },

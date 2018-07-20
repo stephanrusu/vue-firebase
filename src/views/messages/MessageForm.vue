@@ -46,7 +46,11 @@ export default {
     },
   },
   created() {
-    this.newMessage = this.messagesObj[this.$route.params.id];
+    const messageId = this.$route.params.id;
+    this.newMessage = this.messagesObj[messageId];
+    if (this.newMessage === undefined) {
+      this.$router.push({ name: 'messages' });
+    }
   },
   methods: {
     updateItem() {

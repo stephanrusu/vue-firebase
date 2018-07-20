@@ -3,6 +3,7 @@
     <message-card
       v-for="item in messages" :key="item['.key']"
       :message="item" :legend="legend" :editId="item['.key']"
+      @deleteMessage="deleteItem"
     ></message-card>
   </div>
 </template>
@@ -19,6 +20,12 @@ export default {
   },
   firebase: {
     messages: database.ref('messages'),
+  },
+  methods: {
+    deleteItem(key) {
+      console.info(key);
+      // this.$firebaseRefs.messages.child(key).remove();
+    },
   },
 };
 </script>
