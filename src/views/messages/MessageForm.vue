@@ -10,21 +10,23 @@
           <b-field label="Description">
             <b-input v-model="newMessage.message" type="textarea"></b-input>
           </b-field>
-          <div class='field'>
-            <label class="label">Importance</label>
-            <b-radio
-              v-for="(item, key) in legend" :key="key"
-              v-model="newMessage.importance"
-              type="is-info"
-              :native-value="key">
-                {{ item.label }}
-            </b-radio>
-          </div>
-          <div class="field">
+          <b-field label="Importance">
+            <div class="block">
+              <b-radio
+                v-for="(item, key) in legend" :key="key"
+                v-model="newMessage.importance"
+                type="is-info"
+                :native-value="key">
+                  {{ item.label }}
+              </b-radio>
+            </div>
+          </b-field>
+          <div class="is-divider"></div>
+          <b-field>
             <div class="control">
               <button type="submit" class="button is-info">Submit</button>
             </div>
-          </div>
+          </b-field>
         </form>
       </div>
     </div>
@@ -64,7 +66,7 @@ export default {
     submitData() {
       const messageId = this.$route.params.id;
       if (messageId !== undefined) {
-        this.$firebaseRefs.messagesObj.child(this.$route.params.id).set(this.newMessage);
+        this.$firebaseRefs.messagesObj.child(messageId).set(this.newMessage);
       } else {
         this.$firebaseRefs.messagesObj.push(this.newMessage);
       }

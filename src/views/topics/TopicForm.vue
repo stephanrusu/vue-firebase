@@ -7,11 +7,12 @@
           <b-field label='Name'>
             <b-input v-model="newTopic.title"></b-input>
           </b-field>
-          <div class="field">
+          <div class="is-divider"></div>
+          <b-field>
             <div class="control">
               <button type="submit" class="button is-info">Submit</button>
             </div>
-          </div>
+          </b-field>
         </form>
       </div>
     </div>
@@ -51,7 +52,7 @@ export default {
       const topicId = this.$route.params.id;
       this.newTopic.id = this.newTopic.title.toLowerCase().replace(' ', '-');
       if (topicId !== undefined) {
-        this.$firebaseRefs.topicsObj.child(this.$route.params.id).set(this.newTopic);
+        this.$firebaseRefs.topicsObj.child(topicId).set(this.newTopic);
       } else {
         this.$firebaseRefs.topicsObj.push(this.newTopic);
       }

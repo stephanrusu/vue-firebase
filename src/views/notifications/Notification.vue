@@ -9,9 +9,8 @@
       <div class="content">
         <p>{{ notification.description }}</p>
         <b-taglist>
-          <b-tag type="is-primary" class="is-capitalized"
-            v-for="topic in notification.topic" :key="`b-${topic}`" >
-            {{ topic }}
+          <b-tag type="is-primary" class="is-capitalized">
+            {{ notification.topic }}
           </b-tag>
         </b-taglist>
       </div>

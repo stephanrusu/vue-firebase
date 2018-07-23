@@ -1,6 +1,11 @@
 <template>
-  <div class='card-list'>
-    <notification-card v-for="item in notifications" :key="item['.key']" :notification="item" />
+  <div>
+    <div class="has-text-right">
+      <router-link :to="{ name: 'notificationCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+    </div>
+    <div class='card-list'>
+      <notification-card v-for="item in notifications" :key="item['.key']" :notification="item" />
+    </div>
   </div>
 </template>
 

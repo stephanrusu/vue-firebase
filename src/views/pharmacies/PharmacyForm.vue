@@ -16,11 +16,12 @@
           <b-field label="Description">
             <b-input v-model="newPharmacy.description" type="textarea"></b-input>
           </b-field>
-          <div class="field">
+          <div class="is-divider"></div>
+          <b-field>
             <div class="control">
               <button type="submit" class="button is-info">Submit</button>
             </div>
-          </div>
+          </b-field>
         </form>
       </div>
     </div>
@@ -61,7 +62,7 @@ export default {
     submitData() {
       const pharmacyId = this.$route.params.id;
       if (pharmacyId !== undefined) {
-        this.$firebaseRefs.pharmaciesObj.child(this.$route.params.id).set(this.newPharmacy);
+        this.$firebaseRefs.pharmaciesObj.child(pharmacyId).set(this.newPharmacy);
       } else {
         this.$firebaseRefs.pharmaciesObj.push(this.newPharmacy);
       }
