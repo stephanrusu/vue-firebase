@@ -1,7 +1,9 @@
-@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/_all";
 
-$primary: $turquoise;
-$info: $cyan;
+$primary: $turquoise !default;
+$info: $cyan !default;
+$link: $blue !default;
+$link-invert: $blue-invert;
 
 $card-header-background-color: transparent;
 $card-content-background-color: transparent;

@@ -1,11 +1,5 @@
 @import "extend/variables";
 @import "extend/utilities";
-@import "~buefy/src/scss/utils/_all";
 @import "~bulma/bulma";
 @import "~buefy/src/scss/buefy";
-
-.section {
-  &.is-extra-low {
-    padding: 0.75rem;
-  }
-}
+@import "extend/style";
