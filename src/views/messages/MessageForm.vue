@@ -3,7 +3,7 @@
     <router-link :to="{ name: 'messages' }" class="button is-link has-margin-bottom-low">List</router-link>
     <div class="card">
       <div class="card-content">
-        <form @submit.prevent="updateItem">
+        <form @submit.prevent="submitData">
           <b-field label="Title">
             <b-input v-model="newMessage.title"></b-input>
           </b-field>
@@ -15,13 +15,14 @@
             <b-radio
               v-for="(item, key) in legend" :key="key"
               v-model="newMessage.importance"
-                :native-value="key">
+              type="is-info"
+              :native-value="key">
                 {{ item.label }}
             </b-radio>
           </div>
           <div class="field">
             <div class="control">
-                <button type="submit" class="button is-primary">Submit</button>
+              <button type="submit" class="button is-info">Submit</button>
             </div>
           </div>
         </form>
@@ -42,7 +43,6 @@ export default {
     };
   },
   firebase: {
-    messages: database.ref('messages'),
     messagesObj: {
       source: database.ref('messages'),
       asObject: true,
@@ -53,7 +53,7 @@ export default {
     if (messageId !== undefined) {
       this.newMessage = this.messagesObj[messageId];
     } else {
-      this.date = new Date().getTime();
+      this.newMessage.date = new Date().getTime();
     }
 
     if (this.newMessage === undefined) {
@@ -61,12 +61,12 @@ export default {
     }
   },
   methods: {
-    updateItem() {
+    submitData() {
       const messageId = this.$route.params.id;
       if (messageId !== undefined) {
-        this.$firebaseRefs.messages.child(this.$route.params.id).set(this.newMessage);
+        this.$firebaseRefs.messagesObj.child(this.$route.params.id).set(this.newMessage);
       } else {
-        this.$firebaseRefs.messages.push(this.newMessage);
+        this.$firebaseRefs.messagesObj.push(this.newMessage);
       }
       this.$router.push({ name: 'messages' });
     },

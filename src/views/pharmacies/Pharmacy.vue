@@ -17,8 +17,11 @@
       <span class="card-footer-item create-date has-justify-content-start">
         Created:&ensp;<b>{{ pharmacy.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
-      <a href="#" class="card-footer-item">Edit</a>
-      <a href="#" class="card-footer-item">Delete</a>
+      <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}"
+        class="card-footer-item">
+        Edit
+      </router-link>
+      <a href="#" class="card-footer-item" @click="deletePharmacy">Delete</a>
     </footer>
   </div>
 </template>
@@ -26,6 +29,11 @@
 <script>
 export default {
   name: 'Pharmacy',
-  props: ['pharmacy'],
+  props: ['pharmacy', 'editId'],
+  methods: {
+    deletePharmacy() {
+      this.$emit('deletePharmacy', this.editId);
+    },
+  },
 };
 </script>

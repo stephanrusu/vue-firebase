@@ -5,7 +5,7 @@
     </div>
     <div class="card-list">
       <message-card
-        v-for="item in reverseMessages" :key="item['.key']"
+        v-for="item in messagesRevert" :key="item['.key']"
         :message="item" :legend="legend" :editId="item['.key']"
         @deleteMessage="deleteItem"
       ></message-card>
@@ -27,7 +27,7 @@ export default {
     messages: database.ref('messages').orderByChild('date'),
   },
   computed: {
-    reverseMessages() {
+    messagesRevert() {
       return this.messages.slice(0).reverse();
     },
   },
