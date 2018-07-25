@@ -73,6 +73,9 @@ export default {
       }
       this.$router.push({ name: 'sponsors' });
     },
+    deleteLogo() {
+
+    },
   },
 };
 </script>

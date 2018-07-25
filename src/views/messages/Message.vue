@@ -21,7 +21,7 @@
         class="card-footer-item">
         Edit
       </router-link>
-      <a href="#" class="card-footer-item" @click="deleteMessage">Delete</a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteMessage">Delete</a>
     </footer>
   </div>
 </template>
@@ -29,10 +29,15 @@
 <script>
 export default {
   name: 'Message',
-  props: ['message', 'legend', 'editId'],
+  props: ['legend', 'editId'],
+  computed: {
+    message() {
+      return this.$store.getters.loadSingleMessage(this.editId);
+    },
+  },
   methods: {
     deleteMessage() {
-      this.$emit('deleteMessage', this.editId);
+      this.$store.dispatch('removeMessage', this.editId);
     },
   },
 };

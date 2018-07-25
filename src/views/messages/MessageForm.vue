@@ -34,42 +34,26 @@
 </template>
 
 <script>
-import { database } from '@/firebase';
-
 export default {
   name: 'MessageForm',
   props: ['legend'],
-  data() {
-    return {
-      newMessage: {},
-    };
-  },
-  firebase: {
-    messagesObj: {
-      source: database.ref('messages'),
-      asObject: true,
-    },
-  },
   mounted() {
-    const messageId = this.$route.params.id;
-    if (messageId !== undefined) {
-      this.newMessage = this.messagesObj[messageId];
-    } else {
-      this.newMessage.date = new Date().getTime();
-    }
-
     if (this.newMessage === undefined) {
       this.$router.push({ name: 'messages' });
     }
   },
-  methods: {
-    submitData() {
+  computed: {
+    newMessage() {
       const messageId = this.$route.params.id;
       if (messageId !== undefined) {
-        this.$firebaseRefs.messagesObj.child(messageId).set(this.newMessage);
-      } else {
-        this.$firebaseRefs.messagesObj.push(this.newMessage);
+        return this.$store.getters.loadSingleMessage(messageId);
       }
+      return {};
+    },
+  },
+  methods: {
+    submitData() {
+      this.$store.dispatch('processMessage', this.newMessage);
       this.$router.push({ name: 'messages' });
     },
   },

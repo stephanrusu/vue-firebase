@@ -6,8 +6,7 @@
     <div class="card-list">
       <message-card
         v-for="item in messagesRevert" :key="item['.key']"
-        :message="item" :legend="legend" :editId="item['.key']"
-        @deleteMessage="deleteItem"
+        :legend="legend" :editId="item['.key']"
       ></message-card>
     </div>
   </div>
@@ -15,7 +14,6 @@
 
 <script>
 import MessageCard from '@/views/messages/Message.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'MessageList',
@@ -23,17 +21,9 @@ export default {
   components: {
     MessageCard,
   },
-  firebase: {
-    messages: database.ref('messages').orderByChild('date'),
-  },
   computed: {
     messagesRevert() {
-      return this.messages.slice(0).reverse();
-    },
-  },
-  methods: {
-    deleteItem(key) {
-      this.$firebaseRefs.messages.child(key).remove();
+      return this.$store.getters.loadedMessages;
     },
   },
 };

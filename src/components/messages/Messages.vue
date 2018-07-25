@@ -1,13 +1,12 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="messages.length" />
+    <page-header :title="title" :results="lengthMessages" />
     <router-view :legend="legend"></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'Messages',
@@ -24,8 +23,13 @@ export default {
   components: {
     PageHeader,
   },
-  firebase: {
-    messages: database.ref('messages'),
+  computed: {
+    lengthMessages() {
+      return this.$store.getters.messagesLength;
+    },
+  },
+  created() {
+    this.$store.dispatch('loadMessages');
   },
 };
 </script>
