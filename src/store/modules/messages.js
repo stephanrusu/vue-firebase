@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_MESSAGES } from '../constants';
 
@@ -23,7 +24,7 @@ const messages = {
     },
     processMessage({ commit }, payload) {
       const key = payload['.key'];
-      const newMessage = payload;
+      const newMessage = Object.assign({}, payload);
       if (key === undefined) {
         newMessage.date = new Date().getTime();
         database.ref(TYPE_MESSAGES).push(newMessage).then((snapshot) => {
@@ -62,12 +63,12 @@ const messages = {
       state.messages.push(payload);
     },
     updateMessage(state, payload) {
-      const newArr = state.messages.map(message => (message['.key'] === payload['.key'] ? payload : message));
-      state.messages = newArr;
+      const index = _.findIndex(state.messages, { '.key': payload['.key'] });
+      state.messages.splice(index, 1, payload);
     },
     removeMessage(state, payload) {
-      const newArr = state.messages.map(message => (message['.key'] === payload ? null : message));
-      state.messages = newArr;
+      const index = _.findIndex(state.messages, { '.key': payload });
+      state.messages.splice(index, 1);
     },
   },
 };
