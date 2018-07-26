@@ -46,7 +46,7 @@ const messages = {
   },
   getters: {
     loadedMessages(state) {
-      return state.messages.sort((msgA, msgB) => msgA.date < msgB.date);
+      return state.messages.sort((itemA, itemB) => itemA.date < itemB.date);
     },
     messagesLength(state) {
       return state.messages.length;

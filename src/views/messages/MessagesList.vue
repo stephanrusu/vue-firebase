@@ -5,7 +5,7 @@
     </div>
     <div class="card-list">
       <message-card
-        v-for="item in messagesRevert" :key="item['.key']"
+        v-for="item in messages" :key="item['.key']"
         :legend="legend" :editId="item['.key']"
       ></message-card>
     </div>
@@ -22,7 +22,7 @@ export default {
     MessageCard,
   },
   computed: {
-    messagesRevert() {
+    messages() {
       return this.$store.getters.loadedMessages;
     },
   },

@@ -1,13 +1,12 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="pharmacies.length" />
+    <page-header :title="title" :results="lengthPharmacies" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'Pharmacies',
@@ -17,8 +16,13 @@ export default {
   components: {
     PageHeader,
   },
-  firebase: {
-    pharmacies: database.ref('pharmacies'),
+  computed: {
+    lengthPharmacies() {
+      return this.$store.getters.pharmaciesLength;
+    },
+  },
+  created() {
+    this.$store.dispatch('loadPharmacies');
   },
 };
 </script>

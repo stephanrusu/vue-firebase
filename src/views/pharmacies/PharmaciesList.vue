@@ -6,33 +6,45 @@
     <div class="card-list">
       <pharmacy-card
         v-for="item in pharmacies" :key="item['.key']"
-        :pharmacy="item" :editId="item['.key']"
-        @deletePharmacy="deleteItem"
+        :editId="item['.key']" @deletePharmacy="deleteItem"
       ></pharmacy-card>
     </div>
+    <br />
+    <b-pagination
+      :total="total"
+      :current.sync="current"
+      order="is-centered"
+      :per-page="perPage">
+    </b-pagination>
   </div>
 </template>
 
 <script>
 import PharmacyCard from '@/views/pharmacies/Pharmacy.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'PharmaciesList',
-  firebase: {
-    pharmacies: database.ref('pharmacies').orderByChild('date'),
-  },
   components: {
     PharmacyCard,
   },
+  data() {
+    return {
+      current: 1,
+      perPage: 5,
+    };
+  },
   computed: {
-    pharmaciesRevert() {
-      return this.pharmacies.slice(0).reverse();
+    pharmacies() {
+      // return this.$store.getters.loadedPharmacies;
+      return this.$store.getters.paginatePharmacy(this.perPage, this.current);
+    },
+    total() {
+      return this.$store.getters.pharmaciesLength;
     },
   },
   methods: {
     deleteItem(key) {
-      this.$firebaseRefs.pharmacies.child(key).remove();
+      this.$store.dispatch('removeMessage', key);
     },
   },
 };

@@ -29,43 +29,26 @@
 </template>
 
 <script>
-import { database } from '@/firebase';
-
 export default {
   name: 'PharmacyForm',
-  data() {
-    return {
-      newPharmacy: {
-        location: {},
-      },
-    };
-  },
-  firebase: {
-    pharmaciesObj: {
-      source: database.ref('pharmacies'),
-      asObject: true,
-    },
-  },
-  mounted() {
-    const pharmacyId = this.$route.params.id;
-    if (pharmacyId !== undefined) {
-      this.newPharmacy = this.pharmaciesObj[pharmacyId];
-    } else {
-      this.newPharmacy.date = new Date().getTime();
-    }
-
+  created() {
     if (this.newPharmacy === undefined) {
       this.$router.push({ name: 'pharmacies' });
     }
   },
-  methods: {
-    submitData() {
+  computed: {
+    newPharmacy() {
       const pharmacyId = this.$route.params.id;
       if (pharmacyId !== undefined) {
-        this.$firebaseRefs.pharmaciesObj.child(pharmacyId).set(this.newPharmacy);
-      } else {
-        this.$firebaseRefs.pharmaciesObj.push(this.newPharmacy);
+        return this.$store.getters.loadSinglePharmacy(pharmacyId);
       }
+
+      return { location: {} };
+    },
+  },
+  methods: {
+    submitData() {
+      this.$store.dispatch('processPharmacy', this.newPharmacy);
       this.$router.push({ name: 'pharmacies' });
     },
   },

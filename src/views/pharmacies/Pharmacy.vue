@@ -29,7 +29,12 @@
 <script>
 export default {
   name: 'Pharmacy',
-  props: ['pharmacy', 'editId'],
+  props: ['editId'],
+  computed: {
+    pharmacy() {
+      return this.$store.getters.loadSinglePharmacy(this.editId);
+    },
+  },
   methods: {
     deletePharmacy() {
       this.$emit('deletePharmacy', this.editId);

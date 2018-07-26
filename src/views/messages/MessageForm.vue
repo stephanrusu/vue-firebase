@@ -37,7 +37,7 @@
 export default {
   name: 'MessageForm',
   props: ['legend'],
-  mounted() {
+  created() {
     if (this.newMessage === undefined) {
       this.$router.push({ name: 'messages' });
     }
