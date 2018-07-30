@@ -1,10 +1,21 @@
 <template>
   <div class="card">
-    <header class="card-header">
-      <p class="card-header-title">
-        {{ sponsor.title }}
-      </p>
-    </header>
+    <div class="card-content">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-128x128">
+            <img :src="sponsor.photoUrl" />
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p class="">
+              {{ sponsor.title }}
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
         Created:&ensp;<b>{{ sponsor.date | moment('HH:MM DD MMM, YYYY') }}</b>
@@ -34,3 +45,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.media {
+  .image {
+    overflow: hidden;
+  }
+}
+</style>

@@ -23,9 +23,9 @@ export default {
       source: database.ref('activeSponsor'),
       asObject: true,
     },
-    sponsors: database.ref('sponsors'),
+    sponsors: database.ref('sponsors').orderByChild('date'),
     sponsorsObj: {
-      source: database.ref('sponsors'),
+      source: database.ref('sponsors').orderByChild('date'),
       asObject: true,
     },
   },

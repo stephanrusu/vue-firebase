@@ -14,7 +14,7 @@ const messages = {
           const temp = [];
           // eslint-disable-next-line
           for (const key in items) {
-            if ({}.hasOwnProperty.call(items, key)) {
+            if (Object.hasOwnProperty.call(items, key)) {
               temp.push({ '.key': key, ...items[key] });
             }
           }

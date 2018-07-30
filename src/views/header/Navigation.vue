@@ -15,7 +15,7 @@
           </a>
         </div>
         <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
-          <div class="navbar-end">
+          <div class="navbar-end" v-if="user !== ''" >
             <router-link :to="{ name: 'messages' }"
               class="navbar-item" active-class="is-active" exact >
                 Messages
@@ -36,6 +36,7 @@
               class="navbar-item" active-class="is-active" exact >
                 Topics
             </router-link>
+            <a href="#" class="navbar-item" @click="signOut">Sign out </a>
           </div>
         </div>
       </div>
@@ -48,9 +49,17 @@ export default {
   data: () => ({
     isMobileActive: false,
   }),
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
+  },
   methods: {
     toggleMenu() {
       this.isMobileActive = !this.isMobileActive;
+    },
+    signOut() {
+      this.$store.dispatch('signOutUser');
     },
   },
 };

@@ -13,11 +13,19 @@
 
 <script>
 import Navigation from '@/views/header/Navigation.vue';
+import { auth } from './firebase';
 
 export default {
   name: 'App',
   components: {
     Navigation,
+  },
+  created() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('userAlreadySignedIn', user.uid);
+      }
+    });
   },
 };
 </script>

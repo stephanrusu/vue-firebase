@@ -5,7 +5,7 @@
         <p class="title">
           {{ title }}
         </p>
-        <p class="subtitle">
+        <p class="subtitle" v-show="results > 0">
           {{ results }} results
         </p>
       </div>
