@@ -56,11 +56,15 @@ const sponsors = {
       const newActiveSponsor = Object.assign({}, payload);
       newActiveSponsor.skey = newActiveSponsor['.key'];
       delete newActiveSponsor['.key'];
-      commit('setActiveSponsor', newActiveSponsor);
+      database.ref(TYPE_ACTIVE_SPONSOR).set(newActiveSponsor).then(() => {
+        commit('setActiveSponsor', newActiveSponsor);
+      });
     },
     markInactiveSponsor({ commit }) {
       const inactiveSponsor = { skey: '' };
-      commit('setActiveSponsor', inactiveSponsor);
+      database.ref(TYPE_ACTIVE_SPONSOR).set(inactiveSponsor).then(() => {
+        commit('setActiveSponsor', inactiveSponsor);
+      });
     },
   },
   getters: {
@@ -73,7 +77,7 @@ const sponsors = {
     loadSingleSponsor(state) {
       return key => state.sponsors.find(sponsor => sponsor['.key'] === key);
     },
-    loadActiveSponsor(state) {
+    loadTheActiveSponsor(state) {
       return state.activeSponsor;
     },
   },

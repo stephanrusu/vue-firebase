@@ -24,8 +24,8 @@
         class="card-footer-item">
         Edit
       </router-link>
-      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor()">Active</a>
-      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor()">Inactive</a>
+      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">Active</a>
+      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">Inactive</a>
       <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">Delete</a>
     </footer>
   </div>
@@ -40,12 +40,12 @@ export default {
       return this.$store.getters.loadSingleSponsor(this.editId);
     },
     activeSponsor() {
-      return this.$store.getters.loadActiveSponsor();
+      return this.$store.getters.loadTheActiveSponsor;
     },
   },
   methods: {
     toggleActiveSponsor() {
-      this.$store.dispatch('markActiveSponsor', this.editId);
+      this.$store.dispatch('markActiveSponsor', this.sponsor);
     },
     toggleInactiveSponsor() {
       this.$store.dispatch('markInactiveSponsor');

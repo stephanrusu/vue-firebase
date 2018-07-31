@@ -5,7 +5,7 @@
     </div>
     <div class="card-list">
       <sponsor-card v-for="item in sponsors" :key="item['.key']"
-        :sponsor="item" :editId="item['.key']" :activeSponsor="activeSponsor['skey']"
+        :sponsor="item" :editId="item['.key']"
       ></sponsor-card>
     </div>
   </div>
