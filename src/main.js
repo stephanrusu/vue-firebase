@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
-import 'buefy/lib/buefy.css';
-import App from './App.vue';
+import VueMoment from 'vue-moment';
+
 import router from './router';
 import store from './store';
-import './styles/bulma.scss'; // custom styles entry point
+import App from './App.vue';
 
 Vue.use(Buefy);
-
+Vue.use(VueMoment);
 Vue.config.productionTip = false;
 
 new Vue({

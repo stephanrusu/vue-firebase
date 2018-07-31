@@ -1,0 +1,66 @@
+<template>
+  <div class="card">
+    <div class="card-content">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-128x128">
+            <img :src="sponsor.photoUrl" />
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p class="">
+              {{ sponsor.title }}
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+    <footer class="card-footer">
+      <span class="card-footer-item create-date has-justify-content-start">
+        Created:&ensp;<b>{{ sponsor.date | moment('HH:MM DD MMM, YYYY') }}</b>
+      </span>
+      <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}"
+        class="card-footer-item">
+        Edit
+      </router-link>
+      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">Active</a>
+      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">Inactive</a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">Delete</a>
+    </footer>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Sponsor',
+  props: ['editId'],
+  computed: {
+    sponsor() {
+      return this.$store.getters.loadSingleSponsor(this.editId);
+    },
+    activeSponsor() {
+      return this.$store.getters.loadTheActiveSponsor;
+    },
+  },
+  methods: {
+    toggleActiveSponsor() {
+      this.$store.dispatch('markActiveSponsor', this.sponsor);
+    },
+    toggleInactiveSponsor() {
+      this.$store.dispatch('markInactiveSponsor');
+    },
+    deleteSponsor() {
+      this.$store.dispatch('removeSponsor', this.editId);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.media {
+  .image {
+    overflow: hidden;
+  }
+}
+</style>

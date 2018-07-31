@@ -1,25 +1,81 @@
 <template>
-  <nav class='navbar has-shadow' role='navigation' aria-label='main navigation'>
-    <div class='navbar-brand'>
-      <router-link to='/' class='navbar-item'>Pollen</router-link>
-      <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false'>
-        <span aria-hidden='true'></span>
-        <span aria-hidden='true'></span>
-        <span aria-hidden='true'></span>
-      </a>
-    </div>
-    <div class='navbar-menu'>
-      <div class='navbar-end'>
-        <router-link class='navbar-item' to='/'>Home</router-link>
-        <router-link class='navbar-item' to='/about'>About</router-link>
+  <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" >
+      <div class="container">
+        <div class="navbar-brand">
+          <router-link :to="{ name: 'home' }"
+            :class="{ 'is-active': isMobileActive }"
+            class="navbar-item">
+            Pollen
+          </router-link>
+          <a role="button" class="navbar-burger"
+            aria-label="menu" aria-expanded="false" @click="toggleMenu">
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </a>
+        </div>
+        <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
+          <div class="navbar-end" v-if="user !== ''" >
+            <router-link :to="{ name: 'messages' }"
+              class="navbar-item" active-class="is-active" exact >
+                Messages
+            </router-link>
+            <router-link :to="{ name: 'sponsors' }"
+              class="navbar-item" active-class="is-active" exact >
+                Sponsors
+            </router-link>
+            <router-link :to="{ name: 'pharmacies' }"
+              class="navbar-item" active-class="is-active" exact >
+                Pharmacies
+            </router-link>
+            <router-link :to="{ name: 'notifications' }"
+              class="navbar-item" active-class="is-active" exact >
+                Notifications
+            </router-link>
+            <router-link :to="{ name: 'topics' }"
+              class="navbar-item" active-class="is-active" exact >
+                Topics
+            </router-link>
+            <a href="#" class="navbar-item" @click="signOut">Sign out </a>
+          </div>
+        </div>
       </div>
-    </div>
   </nav>
 </template>
 
 <script>
-
 export default {
   name: 'Navigation',
+  data: () => ({
+    isMobileActive: false,
+  }),
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
+  },
+  methods: {
+    toggleMenu() {
+      this.isMobileActive = !this.isMobileActive;
+    },
+    signOut() {
+      this.$store.dispatch('signOutUser');
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+@import '../../styles/extend/variables';
+
+.navbar {
+  &.has-shadow {
+    box-shadow: 5px 5px 0 0 #f5f5f5;
+  }
+  .navbar-item {
+    &:not(.is-active) {
+      color: lighten($grey, 10%);
+    }
+  }
+}
+</style>
