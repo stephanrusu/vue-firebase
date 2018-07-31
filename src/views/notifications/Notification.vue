@@ -26,7 +26,12 @@
 <script>
 export default {
   name: 'Notification',
-  props: ['notification'],
+  props: ['editId'],
+  computed: {
+    notification() {
+      return this.$store.getters.loadSingleNotification(this.editId);
+    },
+  },
 };
 </script>
 

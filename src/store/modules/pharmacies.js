@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { findIndex } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_PHARMACIES } from '../constants';
 
@@ -40,6 +40,7 @@ const pharmacies = {
     },
     removePharmacy({ commit }, payload) {
       database.ref(TYPE_PHARMACIES).child(payload).remove().then(() => {
+        // pharmercy xD
         commit('removePharmacy', payload);
       });
     },
@@ -58,11 +59,11 @@ const pharmacies = {
       state.pharmacies.push(payload);
     },
     updatePharmacy(state, payload) {
-      const index = _.findIndex(state.pharmacies, { '.key': payload['.key'] });
+      const index = findIndex(state.pharmacies, { '.key': payload['.key'] });
       state.pharmacies.splice(index, 1, payload);
     },
     removePharmacy(state, payload) {
-      const index = _.findIndex(state.pharmacies, { '.key': payload });
+      const index = findIndex(state.pharmacies, { '.key': payload });
       state.pharmacies.splice(index, 1);
     },
   },

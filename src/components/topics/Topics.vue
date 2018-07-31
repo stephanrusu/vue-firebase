@@ -1,13 +1,12 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="topics.length" />
+    <page-header :title="title" :results="lengthTopics" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'Topics',
@@ -17,8 +16,13 @@ export default {
   components: {
     PageHeader,
   },
-  firebase: {
-    topics: database.ref('topics'),
+  computed: {
+    lengthTopics() {
+      return this.$store.getters.topicsLength;
+    },
+  },
+  created() {
+    this.$store.dispatch('loadTopics');
   },
 };
 </script>

@@ -10,7 +10,7 @@
       ></pharmacy-card>
     </div>
     <br />
-    <b-pagination
+    <b-pagination v-if="this.total > this.perPage"
       :total="total"
       :current.sync="current"
       order="is-centered"

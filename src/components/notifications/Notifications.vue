@@ -1,13 +1,12 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="notifications.length" />
+    <page-header :title="title" :results="lengthNotifications" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'Notifications',
@@ -17,8 +16,13 @@ export default {
   components: {
     PageHeader,
   },
-  firebase: {
-    notifications: database.ref('notifications'),
+  computed: {
+    lengthNotifications() {
+      return this.$store.getters.notificationsLength;
+    },
+  },
+  created() {
+    this.$store.dispatch('loadNotifications');
   },
 };
 </script>

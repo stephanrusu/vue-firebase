@@ -20,42 +20,25 @@
 </template>
 
 <script>
-import { database } from '@/firebase';
-
 export default {
   name: 'TopicForm',
-  data() {
-    return {
-      newTopic: {},
-    };
-  },
-  firebase: {
-    topicsObj: {
-      source: database.ref('topics'),
-      asObject: true,
-    },
-  },
-  mounted() {
-    const topicId = this.$route.params.id;
-    if (topicId !== undefined) {
-      this.newTopic = this.topicsObj[topicId];
-    } else {
-      this.newTopic.date = new Date().getTime();
-    }
-
+  created() {
     if (this.newTopic === undefined) {
       this.$router.push({ name: 'topics' });
     }
   },
+  computed: {
+    newTopic() {
+      const topicId = this.$route.params.id;
+      if (topicId !== undefined) {
+        return this.$store.getters.loadSingleTopic(topicId);
+      }
+      return {};
+    },
+  },
   methods: {
     submitData() {
-      const topicId = this.$route.params.id;
-      this.newTopic.id = this.newTopic.title.toLowerCase().replace(' ', '-');
-      if (topicId !== undefined) {
-        this.$firebaseRefs.topicsObj.child(topicId).set(this.newTopic);
-      } else {
-        this.$firebaseRefs.topicsObj.push(this.newTopic);
-      }
+      this.$store.dispatch('processTopic', this.newTopic);
       this.$router.push({ name: 'topics' });
     },
   },

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { findIndex } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_MESSAGES } from '../constants';
 
@@ -45,15 +45,10 @@ const messages = {
     },
   },
   getters: {
-    loadedMessages(state) {
-      return state.messages.sort((itemA, itemB) => itemA.date < itemB.date);
-    },
-    messagesLength(state) {
-      return state.messages.length;
-    },
-    loadSingleMessage(state) {
-      return key => state.messages.find(message => message['.key'] === key);
-    },
+    loadedMessages: state => state.messages.sort((itemA, itemB) => itemA.date < itemB.date),
+    messagesLength: state => state.messages.length,
+    loadSingleMessage: state => key => state.messages.find(message => message['.key'] === key),
+    paginateMessages: state => (pageSize, pageNumber) => state.messages.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedMessages(state, payload) {
@@ -63,11 +58,11 @@ const messages = {
       state.messages.push(payload);
     },
     updateMessage(state, payload) {
-      const index = _.findIndex(state.messages, { '.key': payload['.key'] });
+      const index = findIndex(state.messages, { '.key': payload['.key'] });
       state.messages.splice(index, 1, payload);
     },
     removeMessage(state, payload) {
-      const index = _.findIndex(state.messages, { '.key': payload });
+      const index = findIndex(state.messages, { '.key': payload });
       state.messages.splice(index, 1);
     },
   },

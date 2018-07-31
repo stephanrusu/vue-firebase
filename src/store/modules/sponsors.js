@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { findIndex } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_SPONSORS, TYPE_ACTIVE_SPONSOR } from '../constants';
 
@@ -68,18 +68,11 @@ const sponsors = {
     },
   },
   getters: {
-    loadedSponsors(state) {
-      return state.sponsors.sort((itemA, itemB) => itemA.date < itemB.date);
-    },
-    sponsorsLength(state) {
-      return state.sponsors.length;
-    },
-    loadSingleSponsor(state) {
-      return key => state.sponsors.find(sponsor => sponsor['.key'] === key);
-    },
-    loadTheActiveSponsor(state) {
-      return state.activeSponsor;
-    },
+    loadedSponsors: state => state.sponsors.sort((itemA, itemB) => itemA.date < itemB.date),
+    sponsorsLength: state => state.sponsors.length,
+    loadSingleSponsor: state => key => state.sponsors.find(sponsor => sponsor['.key'] === key),
+    loadTheActiveSponsor: state => state.activeSponsor,
+    paginateSponsors: state => (pageSize, pageNumber) => state.sponsors.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedSponsors(state, payload) {
@@ -89,11 +82,11 @@ const sponsors = {
       state.sponsors.push(payload);
     },
     updateSponsor(state, payload) {
-      const index = _.findIndex(state.sponsors, { '.key': payload['.key'] });
+      const index = findIndex(state.sponsors, { '.key': payload['.key'] });
       state.sponsors.splice(index, 1, payload);
     },
     removeSponsor(state, payload) {
-      const index = _.findIndex(state.sponsors, { '.key': payload });
+      const index = findIndex(state.sponsors, { '.key': payload });
       state.sponsors.splice(index, 1);
     },
     setActiveSponsor(state, payload) {

@@ -31,43 +31,24 @@
 </template>
 
 <script>
-import { database } from '@/firebase';
-
 export default {
   name: 'NotificationForm',
   data() {
     return {
-      newNotification: {
-      },
+      newNotification: {},
     };
   },
-  firebase: {
-    topics: database.ref('topics'),
-    notificationsObj: {
-      source: database.ref('notifications'),
-      asObject: true,
-    },
+  created() {
+    this.$store.dispatch('loadTopics');
   },
-  mounted() {
-    const notificationsId = this.$route.params.id;
-    if (notificationsId !== undefined) {
-      this.newNotification = this.notificationsObj[notificationsId];
-    } else {
-      this.newNotification.date = new Date().getTime();
-    }
-
-    if (this.newNotification === undefined) {
-      this.$router.push({ name: 'notificationss' });
-    }
+  computed: {
+    topics() {
+      return this.$store.getters.loadedTopics;
+    },
   },
   methods: {
     submitData() {
-      const notificationId = this.$route.params.id;
-      if (notificationId !== undefined) {
-        this.$firebaseRefs.notificationsObj.child(notificationId).set(this.newNotification);
-      } else {
-        this.$firebaseRefs.notificationsObj.push(this.newNotification);
-      }
+      this.$store.dispatch('processNotification', this.newNotification);
       this.$router.push({ name: 'notifications' });
     },
   },

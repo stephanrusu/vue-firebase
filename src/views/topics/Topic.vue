@@ -21,10 +21,15 @@
 <script>
 export default {
   name: 'Topic',
-  props: ['topic', 'editId'],
+  props: ['editId'],
+  computed: {
+    topic() {
+      return this.$store.getters.loadSingleTopic(this.editId);
+    },
+  },
   methods: {
     deleteTopic() {
-      this.$emit('deleteTopic', this.editId);
+      this.$store.dispatch('removeTopic', this.editId);
     },
   },
 };
