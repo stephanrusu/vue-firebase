@@ -6,7 +6,6 @@
     <div class="card-list">
       <sponsor-card v-for="item in sponsors" :key="item['.key']"
         :sponsor="item" :editId="item['.key']" :activeSponsor="activeSponsor['skey']"
-        @deleteSponsor="deleteItem" @toggleActive="toggleActive"
       ></sponsor-card>
     </div>
   </div>
@@ -14,36 +13,18 @@
 
 <script>
 import SponsorCard from '@/views/sponsors/Sponsor.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'SponsorsList',
-  firebase: {
-    activeSponsor: {
-      source: database.ref('activeSponsor'),
-      asObject: true,
-    },
-    sponsors: database.ref('sponsors').orderByChild('date'),
-    sponsorsObj: {
-      source: database.ref('sponsors').orderByChild('date'),
-      asObject: true,
-    },
-  },
   components: {
     SponsorCard,
   },
-  methods: {
-    deleteItem(key) {
-      this.$firebaseRefs.sponsors.child(key).remove();
+  computed: {
+    sponsors() {
+      return this.$store.getters.loadedSponsors;
     },
-    toggleActive(key, flag) {
-      if (flag) {
-        const newActiveSponsor = this.sponsorsObj[key];
-        newActiveSponsor.skey = key;
-        this.$firebaseRefs.activeSponsor.set(newActiveSponsor);
-      } else {
-        this.$firebaseRefs.activeSponsor.set({ skey: '' });
-      }
+    activeSponsor() {
+      return this.$store.getters.loadActiveSponsor;
     },
   },
 };

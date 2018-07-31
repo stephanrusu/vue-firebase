@@ -7,6 +7,7 @@ import getters from './getters';
 
 import messages from './modules/messages';
 import pharmacies from './modules/pharmacies';
+import sponsors from './modules/sponsors';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   modules: {
     messages,
     pharmacies,
+    sponsors,
   },
   state,
   getters,

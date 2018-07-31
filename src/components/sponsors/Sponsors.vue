@@ -1,13 +1,12 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="sponsors.length" />
+    <page-header :title="title" :results="lengthSponsors" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/header/PageHeader.vue';
-import { database } from '@/firebase';
 
 export default {
   name: 'Sponsors',
@@ -17,8 +16,13 @@ export default {
   components: {
     PageHeader,
   },
-  firebase: {
-    sponsors: database.ref('sponsors'),
+  computed: {
+    lengthSponsors() {
+      return this.$store.getters.sponsorsLength;
+    },
+  },
+  created() {
+    this.$store.dispatch('loadSponsors');
   },
 };
 </script>

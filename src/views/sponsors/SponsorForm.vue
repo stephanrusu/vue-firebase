@@ -9,9 +9,9 @@
           </b-field>
           <b-field label="File">
             <b-upload v-model="files" class="is-right">
-                <a class="button is-primary">
-                  <span>Click to upload</span>
-                </a>
+              <a class="button is-primary">
+                <span>Click to upload</span>
+              </a>
             </b-upload>
             <span class="file-name"
               v-if="files && files.length">
@@ -35,42 +35,30 @@
 </template>
 
 <script>
-import { database } from '@/firebase';
-
 export default {
   name: 'SponsorForm',
   data() {
     return {
-      newSponsor: {},
       files: [],
     };
   },
-  firebase: {
-    sponsorsObj: {
-      source: database.ref('sponsors'),
-      asObject: true,
-    },
-  },
-  mounted() {
-    const sponsorId = this.$route.params.id;
-    if (sponsorId !== undefined) {
-      this.newSponsor = this.sponsorsObj[sponsorId];
-    } else {
-      this.newSponsor.date = new Date().getTime();
-    }
-
+  created() {
     if (this.newSponsor === undefined) {
       this.$router.push({ name: 'sponsors' });
     }
   },
-  methods: {
-    submitData() {
+  computed: {
+    newSponsor() {
       const sponsorId = this.$route.params.id;
       if (sponsorId !== undefined) {
-        this.$firebaseRefs.sponsorsObj.child(sponsorId).set(this.newSponsor);
-      } else {
-        this.$firebaseRefs.sponsorsObj.push(this.newSponsor);
+        return this.$store.getters.loadSingleSponsor(sponsorId);
       }
+      return {};
+    },
+  },
+  methods: {
+    submitData() {
+      this.$store.dispatch('processSponsor', this.newSponsor);
       this.$router.push({ name: 'sponsors' });
     },
     deleteLogo() {

@@ -24,9 +24,9 @@
         class="card-footer-item">
         Edit
       </router-link>
-      <a href="#" v-if="activeSponsor !== editId" class="card-footer-item" @click="toggleActiveSponsor(true)">Active</a>
-      <a href="#" v-else class="card-footer-item" @click="toggleActiveSponsor(false)">Inactive</a>
-      <a href="#" class="card-footer-item" @click="deleteSponsor">Delete</a>
+      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor()">Active</a>
+      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor()">Inactive</a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">Delete</a>
     </footer>
   </div>
 </template>
@@ -34,13 +34,24 @@
 <script>
 export default {
   name: 'Sponsor',
-  props: ['sponsor', 'activeSponsor', 'editId'],
+  props: ['editId'],
+  computed: {
+    sponsor() {
+      return this.$store.getters.loadSingleSponsor(this.editId);
+    },
+    activeSponsor() {
+      return this.$store.getters.loadActiveSponsor();
+    },
+  },
   methods: {
-    toggleActiveSponsor(flag) {
-      this.$emit('toggleActive', this.editId, flag);
+    toggleActiveSponsor() {
+      this.$store.dispatch('markActiveSponsor', this.editId);
+    },
+    toggleInactiveSponsor() {
+      this.$store.dispatch('markInactiveSponsor');
     },
     deleteSponsor() {
-      this.$emit('deleteSponsor', this.editId);
+      this.$store.dispatch('removeSponsor', this.editId);
     },
   },
 };
