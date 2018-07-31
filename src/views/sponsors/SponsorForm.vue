@@ -4,15 +4,15 @@
     <div class="card">
       <div class="card-content columns">
         <div class="column">
-          <form>
+          <form @submit.prevent="submitData">
             <b-field label="Title">
               <b-input v-model="newSponsor.title" name="title"></b-input>
             </b-field>
-            <b-field class="file is-right">
+            <b-field class="file is-right is-expanded">
               <label class="label">File</label>
               <div class="upload-el">
                 <b-upload v-model="files">
-                  <a class="button is-primary">
+                  <a class="button is-info">
                     <span>Browse</span>
                   </a>
                 </b-upload>
@@ -24,6 +24,11 @@
                     Choose file ...
                   </span>
                 </span>
+              </div>
+            </b-field>
+            <b-field v-if="progress > 0 && uploadRunning">
+              <div class="control">
+                <progress class="progress is-small is-info" :value="progress" max="100">{{ progress }}%</progress>
               </div>
             </b-field>
             <div class="is-divider"></div>
@@ -50,11 +55,16 @@
 </template>
 
 <script>
+import { storage } from '../../firebase';
+
 export default {
   name: 'SponsorForm',
   data() {
     return {
       files: [],
+      progress: 0,
+      uploadRunning: false,
+      error: '',
     };
   },
   created() {
@@ -73,11 +83,83 @@ export default {
   },
   methods: {
     submitData() {
+      if (this.files && this.files.length) {
+        this.uploadFile(this.files[0], (result) => {
+          if (result.progress) {
+            this.uploadRunning = true;
+            this.progress = result.progress;
+          }
+
+          if (result.downloadURL) {
+            this.uploadRunning = false;
+            this.newSponsor.photoUrl = result.downloadURL;
+            this.saveForm();
+          }
+
+          if (result.error) {
+            switch (result.error.code) {
+              case 'storage/unauthorized':
+                // User doesn't have permission to access the object
+                this.error = 'User does not have permission to upload this file. File size bigger than 5 MB';
+                break;
+              case 'storage/unknown':
+                // Unknown error occurred, inspect error.serverResponse
+                console.error(result.error.serverResponse);
+                this.error = ' Unknown error occurred';
+                break;
+              default:
+                this.error = result.error;
+                break;
+            }
+          }
+        });
+      }
+    },
+    uploadFile(fileLogo, callback) {
+      const fileName = fileLogo.name;
+      const metaData = {
+        contentType: fileLogo.type,
+      };
+      const sizeLimit = 5 * 1024 * 1024;
+
+      if (fileLogo.type === 'image/png') {
+        if (fileLogo.size < sizeLimit) {
+          const fileRef = `sponsors/${fileName}`;
+          this.newSponsor.fileRef = fileRef;
+          const uploadTask = storage.ref().child(fileRef).put(fileLogo, metaData);
+
+          uploadTask.on('state_changed', (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            callback({ progress });
+          }, (error) => {
+            callback({ error });
+          }, () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              callback({ downloadURL });
+            });
+          });
+        } else {
+          const error = 'Maximum file size allowed: 5 MB';
+          callback({ error });
+        }
+      } else {
+        const error = 'File type not allowed';
+        callback({ error });
+      }
+    },
+    saveForm() {
       this.$store.dispatch('processSponsor', this.newSponsor);
       this.$router.push({ name: 'sponsors' });
     },
     deleteLogo() {
+      const deleteTask = storage.ref().child(this.state.fileRef);
 
+      deleteTask.delete().then(() => {
+        this.newSponsor.photoUrl = '';
+        this.newSponsor.fileRef = '';
+      }).catch((error) => {
+        console.error(error.message);
+      });
     },
   },
 };

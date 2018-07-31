@@ -1,5 +1,5 @@
 import { findIndex } from 'lodash';
-import { database } from '../../firebase';
+import { database, storage } from '../../firebase';
 import { TYPE_SPONSORS, TYPE_ACTIVE_SPONSOR } from '../constants';
 
 const sponsors = {
@@ -39,7 +39,21 @@ const sponsors = {
         });
       }
     },
-    removeSponsor({ commit }, payload) {
+    removeSponsor({ commit, getters, dispatch }, payload) {
+      const activeSponsor = getters.loadTheActiveSponsor;
+      console.info(activeSponsor);
+      if (activeSponsor.skey === payload) {
+        dispatch('markInactiveSponsor');
+      }
+
+      const { fileRef } = getters.loadSingleSponsor(payload);
+      if (fileRef !== '') {
+        const deleteTask = storage.ref().child(fileRef);
+        deleteTask.delete().then().catch((error) => {
+          console.error(error.message);
+        });
+      }
+
       database.ref(TYPE_SPONSORS).child(payload).remove().then(() => {
         commit('removeSponsor', payload);
       });

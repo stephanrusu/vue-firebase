@@ -3,7 +3,7 @@
     <router-link :to="{ name: 'pharmacies' }" class="button is-link has-margin-bottom-low">List</router-link>
     <div class="card">
       <div class="card-content">
-        <form>
+        <form @submit.prevent="submitData">
           <b-field label="Title">
             <b-input v-model="newPharmacy.title"></b-input>
           </b-field>
