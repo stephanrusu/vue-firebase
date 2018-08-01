@@ -16,7 +16,7 @@
       </transition-group>
     </div>
     <br/>
-    <b-pagination v-if="this.total > this.perPage"
+    <b-pagination v-if="total > perPage"
       :total="total"
       :current.sync="current"
       order="is-centered"
@@ -37,12 +37,13 @@ export default {
   data() {
     return {
       current: 1,
+      perPage: PAGE_SIZE,
     };
   },
   computed: {
     sponsors() {
       // return this.$store.getters.loadedSponsors;
-      return this.$store.getters.paginateSponsors(PAGE_SIZE, this.current);
+      return this.$store.getters.paginateSponsors(this.perPage, this.current);
     },
     activeSponsor() {
       return this.$store.getters.loadActiveSponsor;

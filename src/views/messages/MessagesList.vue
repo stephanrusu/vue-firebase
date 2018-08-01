@@ -17,7 +17,7 @@
       </transition-group>
     </div>
     <br />
-    <b-pagination v-if="this.total > this.perPage"
+    <b-pagination v-if="total > perPage"
       :total="total"
       :current.sync="current"
       order="is-centered"
@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       current: 1,
+      perPage: PAGE_SIZE,
     };
   },
   components: {
@@ -44,7 +45,7 @@ export default {
   computed: {
     messages() {
       // return this.$store.getters.loadedMessages;
-      return this.$store.getters.paginateMessages(PAGE_SIZE, this.current);
+      return this.$store.getters.paginateMessages(this.perPage, this.current);
     },
     total() {
       return this.$store.getters.messagesLength;
