@@ -9,7 +9,7 @@
       <div class="content">
         <p>{{ notification.description }}</p>
         <b-taglist>
-          <b-tag type="is-primary" class="is-capitalized">
+          <b-tag type="is-info" class="is-capitalized">
             {{ notification.topic }}
           </b-tag>
         </b-taglist>

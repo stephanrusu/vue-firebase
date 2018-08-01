@@ -12,13 +12,10 @@
           </b-field>
           <b-field label="Importance">
             <div class="block">
-              <b-radio
-                v-for="(item, key) in legend" :key="key"
-                v-model="newMessage.importance"
-                type="is-info"
-                :native-value="key">
-                  {{ item.label }}
-              </b-radio>
+              <b-radio v-for="(item, key) in legend"
+                :key="item.level" v-model="newMessage.importance"
+                type="is-info" :native-value="key" name='importance'
+              > {{ item.label }} </b-radio>
             </div>
           </b-field>
           <div class="is-divider"></div>

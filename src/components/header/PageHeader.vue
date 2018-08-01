@@ -1,14 +1,12 @@
 <template>
   <section class="hero is-info">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <p class="title">
-          {{ title }}
-        </p>
-        <p class="subtitle" v-show="results > 0">
-          {{ results }} results
-        </p>
-      </div>
+    <div class="hero-body has-text-centered">
+      <p class="title">
+        {{ title }}
+      </p>
+      <p class="subtitle" v-show="results > 0">
+        {{ results }} results
+      </p>
     </div>
   </section>
 </template>

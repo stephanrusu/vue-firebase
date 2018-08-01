@@ -1,5 +1,6 @@
 let functions = require('firebase-functions');
 let admin = require('firebase-admin');
+
 admin.initializeApp(functions.config().firebase);
 
 exports.addNotifications = functions.https.onRequest((request, response) => {

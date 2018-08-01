@@ -11,7 +11,7 @@
         appear
       >
         <sponsor-card v-for="item in sponsors" :key="item['.key']"
-          :sponsor="item" :editId="item['.key']"
+          :editId="item['.key']"
         ></sponsor-card>
       </transition-group>
     </div>
