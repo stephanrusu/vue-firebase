@@ -27,6 +27,7 @@
 
 <script>
 import SponsorCard from '@/views/sponsors/Sponsor.vue';
+import { PAGE_SIZE } from '@/constants';
 
 export default {
   name: 'SponsorsList',
@@ -36,13 +37,12 @@ export default {
   data() {
     return {
       current: 1,
-      perPage: 5,
     };
   },
   computed: {
     sponsors() {
       // return this.$store.getters.loadedSponsors;
-      return this.$store.getters.paginateSponsors(this.perPage, this.current);
+      return this.$store.getters.paginateSponsors(PAGE_SIZE, this.current);
     },
     activeSponsor() {
       return this.$store.getters.loadActiveSponsor;

@@ -27,6 +27,7 @@
 
 <script>
 import NotificationCard from '@/views/notifications/Notification.vue';
+import { PAGE_SIZE } from '@/constants';
 
 export default {
   name: 'NotificationsList',
@@ -36,13 +37,12 @@ export default {
   data() {
     return {
       current: 1,
-      perPage: 5,
     };
   },
   computed: {
     notifications() {
       // return this.$store.getters.loadedNotifications;
-      return this.$store.getters.paginateNotifications(this.perPage, this.current);
+      return this.$store.getters.paginateNotifications(PAGE_SIZE, this.current);
     },
     total() {
       return this.$store.getters.notificationsLength;

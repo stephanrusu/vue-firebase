@@ -27,6 +27,7 @@
 
 <script>
 import TopicCard from '@/views/topics/Topic.vue';
+import { PAGE_SIZE } from '@/constants';
 
 export default {
   name: 'TopicsList',
@@ -36,13 +37,12 @@ export default {
   data() {
     return {
       current: 1,
-      perPage: 5,
     };
   },
   computed: {
     topics() {
       // return this.$store.getters.loadedTopics;
-      return this.$store.getters.paginateTopics(this.perPage, this.current);
+      return this.$store.getters.paginateTopics(PAGE_SIZE, this.current);
     },
     total() {
       return this.$store.getters.topicsLength;

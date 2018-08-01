@@ -19,3 +19,5 @@ export const ROUTE_TOPICS = `/${TYPE_TOPICS}`;
 export const ROUTE_LOGIN = `/${TYPE_LOGIN}`;
 export const ROUTE_REGISTER = `/${TYPE_REGISTER}`;
 export const ROUTE_AUTH = `/${TYPE_AUTH}`;
+
+export const PAGE_SIZE = 10;

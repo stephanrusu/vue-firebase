@@ -28,6 +28,7 @@
 
 <script>
 import PharmacyCard from '@/views/pharmacies/Pharmacy.vue';
+import { PAGE_SIZE } from '@/constants';
 
 export default {
   name: 'PharmaciesList',
@@ -37,13 +38,12 @@ export default {
   data() {
     return {
       current: 1,
-      perPage: 5,
     };
   },
   computed: {
     pharmacies() {
       // return this.$store.getters.loadedPharmacies;
-      return this.$store.getters.paginatePharmacy(this.perPage, this.current);
+      return this.$store.getters.paginatePharmacy(PAGE_SIZE, this.current);
     },
     total() {
       return this.$store.getters.pharmaciesLength;

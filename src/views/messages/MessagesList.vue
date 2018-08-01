@@ -28,6 +28,7 @@
 
 <script>
 import MessageCard from '@/views/messages/Message.vue';
+import { PAGE_SIZE } from '@/constants';
 
 export default {
   name: 'MessageList',
@@ -35,7 +36,6 @@ export default {
   data() {
     return {
       current: 1,
-      perPage: 5,
     };
   },
   components: {
@@ -44,7 +44,7 @@ export default {
   computed: {
     messages() {
       // return this.$store.getters.loadedMessages;
-      return this.$store.getters.paginateMessages(this.perPage, this.current);
+      return this.$store.getters.paginateMessages(PAGE_SIZE, this.current);
     },
     total() {
       return this.$store.getters.messagesLength;
