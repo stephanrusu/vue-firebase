@@ -6,12 +6,12 @@
         <div class="column">
           <form @submit.prevent="submitData">
             <b-field label="Title">
-              <b-input v-model="newSponsor.title" name="title"></b-input>
+              <b-input v-model="newSponsor.title" name="title" maxlength="30" required :has-counter="false"></b-input>
             </b-field>
             <b-field class="file is-right is-expanded">
               <label class="label">File</label>
               <div class="upload-el">
-                <b-upload v-model="files">
+                <b-upload v-model="files" required>
                   <a class="button is-info">
                     <span>Browse</span>
                   </a>
@@ -26,12 +26,7 @@
                 </span>
               </div>
             </b-field>
-            <b-field v-if="progress > 0 && uploadRunning">
-              <div class="control">
-                <progress class="progress is-small is-info" :value="progress" max="100">{{ progress }}%</progress>
-              </div>
-            </b-field>
-            <div class="is-divider"></div>
+            <progress class="progress is-custom-progress is-info" :value="progress" max="100">{{ progress }}%</progress>
             <b-field>
               <div class="control">
                 <button type="submit" class="button is-info">Submit</button>
@@ -177,10 +172,19 @@ export default {
     margin-top: 1rem;
   }
 
-  .column.sponsor-logo-display {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  .column {
+    &.sponsor-logo-display {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  .progress {
+    &.is-custom-progress {
+      height: 1px;
+      margin: 1.5rem 0;
+    }
   }
 
 </style>

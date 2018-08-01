@@ -4,10 +4,17 @@
         <router-link :to="{ name: 'pharmacyCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
       </div>
     <div class="card-list">
-      <pharmacy-card
-        v-for="item in pharmacies" :key="item['.key']"
-        :editId="item['.key']" @deletePharmacy="deleteItem"
-      ></pharmacy-card>
+      <transition-group
+        name="fade"
+        mode="out-in"
+        :duration="300"
+        appear
+      >
+        <pharmacy-card
+          v-for="item in pharmacies" :key="item['.key']"
+          :editId="item['.key']" @deletePharmacy="deleteItem"
+        ></pharmacy-card>
+      </transition-group>
     </div>
     <br />
     <b-pagination v-if="this.total > this.perPage"

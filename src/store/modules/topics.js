@@ -1,6 +1,7 @@
 import { findIndex } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_TOPICS } from '../constants';
+import { firebaseObjectToArray } from '../../helpers';
 
 const topics = {
   state: {
@@ -11,13 +12,7 @@ const topics = {
       database.ref(TYPE_TOPICS).orderByChild('date').once('value', (snapshot) => {
         const items = snapshot.val();
         if (items !== null) {
-          const temp = [];
-          // eslint-disable-next-line
-          for (const key in items) {
-            if ({}.hasOwnProperty.call(items, key)) {
-              temp.push({ '.key': key, ...items[key] });
-            }
-          }
+          const temp = firebaseObjectToArray(items);
           commit('setLoadedTopics', temp);
         }
       });

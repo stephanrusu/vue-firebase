@@ -5,13 +5,13 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field label="Title">
-            <b-input v-model="newPharmacy.title"></b-input>
+            <b-input v-model="newPharmacy.title" maxlength="30" required :has-counter="false"></b-input>
           </b-field>
           <b-field label="Latitude">
-            <b-input v-model="newPharmacy.location.latitude"></b-input>
+            <b-input type='number' v-model="newPharmacy.location.latitude" maxlength="12" required :has-counter="false"></b-input>
           </b-field>
           <b-field label="Longitude">
-            <b-input v-model="newPharmacy.location.longitude"></b-input>
+            <b-input type='number' v-model="newPharmacy.location.longitude" maxlength="12" required :has-counter="false"></b-input>
           </b-field>
           <b-field label="Description">
             <b-input v-model="newPharmacy.description" type="textarea"></b-input>

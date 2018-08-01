@@ -1,7 +1,14 @@
 <template>
   <div class="column">
     <page-header :title="title" :results="lengthMessages" />
-    <router-view :legend="legend"></router-view>
+    <transition
+      name="fade"
+      mode="out-in"
+      :duration="300"
+      appear
+    >
+      <router-view :legend="legend"></router-view>
+    </transition>
   </div>
 </template>
 

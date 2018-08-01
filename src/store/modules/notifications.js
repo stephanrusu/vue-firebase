@@ -1,5 +1,6 @@
 import { database } from '../../firebase';
 import { TYPE_NOTIFICATIONS } from '../constants';
+import { firebaseObjectToArray } from '../../helpers';
 
 const notifications = {
   state: {
@@ -10,13 +11,7 @@ const notifications = {
       database.ref(TYPE_NOTIFICATIONS).orderByChild('date').once('value', (snapshot) => {
         const items = snapshot.val();
         if (items !== null) {
-          const temp = [];
-          // eslint-disable-next-line
-          for (const key in items) {
-            if ({}.hasOwnProperty.call(items, key)) {
-              temp.push({ '.key': key, ...items[key] });
-            }
-          }
+          const temp = firebaseObjectToArray(items);
           commit('setLoadedNotifications', temp);
         }
       });

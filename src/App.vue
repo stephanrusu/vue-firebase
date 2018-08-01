@@ -4,7 +4,14 @@
     <section class="section is-extra-low">
       <div class="container">
         <div class="columns">
-          <router-view/>
+          <transition
+            name="fade"
+            mode="out-in"
+            :duration="800"
+            appear
+            >
+            <router-view></router-view>
+          </transition>
         </div>
       </div>
     </section>
@@ -62,5 +69,13 @@ html, body {
       flex-basis: 75%;
     }
   }
+
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
 </style>

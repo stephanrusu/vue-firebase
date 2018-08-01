@@ -1,7 +1,14 @@
 <template>
   <div class="column">
     <page-header :title="title" :results="lengthSponsors" />
-    <router-view></router-view>
+    <transition
+      name="fade"
+      mode="out-in"
+      :duration="300"
+      appear
+    >
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 

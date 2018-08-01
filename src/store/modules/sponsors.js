@@ -1,6 +1,7 @@
 import { findIndex } from 'lodash';
 import { database, storage } from '../../firebase';
 import { TYPE_SPONSORS, TYPE_ACTIVE_SPONSOR } from '../constants';
+import { firebaseObjectToArray } from '../../helpers';
 
 const sponsors = {
   state: {
@@ -12,13 +13,7 @@ const sponsors = {
       database.ref(TYPE_SPONSORS).orderByChild('date').once('value', (snapshot) => {
         const items = snapshot.val();
         if (items !== null) {
-          const temp = [];
-          // eslint-disable-next-line
-          for (const key in items) {
-            if (Object.hasOwnProperty.call(items, key)) {
-              temp.push({ '.key': key, ...items[key] });
-            }
-          }
+          const temp = firebaseObjectToArray(items);
           commit('setLoadedSponsors', temp);
         }
       });
@@ -41,7 +36,7 @@ const sponsors = {
     },
     removeSponsor({ commit, getters, dispatch }, payload) {
       const activeSponsor = getters.loadTheActiveSponsor;
-      console.info(activeSponsor);
+
       if (activeSponsor.skey === payload) {
         dispatch('markInactiveSponsor');
       }
