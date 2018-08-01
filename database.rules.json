@@ -1,0 +1,21 @@
+{
+  "rules": {
+    ".read": "true",
+    ".write": true,
+    "messages": {      
+      ".indexOn": "date",
+    },
+    "notifications": {      
+      ".indexOn": "date",
+    },
+    "sponsors": {      
+      ".indexOn": "date",
+    },
+    "pharmacies": {      
+      ".indexOn": "date",
+    },
+    "topics": {      
+      ".indexOn": "date",
+    }
+  }
+}
