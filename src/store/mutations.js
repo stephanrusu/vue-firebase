@@ -1,12 +1,12 @@
 const mutations = {
   userSignedIn(state, payload) {
-    state.user = payload;
-  },
-  userSignedUp(state, payload) {
-    state.user = payload;
+    state.user.uid = payload;
   },
   userSignedOut(state) {
-    state.user = '';
+    state.user.uid = '';
+  },
+  userAuthError(state, payload) {
+    state.user.error = payload;
   },
 };
 

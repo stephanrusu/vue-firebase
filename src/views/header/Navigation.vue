@@ -15,7 +15,7 @@
           </a>
         </div>
         <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
-          <div class="navbar-end" v-if="user !== ''" >
+          <div class="navbar-end" v-if="userUid !== ''" >
             <router-link :to="{ name: 'messages' }"
               class="navbar-item" active-class="is-active" exact >
                 Messages
@@ -50,8 +50,8 @@ export default {
     isMobileActive: false,
   }),
   computed: {
-    user() {
-      return this.$store.getters.user;
+    userUid() {
+      return this.$store.getters.userUid;
     },
   },
   methods: {

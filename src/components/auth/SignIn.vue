@@ -6,6 +6,9 @@
           <h1 class="title">
             Sign in
           </h1>
+          <b-message title="Error" type="is-danger" v-if="userError !== ''" @close="userErrorClear">
+            {{ userError }}
+          </b-message>
           <div class="box">
             <form @submit.prevent="signInUser">
               <div class="field">
@@ -58,14 +61,22 @@ export default {
     };
   },
   computed: {
-    user() {
-      return this.$store.getters.user;
+    userUid() {
+      return this.$store.getters.userUid;
+    },
+    userError() {
+      return this.$store.getters.userError;
     },
   },
   watch: {
-    user(value) {
+    userUid(value) {
       if (value !== null && value !== undefined) {
         this.$router.push({ name: 'home' });
+      }
+    },
+    userError(value) {
+      if (value !== '') {
+        this.loading = false;
       }
     },
   },
@@ -82,6 +93,9 @@ export default {
           this.loading = false;
         }
       });
+    },
+    closeError() {
+      this.$store.dispatch('userErrorClear');
     },
   },
 };
