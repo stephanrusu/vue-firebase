@@ -5,16 +5,18 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field label="Title">
-            <b-input v-model="newPharmacy.title" maxlength="30" required :has-counter="false"></b-input>
+            <b-input v-model="newPharmacy.title" maxlength="30" required :has-counter="false" name="title"></b-input>
           </b-field>
           <b-field label="Latitude">
-            <b-input type='number' v-model="newPharmacy.location.latitude" maxlength="12" required :has-counter="false"></b-input>
+            <b-input type='number' v-model="newPharmacy.location.latitude"
+              maxlength="12" required :has-counter="false" name="latitude"></b-input>
           </b-field>
           <b-field label="Longitude">
-            <b-input type='number' v-model="newPharmacy.location.longitude" maxlength="12" required :has-counter="false"></b-input>
+            <b-input type='number' v-model="newPharmacy.location.longitude"
+            maxlength="12" required :has-counter="false" name="longitude"></b-input>
           </b-field>
           <b-field label="Description">
-            <b-input v-model="newPharmacy.description" type="textarea"></b-input>
+            <b-input v-model="newPharmacy.description" type="textarea" name="description"></b-input>
           </b-field>
           <div class="is-divider"></div>
           <b-field>

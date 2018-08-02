@@ -5,16 +5,19 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field label='Title'>
-            <b-input v-model="newNotification.title" maxlength="30" required :has-counter="false"></b-input>
+            <b-input v-model="newNotification.title" maxlength="30" required :has-counter="false" name="title"></b-input>
           </b-field>
           <b-field label="Description">
-            <b-input type="textarea" v-model="newNotification.description" maxlength="140" required :has-counter="false"></b-input>
+            <b-input type="textarea" v-model="newNotification.description"
+              maxlength="140" required :has-counter="false"
+              name="description"
+            ></b-input>
           </b-field>
           <b-field label="Topic">
             <div class="block">
               <b-radio v-for="topic in topics" :key="topic['.key']"
                 type="is-info" :native-value="topic.id"
-                v-model="newNotification.topic"
+                name="topic" v-model="newNotification.topic"
               >{{ topic.title }}</b-radio>
             </div>
           </b-field>

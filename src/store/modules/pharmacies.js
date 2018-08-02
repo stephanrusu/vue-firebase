@@ -9,35 +9,49 @@ const pharmacies = {
   },
   actions: {
     loadPharmacies({ commit }) {
-      database.ref(TYPE_PHARMACIES).orderByChild('date').once('value', (snapshot) => {
-        const items = snapshot.val();
-        if (items !== null) {
-          const temp = firebaseObjectToArray(items);
-          commit('setLoadedPharmacies', temp);
-        }
-      });
+      database
+        .ref(TYPE_PHARMACIES)
+        .orderByChild('date')
+        .once('value', (snapshot) => {
+          const items = snapshot.val();
+          if (items !== null) {
+            const temp = firebaseObjectToArray(items);
+            commit('setLoadedPharmacies', temp);
+          }
+        });
     },
     processPharmacy({ commit }, payload) {
       const key = payload['.key'];
       const newPharmacy = Object.assign({}, payload);
       if (key === undefined) {
         newPharmacy.date = new Date().getTime();
-        database.ref(TYPE_PHARMACIES).push(newPharmacy).then((snapshot) => {
-          newPharmacy['.key'] = snapshot.key;
-          commit('createPharmacy', newPharmacy);
-        });
+        database
+          .ref(TYPE_PHARMACIES)
+          .push(newPharmacy)
+          .then((snapshot) => {
+            newPharmacy['.key'] = snapshot.key;
+            commit('createPharmacy', newPharmacy);
+          });
       } else {
         delete newPharmacy['.key'];
-        database.ref(TYPE_PHARMACIES).child(key).update(newPharmacy).then(() => {
-          commit('updatePharmacy', payload);
-        });
+        database
+          .ref(TYPE_PHARMACIES)
+          .child(key)
+          .update(newPharmacy)
+          .then(() => {
+            commit('updatePharmacy', payload);
+          });
       }
     },
     removePharmacy({ commit }, payload) {
-      database.ref(TYPE_PHARMACIES).child(payload).remove().then(() => {
-        // pharmercy xD
-        commit('removePharmacy', payload);
-      });
+      database
+        .ref(TYPE_PHARMACIES)
+        .child(payload)
+        .remove()
+        .then(() => {
+          // pharmercy xD
+          commit('removePharmacy', payload);
+        });
     },
   },
   getters: {

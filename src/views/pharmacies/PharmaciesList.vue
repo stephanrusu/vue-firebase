@@ -4,12 +4,7 @@
         <router-link :to="{ name: 'pharmacyCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
       </div>
     <div class="card-list">
-      <transition-group
-        name="fade"
-        mode="out-in"
-        :duration="300"
-        appear
-      >
+      <transition-group name="fade" mode="out-in" :duration="300" appear >
         <pharmacy-card
           v-for="item in pharmacies" :key="item['.key']"
           :editId="item['.key']" @deletePharmacy="deleteItem"
@@ -18,11 +13,9 @@
     </div>
     <br />
     <b-pagination v-if="total > perPage"
-      :total="total"
-      :current.sync="current"
-      order="is-centered"
-      :per-page="perPage">
-    </b-pagination>
+      :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage"
+    ></b-pagination>
   </div>
 </template>
 
@@ -43,7 +36,6 @@ export default {
   },
   computed: {
     pharmacies() {
-      // return this.$store.getters.loadedPharmacies;
       return this.$store.getters.paginatePharmacy(this.perPage, this.current);
     },
     total() {

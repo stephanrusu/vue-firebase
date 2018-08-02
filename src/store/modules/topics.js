@@ -9,34 +9,48 @@ const topics = {
   },
   actions: {
     loadTopics({ commit }) {
-      database.ref(TYPE_TOPICS).orderByChild('date').once('value', (snapshot) => {
-        const items = snapshot.val();
-        if (items !== null) {
-          const temp = firebaseObjectToArray(items);
-          commit('setLoadedTopics', temp);
-        }
-      });
+      database
+        .ref(TYPE_TOPICS)
+        .orderByChild('date')
+        .once('value', (snapshot) => {
+          const items = snapshot.val();
+          if (items !== null) {
+            const temp = firebaseObjectToArray(items);
+            commit('setLoadedTopics', temp);
+          }
+        });
     },
     processTopic({ commit }, payload) {
       const key = payload['.key'];
       const newTopic = Object.assign({}, payload);
       if (key === undefined) {
         newTopic.date = new Date().getTime();
-        database.ref(TYPE_TOPICS).push(newTopic).then((snapshot) => {
-          newTopic['.key'] = snapshot.key;
-          commit('createTopic', newTopic);
-        });
+        database
+          .ref(TYPE_TOPICS)
+          .push(newTopic)
+          .then((snapshot) => {
+            newTopic['.key'] = snapshot.key;
+            commit('createTopic', newTopic);
+          });
       } else {
         delete newTopic['.key'];
-        database.ref(TYPE_TOPICS).child(key).update(newTopic).then(() => {
-          commit('updateTopic', payload);
-        });
+        database
+          .ref(TYPE_TOPICS)
+          .child(key)
+          .update(newTopic)
+          .then(() => {
+            commit('updateTopic', payload);
+          });
       }
     },
     removeTopic({ commit }, payload) {
-      database.ref(TYPE_TOPICS).child(payload).remove().then(() => {
-        commit('removeTopic', payload);
-      });
+      database
+        .ref(TYPE_TOPICS)
+        .child(payload)
+        .remove()
+        .then(() => {
+          commit('removeTopic', payload);
+        });
     },
   },
   getters: {

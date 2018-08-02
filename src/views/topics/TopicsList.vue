@@ -17,10 +17,8 @@
     </div>
     <br/>
     <b-pagination v-if="total > perPage"
-      :total="total"
-      :current.sync="current"
-      order="is-centered"
-      :per-page="perPage">
+      :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage">
     </b-pagination>
   </div>
 </template>

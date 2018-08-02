@@ -9,34 +9,48 @@ const messages = {
   },
   actions: {
     loadMessages({ commit }) {
-      database.ref(TYPE_MESSAGES).orderByChild('date').once('value', (snapshot) => {
-        const items = snapshot.val();
-        if (items !== null) {
-          const temp = firebaseObjectToArray(items);
-          commit('setLoadedMessages', temp);
-        }
-      });
+      database
+        .ref(TYPE_MESSAGES)
+        .orderByChild('date')
+        .once('value', (snapshot) => {
+          const items = snapshot.val();
+          if (items !== null) {
+            const temp = firebaseObjectToArray(items);
+            commit('setLoadedMessages', temp);
+          }
+        });
     },
     processMessage({ commit }, payload) {
       const key = payload['.key'];
       const newMessage = Object.assign({}, payload);
       if (key === undefined) {
         newMessage.date = new Date().getTime();
-        database.ref(TYPE_MESSAGES).push(newMessage).then((snapshot) => {
-          newMessage['.key'] = snapshot.key;
-          commit('createMessage', newMessage);
-        });
+        database
+          .ref(TYPE_MESSAGES)
+          .push(newMessage)
+          .then((snapshot) => {
+            newMessage['.key'] = snapshot.key;
+            commit('createMessage', newMessage);
+          });
       } else {
         delete newMessage['.key'];
-        database.ref(TYPE_MESSAGES).child(key).update(newMessage).then(() => {
-          commit('updateMessage', payload);
-        });
+        database
+          .ref(TYPE_MESSAGES)
+          .child(key)
+          .update(newMessage)
+          .then(() => {
+            commit('updateMessage', payload);
+          });
       }
     },
     removeMessage({ commit }, payload) {
-      database.ref(TYPE_MESSAGES).child(payload).remove().then(() => {
-        commit('removeMessage', payload);
-      });
+      database
+        .ref(TYPE_MESSAGES)
+        .child(payload)
+        .remove()
+        .then(() => {
+          commit('removeMessage', payload);
+        });
     },
   },
   getters: {

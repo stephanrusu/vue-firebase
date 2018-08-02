@@ -6,12 +6,13 @@
         <div class="column">
           <form @submit.prevent="submitData">
             <b-field label="Title">
-              <b-input v-model="newSponsor.title" name="title" maxlength="30" required :has-counter="false"></b-input>
+              <b-input v-model="newSponsor.title" name="title"
+                maxlength="30" required :has-counter="false"></b-input>
             </b-field>
             <b-field class="file is-right is-expanded">
               <label class="label">File</label>
               <div class="upload-el">
-                <b-upload v-model="files" required>
+                <b-upload v-model="files" name="logo" required>
                   <a class="button is-info">
                     <span>Browse</span>
                   </a>

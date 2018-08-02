@@ -4,12 +4,7 @@
       <router-link :to="{ name: 'sponsorCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
     </div>
     <div class="card-list">
-      <transition-group
-        name="fade"
-        mode="out-in"
-        :duration="300"
-        appear
-      >
+      <transition-group name="fade" mode="out-in" :duration="300" appear >
         <sponsor-card v-for="item in sponsors" :key="item['.key']"
           :editId="item['.key']"
         ></sponsor-card>
@@ -17,10 +12,8 @@
     </div>
     <br/>
     <b-pagination v-if="total > perPage"
-      :total="total"
-      :current.sync="current"
-      order="is-centered"
-      :per-page="perPage">
+      :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage">
     </b-pagination>
   </div>
 </template>

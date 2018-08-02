@@ -1,7 +1,5 @@
 const getters = {
-  user(state) {
-    return state.user;
-  },
+  user: state => state.user,
 };
 
 export default getters;

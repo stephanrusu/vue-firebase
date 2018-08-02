@@ -7,7 +7,8 @@
     </header>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ topic.date | moment('HH:MM DD MMM, YYYY') }}</b>
+        Created:&ensp;
+        <b>{{ topic.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
       <router-link :to="{ name: 'topicEdit', params: { id: editId }}"
         class="card-footer-item">

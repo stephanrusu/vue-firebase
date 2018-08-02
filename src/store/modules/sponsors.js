@@ -10,28 +10,38 @@ const sponsors = {
   },
   actions: {
     loadSponsors({ commit }) {
-      database.ref(TYPE_SPONSORS).orderByChild('date').once('value', (snapshot) => {
-        const items = snapshot.val();
-        if (items !== null) {
-          const temp = firebaseObjectToArray(items);
-          commit('setLoadedSponsors', temp);
-        }
-      });
+      database
+        .ref(TYPE_SPONSORS)
+        .orderByChild('date')
+        .once('value', (snapshot) => {
+          const items = snapshot.val();
+          if (items !== null) {
+            const temp = firebaseObjectToArray(items);
+            commit('setLoadedSponsors', temp);
+          }
+        });
     },
     processSponsor({ commit }, payload) {
       const key = payload['.key'];
       const newSponsor = Object.assign({}, payload);
       if (key === undefined) {
         newSponsor.date = new Date().getTime();
-        database.ref(TYPE_SPONSORS).push(newSponsor).then((snapshot) => {
-          newSponsor['.key'] = snapshot.key;
-          commit('createSponsor', newSponsor);
-        });
+        database
+          .ref(TYPE_SPONSORS)
+          .push(newSponsor)
+          .then((snapshot) => {
+            newSponsor['.key'] = snapshot.key;
+            commit('createSponsor', newSponsor);
+          });
       } else {
         delete newSponsor['.key'];
-        database.ref(TYPE_SPONSORS).child(key).update(newSponsor).then(() => {
-          commit('updateSponsor', payload);
-        });
+        database
+          .ref(TYPE_SPONSORS)
+          .child(key)
+          .update(newSponsor)
+          .then(() => {
+            commit('updateSponsor', payload);
+          });
       }
     },
     removeSponsor({ commit, getters, dispatch }, payload) {
@@ -44,14 +54,21 @@ const sponsors = {
       const { fileRef } = getters.loadSingleSponsor(payload);
       if (fileRef !== '') {
         const deleteTask = storage.ref().child(fileRef);
-        deleteTask.delete().then().catch((error) => {
-          console.error(error.message);
-        });
+        deleteTask
+          .delete()
+          .then()
+          .catch((error) => {
+            console.error(error.message);
+          });
       }
 
-      database.ref(TYPE_SPONSORS).child(payload).remove().then(() => {
-        commit('removeSponsor', payload);
-      });
+      database
+        .ref(TYPE_SPONSORS)
+        .child(payload)
+        .remove()
+        .then(() => {
+          commit('removeSponsor', payload);
+        });
     },
     loadActiveSponsor({ commit }) {
       database.ref(TYPE_ACTIVE_SPONSOR).once('value', (snapshot) => {
@@ -65,15 +82,21 @@ const sponsors = {
       const newActiveSponsor = Object.assign({}, payload);
       newActiveSponsor.skey = newActiveSponsor['.key'];
       delete newActiveSponsor['.key'];
-      database.ref(TYPE_ACTIVE_SPONSOR).set(newActiveSponsor).then(() => {
-        commit('setActiveSponsor', newActiveSponsor);
-      });
+      database
+        .ref(TYPE_ACTIVE_SPONSOR)
+        .set(newActiveSponsor)
+        .then(() => {
+          commit('setActiveSponsor', newActiveSponsor);
+        });
     },
     markInactiveSponsor({ commit }) {
       const inactiveSponsor = { skey: '' };
-      database.ref(TYPE_ACTIVE_SPONSOR).set(inactiveSponsor).then(() => {
-        commit('setActiveSponsor', inactiveSponsor);
-      });
+      database
+        .ref(TYPE_ACTIVE_SPONSOR)
+        .set(inactiveSponsor)
+        .then(() => {
+          commit('setActiveSponsor', inactiveSponsor);
+        });
     },
   },
   getters: {

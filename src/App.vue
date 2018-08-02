@@ -4,12 +4,7 @@
     <section class="section is-extra-low">
       <div class="container">
         <div class="columns">
-          <transition
-            name="fade"
-            mode="out-in"
-            :duration="800"
-            appear
-            >
+          <transition name="fade" mode="out-in" :duration="800" appear>
             <router-view></router-view>
           </transition>
         </div>

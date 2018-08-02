@@ -17,7 +17,8 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ notification.date | moment('HH:MM DD MMM, YYYY') }}</b>
+        Created:&ensp;
+        <b>{{ notification.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
     </footer>
   </div>
