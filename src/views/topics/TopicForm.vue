@@ -5,9 +5,9 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field label='Name'>
-            <b-input v-model="newTopic.title" maxlength="30" required :has-counter="false" name="title"></b-input>
+            <b-input v-model="newTopic.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <div class="is-divider"></div>
+          <div class="is-divider" />
           <b-field>
             <div class="control">
               <button type="submit" class="button is-info">Submit</button>

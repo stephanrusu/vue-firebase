@@ -5,10 +5,10 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field label="Title">
-            <b-input v-model="newMessage.title" maxlength="30" required :has-counter="false" name="title"></b-input>
+            <b-input v-model="newMessage.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
           <b-field label="Description">
-            <b-input v-model="newMessage.message" type="textarea" maxlength="200" :has-counter="false" name="description"></b-input>
+            <b-input v-model="newMessage.message" type="textarea" maxlength="200" :has-counter="false" name="description" />
           </b-field>
           <b-field label="Importance">
             <div class="block">
@@ -18,7 +18,7 @@
               > {{ item.label }} </b-radio>
             </div>
           </b-field>
-          <div class="is-divider"></div>
+          <div class="is-divider" />
           <b-field>
             <div class="control">
               <button type="submit" class="button is-info">Submit</button>
@@ -33,7 +33,12 @@
 <script>
 export default {
   name: 'MessageForm',
-  props: ['legend'],
+  props: {
+    legend: {
+      type: Object,
+      required: true,
+    },
+  },
   created() {
     if (this.newMessage === undefined) {
       this.$router.push({ name: 'messages' });

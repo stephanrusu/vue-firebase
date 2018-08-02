@@ -17,8 +17,7 @@
       <span class="card-footer-item create-date has-justify-content-start">
         Created:&ensp;<b>{{ pharmacy.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
-      <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}"
-        class="card-footer-item">
+      <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}" class="card-footer-item">
         Edit
       </router-link>
       <a href="#" class="card-footer-item" @click="deletePharmacy">Delete</a>
@@ -29,7 +28,12 @@
 <script>
 export default {
   name: 'Pharmacy',
-  props: ['editId'],
+  props: {
+    editId: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
     pharmacy() {
       return this.$store.getters.loadSinglePharmacy(this.editId);

@@ -7,6 +7,15 @@
 <script>
 export default {
   name: 'RouteLinkAction',
-  props: ['route', 'label'],
+  props: {
+    route: {
+      type: Object,
+      required: true,
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>

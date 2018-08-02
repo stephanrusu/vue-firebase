@@ -5,16 +5,11 @@
     </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear >
-        <sponsor-card v-for="item in sponsors" :key="item['.key']"
-          :editId="item['.key']"
-        ></sponsor-card>
+        <sponsor-card v-for="item in sponsors" :key="item['.key']" :editId="item['.key']" />
       </transition-group>
     </div>
-    <br/>
-    <b-pagination v-if="total > perPage"
-      :total="total" :current.sync="current"
-      order="is-centered" :per-page="perPage">
-    </b-pagination>
+    <br />
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 

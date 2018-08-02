@@ -5,14 +5,11 @@
     </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear>
-        <message-card v-for="item in messages" :key="item['.key']"
-        :legend="legend" :editId="item['.key']"></message-card>
+        <message-card v-for="item in messages" :key="item['.key']" :legend="legend" :editId="item['.key']" />
       </transition-group>
     </div>
     <br />
-    <b-pagination v-if="total > perPage" :total="total"
-      :current.sync="current" order="is-centered" :per-page="perPage"
-      ></b-pagination>
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
@@ -22,7 +19,12 @@ import { PAGE_SIZE } from '@/constants';
 
 export default {
   name: 'MessageList',
-  props: ['legend'],
+  props: {
+    legend: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       current: 1,
@@ -34,7 +36,6 @@ export default {
   },
   computed: {
     messages() {
-      // return this.$store.getters.loadedMessages;
       return this.$store.getters.paginateMessages(this.perPage, this.current);
     },
     total() {

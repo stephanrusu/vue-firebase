@@ -2,8 +2,7 @@
   <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" >
       <div class="container">
         <div class="navbar-brand">
-          <router-link :to="{ name: 'home' }"
-            :class="{ 'is-active': isMobileActive }"
+          <router-link :to="{ name: 'home' }" :class="{ 'is-active': isMobileActive }"
             class="navbar-item">
             Pollen
           </router-link>
@@ -45,10 +44,12 @@
 
 <script>
 export default {
-  name: 'Navigation',
-  data: () => ({
-    isMobileActive: false,
-  }),
+  name: 'NavigationTop',
+  data() {
+    return {
+      isMobileActive: false,
+    };
+  },
   computed: {
     userUid() {
       return this.$store.getters.userUid;

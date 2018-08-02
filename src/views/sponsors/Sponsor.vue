@@ -9,9 +9,7 @@
         </div>
         <div class="media-content">
           <div class="content">
-            <p class="">
-              {{ sponsor.title }}
-            </p>
+            <p>{{ sponsor.title }}</p>
           </div>
         </div>
       </article>
@@ -20,8 +18,7 @@
       <span class="card-footer-item create-date has-justify-content-start">
         Created:&ensp;<b>{{ sponsor.date | moment('HH:MM DD MMM, YYYY') }}</b>
       </span>
-      <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}"
-        class="card-footer-item">
+      <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
         Edit
       </router-link>
       <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">Active</a>
@@ -34,7 +31,12 @@
 <script>
 export default {
   name: 'Sponsor',
-  props: ['editId'],
+  props: {
+    editId: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
     sponsor() {
       return this.$store.getters.loadSingleSponsor(this.editId);

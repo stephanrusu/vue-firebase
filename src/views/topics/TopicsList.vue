@@ -4,22 +4,12 @@
       <router-link :to="{ name: 'topicCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
     </div>
     <div class="card-list">
-      <transition-group
-        name="fade"
-        mode="out-in"
-        :duration="300"
-        appear
-      >
-        <topic-card v-for="item in topics"
-          :key="item['.key']" :editId="item['.key']"
-        ></topic-card>
+      <transition-group name="fade" mode="out-in" :duration="300" appear >
+        <topic-card v-for="item in topics" :key="item['.key']" :editId="item['.key']" />
       </transition-group>
     </div>
     <br/>
-    <b-pagination v-if="total > perPage"
-      :total="total" :current.sync="current"
-      order="is-centered" :per-page="perPage">
-    </b-pagination>
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 

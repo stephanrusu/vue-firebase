@@ -5,13 +5,11 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field label='Title'>
-            <b-input v-model="newNotification.title" maxlength="30" required :has-counter="false" name="title"></b-input>
+            <b-input v-model="newNotification.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
           <b-field label="Description">
             <b-input type="textarea" v-model="newNotification.description"
-              maxlength="140" required :has-counter="false"
-              name="description"
-            ></b-input>
+              maxlength="140" required :has-counter="false" name="description" />
           </b-field>
           <b-field label="Topic">
             <div class="block">
@@ -21,7 +19,7 @@
               >{{ topic.title }}</b-radio>
             </div>
           </b-field>
-          <div class='is-divider'></div>
+          <div class='is-divider' />
           <b-field>
             <div class="control">
               <button type="submit" class="button is-info">Submit</button>

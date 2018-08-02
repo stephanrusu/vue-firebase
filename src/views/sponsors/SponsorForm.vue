@@ -6,8 +6,7 @@
         <div class="column">
           <form @submit.prevent="submitData">
             <b-field label="Title">
-              <b-input v-model="newSponsor.title" name="title"
-                maxlength="30" required :has-counter="false"></b-input>
+              <b-input v-model="newSponsor.title" name="title" maxlength="30" required :has-counter="false" />
             </b-field>
             <b-field class="file is-right is-expanded">
               <label class="label">File</label>
@@ -37,7 +36,7 @@
         </div>
         <div v-if="newSponsor && newSponsor.photoUrl !== undefined" class="column is-2 sponsor-logo-display">
           <figure class="image is-128x128 is-centered">
-            <img :src="newSponsor.photoUrl">
+            <img :src="newSponsor.photoUrl" />
           </figure>
           <b-field class="delete-logo">
             <div class="control">
@@ -51,7 +50,7 @@
 </template>
 
 <script>
-import { storage } from '../../firebase';
+import { storage } from '@/firebase';
 
 export default {
   name: 'SponsorForm',

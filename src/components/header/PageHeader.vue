@@ -14,7 +14,16 @@
 <script>
 export default {
   name: 'PageHeader',
-  props: ['title', 'results'],
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    results: {
+      type: Number,
+      required: true,
+    },
+  },
 };
 </script>
 <style lang="scss">

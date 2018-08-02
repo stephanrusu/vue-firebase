@@ -4,17 +4,12 @@
       <router-link :to="{ name: 'notificationCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
     </div>
     <div class="card-list">
-    <transition-group name="fade" mode="out-in" :duration="300" appear >
-      <notification-card v-for="item in notifications"
-        :key="item['.key']" :editId="item['.key']"
-      ></notification-card>
-    </transition-group>
+      <transition-group name="fade" mode="out-in" :duration="300" appear >
+        <notification-card v-for="item in notifications" :key="item['.key']" :editId="item['.key']" />
+      </transition-group>
     </div>
-    <br/>
-    <b-pagination v-if="total > perPage"
-      :total="total" :current.sync="current"
-      order="is-centered" :per-page="perPage">
-    </b-pagination>
+    <br />
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 

@@ -14,10 +14,9 @@
               <div class="field">
                 <label for="email" class="label">Email</label>
                 <div class="control">
-                  <input name="email" type="text"
-                    :class="{'input': true, 'is-danger': errors.has('email')}"
-                    v-validate="'required|email'"
-                    v-model="email"
+                  <input :class="{'input': true, 'is-danger': errors.has('email')}"
+                    v-validate="'required|email'" v-model="email"
+                    name="email" type="text"
                   />
                   <span v-show="errors.has('email')" class="help is-danger">
                     {{ errors.first('email') }}
@@ -27,10 +26,9 @@
               <div class="field">
                 <label for="password" class="label">Password</label>
                 <div class="control">
-                  <input type="password" name="password"
-                    :class="{'input': true, 'is-danger': errors.has('password') }"
-                    v-validate="'required|min:6'"
-                    v-model="password"
+                  <input  :class="{'input': true, 'is-danger': errors.has('password') }"
+                    v-validate="'required|min:6'" v-model="password"
+                    type="password" name="password"
                   />
                   <span v-show="errors.has('password')" class="help is-danger">
                     {{ errors.first('password') }}
@@ -40,7 +38,10 @@
               <hr />
               <div class="field is-flex has-justify-content-between">
                 <router-link :to="{ name: 'signup' }" class="button is-text">I don't have an account</router-link>
-                <button type="submit" class="button is-link" :class="{'is-loading': loading}" :disabled="loading">Sign in</button>
+                <button :class="{'is-loading': loading}" :disabled="loading"
+                  type="submit" class="button is-link" >
+                  Sign in
+                </button>
               </div>
             </form>
           </div>

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Navigation />
+    <navigation-top />
     <section class="section is-extra-low">
       <div class="container">
         <div class="columns">
           <transition name="fade" mode="out-in" :duration="800" appear>
-            <router-view></router-view>
+            <router-view />
           </transition>
         </div>
       </div>
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import Navigation from '@/views/header/Navigation.vue';
+import NavigationTop from '@/views/header/NavigationTop.vue';
 import { auth } from './firebase';
 
 export default {
   name: 'App',
   components: {
-    Navigation,
+    NavigationTop,
   },
   created() {
     auth.onAuthStateChanged((user) => {

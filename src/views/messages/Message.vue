@@ -29,7 +29,16 @@
 <script>
 export default {
   name: 'Message',
-  props: ['legend', 'editId'],
+  props: {
+    editId: {
+      type: String,
+      required: true,
+    },
+    legend: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
     message() {
       return this.$store.getters.loadSingleMessage(this.editId);

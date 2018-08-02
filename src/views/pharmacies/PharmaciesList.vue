@@ -5,17 +5,11 @@
       </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear >
-        <pharmacy-card
-          v-for="item in pharmacies" :key="item['.key']"
-          :editId="item['.key']" @deletePharmacy="deleteItem"
-        ></pharmacy-card>
+        <pharmacy-card v-for="item in pharmacies" :key="item['.key']" :editId="item['.key']" @deletePharmacy="deleteItem" />
       </transition-group>
     </div>
     <br />
-    <b-pagination v-if="total > perPage"
-      :total="total" :current.sync="current"
-      order="is-centered" :per-page="perPage"
-    ></b-pagination>
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
