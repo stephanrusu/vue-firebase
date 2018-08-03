@@ -16,7 +16,7 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ sponsor.date | moment('HH:mm DD MMM, YYYY') }}</b>
+        Created:&ensp;<moment-date :date="sponsor.date" />
       </span>
       <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
         Edit
@@ -29,8 +29,13 @@
 </template>
 
 <script>
+import MomentDate from '@/views/common/MomentDate.vue';
+
 export default {
   name: 'Sponsor',
+  components: {
+    MomentDate,
+  },
   props: {
     editId: {
       type: String,

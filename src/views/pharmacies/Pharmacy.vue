@@ -15,19 +15,24 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ pharmacy.date | moment('HH:mm DD MMM, YYYY') }}</b>
+        Created:&ensp;<moment-date :date="pharmacy.date" />
       </span>
       <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}" class="card-footer-item">
         Edit
       </router-link>
-      <a href="#" class="card-footer-item" @click="deletePharmacy">Delete</a>
+      <a href="#" class="card-footer-item" @click.prevent="deletePharmacy">Delete</a>
     </footer>
   </div>
 </template>
 
 <script>
+import MomentDate from '@/views/common/MomentDate.vue';
+
 export default {
   name: 'Pharmacy',
+  components: {
+    MomentDate,
+  },
   props: {
     editId: {
       type: String,

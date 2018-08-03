@@ -13,6 +13,12 @@ Vue.use(VeeValidate);
 
 Vue.config.productionTip = false;
 
+Vue.filter('capitalize', (value) => {
+  if (!value) return '';
+  const updatedValue = value.toString();
+  return updatedValue.charAt(0).toUpperCase() + updatedValue.slice(1);
+});
+
 new Vue({
   router,
   store,

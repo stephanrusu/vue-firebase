@@ -2,8 +2,7 @@
   <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" >
       <div class="container">
         <div class="navbar-brand">
-          <router-link :to="{ name: 'home' }" :class="{ 'is-active': isMobileActive }"
-            class="navbar-item">
+          <router-link :to="{ name: 'home' }" :class="{ 'is-active': isMobileActive }" class="navbar-item">
             Pollen
           </router-link>
           <a role="button" class="navbar-burger"

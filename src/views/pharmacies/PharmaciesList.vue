@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="has-text-right">
-        <router-link :to="{ name: 'pharmacyCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
-      </div>
+      <route-link-action :route="{ name: 'pharmacyCreate' }">Create</route-link-action>
+    </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear >
         <pharmacy-card v-for="item in pharmacies" :key="item['.key']" :editId="item['.key']" @deletePharmacy="deleteItem" />
@@ -16,11 +16,13 @@
 <script>
 import PharmacyCard from '@/views/pharmacies/Pharmacy.vue';
 import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'PharmaciesList',
   components: {
     PharmacyCard,
+    RouteLinkAction,
   },
   data() {
     return {

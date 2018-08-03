@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="has-text-right">
-      <router-link :to="{ name: 'notificationCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+      <route-link-action :route="{ name: 'notificationCreate' }">Create</route-link-action>
     </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear >
@@ -16,11 +16,13 @@
 <script>
 import NotificationCard from '@/views/notifications/Notification.vue';
 import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'NotificationsList',
   components: {
     NotificationCard,
+    RouteLinkAction,
   },
   data() {
     return {

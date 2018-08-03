@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="has-text-right">
-      <router-link :to="{ name: 'topicCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+      <route-link-action :route="{ name: 'topicCreate' }">Create</route-link-action>
     </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear >
@@ -16,11 +16,13 @@
 <script>
 import TopicCard from '@/views/topics/Topic.vue';
 import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'TopicsList',
   components: {
     TopicCard,
+    RouteLinkAction,
   },
   data() {
     return {

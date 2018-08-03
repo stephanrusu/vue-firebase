@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="has-text-right">
-      <router-link :to="{ name: 'messageCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+      <route-link-action :route="{ name: 'messageCreate' }">Create</route-link-action>
     </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear>
@@ -16,6 +16,7 @@
 <script>
 import MessageCard from '@/views/messages/Message.vue';
 import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'MessageList',
@@ -32,6 +33,7 @@ export default {
     };
   },
   components: {
+    RouteLinkAction,
     MessageCard,
   },
   computed: {

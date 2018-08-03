@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'topics' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'topics' }">List</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
@@ -20,8 +20,13 @@
 </template>
 
 <script>
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+
 export default {
   name: 'TopicForm',
+  components: {
+    RouteLinkAction,
+  },
   created() {
     if (this.newTopic === undefined) {
       this.$router.push({ name: 'topics' });

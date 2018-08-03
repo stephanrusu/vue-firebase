@@ -9,24 +9,28 @@
       <div class="content">
         <p>{{ notification.description }}</p>
         <b-taglist>
-          <b-tag type="is-info" class="is-capitalized">
-            {{ notification.topic }}
+          <b-tag type="is-info">
+            {{ notification.topic | capitalize }}
           </b-tag>
         </b-taglist>
       </div>
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;
-        <b>{{ notification.date | moment('HH:mm DD MMM, YYYY') }}</b>
+        Created:&ensp; <moment-date :date="notification.date" />
       </span>
     </footer>
   </div>
 </template>
 
 <script>
+import MomentDate from '@/views/common/MomentDate.vue';
+
 export default {
   name: 'Notification',
+  components: {
+    MomentDate,
+  },
   props: {
     editId: {
       type: String,

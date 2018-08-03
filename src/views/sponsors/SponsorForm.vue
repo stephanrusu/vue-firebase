@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'sponsors' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'sponsors' }">List</route-link-action>
     <div class="card">
       <div class="card-content columns">
         <div class="column">
@@ -9,7 +9,7 @@
               <b-input v-model="newSponsor.title" name="title" maxlength="30" required :has-counter="false" />
             </b-field>
             <b-field class="file is-right is-expanded">
-              <label class="label">File</label>
+              <label class="label">File / logo</label>
               <div class="upload-el">
                 <b-upload v-model="files" name="logo" required>
                   <a class="button is-info">
@@ -51,9 +51,13 @@
 
 <script>
 import { storage } from '@/firebase';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'SponsorForm',
+  components: {
+    RouteLinkAction,
+  },
   data() {
     return {
       files: [],

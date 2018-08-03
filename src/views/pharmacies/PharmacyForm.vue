@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'pharmacies' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'pharmacies' }">List</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
@@ -31,8 +31,13 @@
 </template>
 
 <script>
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+
 export default {
   name: 'PharmacyForm',
+  components: {
+    RouteLinkAction,
+  },
   created() {
     if (this.newPharmacy === undefined) {
       this.$router.push({ name: 'pharmacies' });

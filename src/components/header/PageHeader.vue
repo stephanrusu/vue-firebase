@@ -2,7 +2,7 @@
   <section class="hero is-info">
     <div class="hero-body has-text-centered">
       <p class="title">
-        {{ title }}
+        {{ title | capitalize }}
       </p>
       <p class="subtitle" v-show="results > 0">
         {{ results }} results
@@ -36,7 +36,6 @@ export default {
 
     .title {
       font-size: 1.5rem;
-      text-transform: capitalize;
     }
     .subtitle {
       font-size: 1rem;

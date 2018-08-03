@@ -1,6 +1,6 @@
 <template>
   <router-link :to="route" class="button is-link has-margin-bottom-low">
-    {{ label }}
+    <slot />
   </router-link>
 </template>
 
@@ -10,10 +10,6 @@ export default {
   props: {
     route: {
       type: Object,
-      required: true,
-    },
-    label: {
-      type: String,
       required: true,
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'messages' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'messages' }">List</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
@@ -31,8 +31,13 @@
 </template>
 
 <script>
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+
 export default {
   name: 'MessageForm',
+  components: {
+    RouteLinkAction,
+  },
   props: {
     legend: {
       type: Object,

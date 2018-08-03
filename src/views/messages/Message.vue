@@ -4,8 +4,8 @@
       <p class="card-header-title">
         {{ message.title }}
       </p>
-      <b-tag :type="`is-${legend[message.importance].level}`" class="is-capitalized">
-        {{ legend[message.importance].label }}
+      <b-tag :type="`is-${legend[message.importance].level}`">
+        {{ legend[message.importance].label | capitalize }}
       </b-tag>
     </header>
     <div class="card-content">
@@ -15,8 +15,7 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;
-        <b>{{ message.date | moment('HH:mm DD MMM, YYYY') }}</b>
+        Created:&ensp;<moment-date :date="message.date" />
       </span>
       <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">
         Edit
@@ -27,8 +26,13 @@
 </template>
 
 <script>
+import MomentDate from '@/views/common/MomentDate.vue';
+
 export default {
   name: 'Message',
+  components: {
+    MomentDate,
+  },
   props: {
     editId: {
       type: String,
