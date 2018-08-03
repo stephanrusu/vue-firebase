@@ -15,7 +15,7 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ pharmacy.date | moment('HH:MM DD MMM, YYYY') }}</b>
+        Created:&ensp;<b>{{ pharmacy.date | moment('HH:mm DD MMM, YYYY') }}</b>
       </span>
       <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}" class="card-footer-item">
         Edit

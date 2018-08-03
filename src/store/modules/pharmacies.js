@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import { findIndex, orderBy } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_PHARMACIES } from '../constants';
 import { firebaseObjectToArray } from '../../helpers';
@@ -55,17 +55,17 @@ const pharmacies = {
     },
   },
   getters: {
-    loadedPharmacies: state => state.pharmacies.sort((itemA, itemB) => itemA.date < itemB.date),
     pharmaciesLength: state => state.pharmacies.length,
     loadSinglePharmacy: state => key => state.pharmacies.find(pharmacy => pharmacy['.key'] === key),
-    paginatePharmacy: state => (pageSize, pageNumber) => state.pharmacies.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    paginatePharmacy: state => (pageSize, pageNumber) => orderBy(state.pharmacies, 'date', 'desc')
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedPharmacies(state, payload) {
       state.pharmacies = payload;
     },
     createPharmacy(state, payload) {
-      state.pharmacies.push(payload);
+      state.pharmacies.splice(0, 0, payload);
     },
     updatePharmacy(state, payload) {
       const index = findIndex(state.pharmacies, { '.key': payload['.key'] });

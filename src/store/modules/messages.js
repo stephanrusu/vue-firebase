@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import { orderBy, findIndex } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_MESSAGES } from '../constants';
 import { firebaseObjectToArray } from '../../helpers';
@@ -54,17 +54,24 @@ const messages = {
     },
   },
   getters: {
-    loadedMessages: state => state.messages.sort((itemA, itemB) => itemA.date < itemB.date),
+    // sort
+    // loadedMessages: state => state.messages.sort((itemA, itemB) => {
+    //   if (itemA.date > itemB.date) { return 1; } else if (itemA.date < itemB.date) { return -1; }
+    //   return 0;
+    // }),
+    // orderBy from lodash
+    // loadedMessages: state => orderBy(state.messages, ['date'], ['desc']),
     messagesLength: state => state.messages.length,
     loadSingleMessage: state => key => state.messages.find(message => message['.key'] === key),
-    paginateMessages: state => (pageSize, pageNumber) => state.messages.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    paginateMessages: state => (pageSize, pageNumber) => orderBy(state.messages, 'date', 'desc')
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedMessages(state, payload) {
       state.messages = payload;
     },
     createMessage(state, payload) {
-      state.messages.push(payload);
+      state.messages.splice(0, 0, payload);
     },
     updateMessage(state, payload) {
       const index = findIndex(state.messages, { '.key': payload['.key'] });

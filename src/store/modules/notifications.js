@@ -1,3 +1,4 @@
+import { orderBy } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_NOTIFICATIONS } from '../constants';
 import { firebaseObjectToArray } from '../../helpers';
@@ -32,10 +33,10 @@ const notifications = {
     },
   },
   getters: {
-    loadedNotifications: state => state.notifications.sort((itemA, itemB) => itemA.date < itemB.date),
     notificationsLength: state => state.notifications.length,
     loadSingleNotification: state => key => state.notifications.find(notification => notification['.key'] === key),
-    paginateNotifications: state => (pageSize, pageNumber) => state.notifications.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    paginateNotifications: state => (pageSize, pageNumber) => orderBy(state.notifications, 'date', 'desc')
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
 
   },
   mutations: {
@@ -43,7 +44,7 @@ const notifications = {
       state.notifications = payload;
     },
     createNotification(state, payload) {
-      state.notifications.push(payload);
+      state.notifications.splice(0, 0, payload);
     },
   },
 };

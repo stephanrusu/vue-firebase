@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import { findIndex, orderBy } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_TOPICS } from '../constants';
 import { firebaseObjectToArray } from '../../helpers';
@@ -54,17 +54,17 @@ const topics = {
     },
   },
   getters: {
-    loadedTopics: state => state.topics.sort((itemA, itemB) => itemA.date < itemB.date),
     topicsLength: state => state.topics.length,
     loadSingleTopic: state => key => state.topics.find(topic => topic['.key'] === key),
-    paginateTopics: state => (pageSize, pageNumber) => state.topics.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    paginateTopics: state => (pageSize, pageNumber) => orderBy(state.topics, 'date', 'desc')
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedTopics(state, payload) {
       state.topics = payload;
     },
     createTopic(state, payload) {
-      state.topics.push(payload);
+      state.topics.splice(0, 0, payload);
     },
     updateTopic(state, payload) {
       const index = findIndex(state.topics, { '.key': payload['.key'] });

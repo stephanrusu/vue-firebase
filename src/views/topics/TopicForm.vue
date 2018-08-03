@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     submitData() {
+      this.newTopic.id = this.newTopic.title.toLowerCase().replace(' ', '-');
       this.$store.dispatch('processTopic', this.newTopic);
       this.$router.push({ name: 'topics' });
     },

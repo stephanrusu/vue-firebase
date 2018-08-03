@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import { findIndex, orderBy } from 'lodash';
 import { database, storage } from '../../firebase';
 import { TYPE_SPONSORS, TYPE_ACTIVE_SPONSOR } from '../constants';
 import { firebaseObjectToArray } from '../../helpers';
@@ -100,18 +100,18 @@ const sponsors = {
     },
   },
   getters: {
-    loadedSponsors: state => state.sponsors.sort((itemA, itemB) => itemA.date < itemB.date),
     sponsorsLength: state => state.sponsors.length,
     loadSingleSponsor: state => key => state.sponsors.find(sponsor => sponsor['.key'] === key),
     loadTheActiveSponsor: state => state.activeSponsor,
-    paginateSponsors: state => (pageSize, pageNumber) => state.sponsors.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    paginateSponsors: state => (pageSize, pageNumber) => orderBy(state.sponsors, 'date', 'desc')
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedSponsors(state, payload) {
       state.sponsors = payload;
     },
     createSponsor(state, payload) {
-      state.sponsors.push(payload);
+      state.sponsors.splice(0, 0, payload);
     },
     updateSponsor(state, payload) {
       const index = findIndex(state.sponsors, { '.key': payload['.key'] });
