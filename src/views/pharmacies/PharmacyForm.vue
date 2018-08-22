@@ -8,11 +8,11 @@
             <b-input v-model="newPharmacy.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
           <b-field label="Latitude">
-            <b-input type='number' v-model="newPharmacy.location.latitude"
+            <b-input type='number' v-model="newPharmacy.location.latitude" step="0.000000001"
               maxlength="12" required :has-counter="false" name="latitude" />
           </b-field>
           <b-field label="Longitude">
-            <b-input type='number' v-model="newPharmacy.location.longitude"
+            <b-input type='number' v-model="newPharmacy.location.longitude" step="0.000000001"
             maxlength="12" required :has-counter="false" name="longitude" />
           </b-field>
           <b-field label="Description">
