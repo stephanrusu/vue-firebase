@@ -6,7 +6,6 @@ i18next
   .use(LngDetector)
   .init({
     fallbackLng: 'en',
-    debug: true,
     resources: {
       en: { translation: locales.en },
       de: { translation: locales.de },

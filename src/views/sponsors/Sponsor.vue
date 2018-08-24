@@ -12,6 +12,9 @@
             <p>{{ sponsor.title }}</p>
           </div>
         </div>
+        <div class="media-right" v-show="activeSponsor.skey === editId">
+          <b-tag type="is-info">Active</b-tag>
+        </div>
       </article>
     </div>
     <footer class="card-footer">

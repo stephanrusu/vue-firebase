@@ -3,8 +3,8 @@
     <page-header :title="title" :results="lengthMessages" />
     <!-- <div>{{ $t('title') }}</div>
     <a @click="changeLanguage('de')">DE</a> |
-    <a @click="changeLanguage('en')">EN</a> | -->
-    <a @click="changeLanguage('ro')">RO</a>
+    <a @click="changeLanguage('en')">EN</a> |
+    <a @click="changeLanguage('ro')">RO</a>-->
     <transition name="fade" mode="out-in" :duration="300" appear >
       <router-view :legend="legend" />
     </transition>

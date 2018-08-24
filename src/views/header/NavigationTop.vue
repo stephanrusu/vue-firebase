@@ -2,7 +2,7 @@
   <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" >
       <div class="container">
         <div class="navbar-brand">
-          <router-link :to="{ name: 'home' }" :class="{ 'is-active': isMobileActive }" class="navbar-item">
+          <router-link :to="{ name: 'home' }" class="navbar-item">
             Pollen
           </router-link>
           <a role="button" class="navbar-burger"
@@ -14,23 +14,23 @@
         </div>
         <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
           <div class="navbar-end" v-if="userUid !== ''" >
-            <router-link :to="{ name: 'messages' }"
+            <router-link :to="{ name: 'messages' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
                 Messages
             </router-link>
-            <router-link :to="{ name: 'sponsors' }"
+            <router-link :to="{ name: 'sponsors' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
                 Sponsors
             </router-link>
-            <router-link :to="{ name: 'pharmacies' }"
+            <router-link :to="{ name: 'pharmacies' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
                 Pharmacies
             </router-link>
-            <router-link :to="{ name: 'notifications' }"
+            <router-link :to="{ name: 'notifications' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
                 Notifications
             </router-link>
-            <router-link :to="{ name: 'topics' }"
+            <router-link :to="{ name: 'topics' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
                 Topics
             </router-link>
@@ -57,6 +57,9 @@ export default {
   methods: {
     toggleMenu() {
       this.isMobileActive = !this.isMobileActive;
+    },
+    closeMenu() {
+      this.isMobileActive = false;
     },
     signOut() {
       this.$store.dispatch('signOutUser');
