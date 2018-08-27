@@ -1,19 +1,19 @@
 <template>
   <div>
-    <route-link-action :route="{ name: 'sponsors' }">List</route-link-action>
+    <route-link-action :route="{ name: 'sponsors' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content columns">
         <div class="column">
           <form @submit.prevent="submitData">
-            <b-field label="Title">
+            <b-field :label="$t('form.labels.title')">
               <b-input v-model="newSponsor.title" name="title" maxlength="30" required :has-counter="false" />
             </b-field>
             <b-field class="file is-right is-expanded">
-              <label class="label">File / logo</label>
+              <label class="label">{{ $t('form.labels.fileLogo') }}</label>
               <div class="upload-el">
                 <b-upload v-model="files" name="logo" required>
                   <a class="button is-info">
-                    <span>Browse</span>
+                    <span>{{ $t('form.labels.browse') }}</span>
                   </a>
                 </b-upload>
                 <span class="file-name">
@@ -21,7 +21,7 @@
                     {{ files[0].name }}
                   </span>
                   <span v-else>
-                    Choose file ...
+                    {{ $t('form.labels.chooseFile') }}
                   </span>
                 </span>
               </div>
@@ -29,7 +29,7 @@
             <progress class="progress is-custom-progress is-info" :value="progress" max="100">{{ progress }}%</progress>
             <b-field>
               <div class="control">
-                <button type="submit" class="button is-info">Submit</button>
+                <button type="submit" class="button is-info">{{ $t('actions.submit') }}</button>
               </div>
             </b-field>
           </form>
@@ -40,7 +40,9 @@
           </figure>
           <b-field class="delete-logo">
             <div class="control">
-              <button class="button is-danger is-block" @click="deleteLogo">Delete logo</button>
+              <button class="button is-danger is-block" @click="deleteLogo">
+                {{ $t('form.labels.deleteFile') }}
+              </button>
             </div>
           </b-field>
         </div>
@@ -104,7 +106,7 @@ export default {
               case 'storage/unknown':
                 // Unknown error occurred, inspect error.serverResponse
                 console.error(result.error.serverResponse);
-                this.error = ' Unknown error occurred';
+                this.error = 'Unknown error occurred';
                 break;
               default:
                 this.error = result.error;

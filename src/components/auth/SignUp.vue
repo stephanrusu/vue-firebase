@@ -4,7 +4,7 @@
       <div class="columns is-vcentered">
         <div class="column is-6 is-offset-3">
           <h1 class="title">
-            Sign up
+            {{ $t('auth.signUp') }}
           </h1>
           <b-message title="Error" type="is-danger" v-if="userError !== ''" @close="userErrorClear">
             {{ userError }}
@@ -12,7 +12,7 @@
           <div class="box">
             <form @submit.prevent="signUpUser">
                <div class="field">
-                <label for="email" class="label">Email</label>
+                <label for="email" class="label">{{ $t('form.labels.email') }}</label>
                 <div class="control">
                   <input name="email" type="text"
                     :class="{'input': true, 'is-danger': errors.has('email')}"
@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="field">
-                <label for="password" class="label">Password</label>
+                <label for="password" class="label">{{ $t('form.labels.password') }}</label>
                 <div class="control">
                   <input type="password" name="password"
                     :class="{'input': true, 'is-danger': errors.has('password') }"
@@ -38,7 +38,7 @@
                 </div>
               </div>
               <div class="field">
-                <label for="confirmPassword" class="label">Confirm password</label>
+                <label for="confirmPassword" class="label">{{ $t('form.labels.confirmPassword') }}</label>
                 <div class="control">
                   <input type="password" name="confirmPassword"
                     :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
@@ -52,8 +52,10 @@
               </div>
               <hr />
               <div class="field is-flex has-justify-content-between">
-                <router-link :to="{ name: 'signin' }" class="button is-text">I already have an account</router-link>
-                <button type="submit" class="button is-link" :class="{'is-loading': loading}" :disabled="loading">Sign up</button>
+                <router-link :to="{ name: 'signin' }" class="button is-text">{{ $t('form.labels.withAccount') }}</router-link>
+                <button type="submit" class="button is-link" :class="{'is-loading': loading}" :disabled="loading">
+                  {{ $t('auth.signUp') }}
+                </button>
               </div>
             </form>
           </div>

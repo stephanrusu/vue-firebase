@@ -54,6 +54,7 @@ const topics = {
     },
   },
   getters: {
+    loadedTopics: state => state.topics.sort((itemA, itemB) => itemA.date < itemB.date),
     topicsLength: state => state.topics.length,
     loadSingleTopic: state => key => state.topics.find(topic => topic['.key'] === key),
     paginateTopics: state => (pageSize, pageNumber) => orderBy(state.topics, 'date', 'desc')

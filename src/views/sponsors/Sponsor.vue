@@ -13,20 +13,26 @@
           </div>
         </div>
         <div class="media-right" v-show="activeSponsor.skey === editId">
-          <b-tag type="is-info">Active</b-tag>
+          <b-tag type="is-info">{{ $t('actions.active') }}</b-tag>
         </div>
       </article>
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<moment-date :date="sponsor.date" />
+        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="sponsor.date" />
       </span>
       <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
-        Edit
+        {{ $t('actions.edit') }}
       </router-link>
-      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">Active</a>
-      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">Inactive</a>
-      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">Delete</a>
+      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">
+        {{ $t('actions.active') }}
+      </a>
+      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">
+        {{ $t('actions.inactive')}}
+      </a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="has-text-right">
-      <route-link-action :route="{ name: 'sponsorCreate' }">Create</route-link-action>
+      <route-link-action :route="{ name: 'sponsorCreate' }">{{ $t('actions.create') }}</route-link-action>
     </div>
     <div class="card-list">
       <transition-group name="fade" mode="out-in" :duration="300" appear >

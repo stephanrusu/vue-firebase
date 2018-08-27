@@ -4,7 +4,7 @@
       <div class="columns is-vcentered">
         <div class="column is-6 is-offset-3">
           <h1 class="title">
-            Sign in
+            {{ $t('auth.signIn') }}
           </h1>
           <b-message title="Error" type="is-danger" v-if="userError !== ''" @close="userErrorClear">
             {{ userError }}
@@ -12,7 +12,7 @@
           <div class="box">
             <form @submit.prevent="signInUser">
               <div class="field">
-                <label for="email" class="label">Email</label>
+                <label for="email" class="label">{{ $t('form.labels.email') }}</label>
                 <div class="control">
                   <input :class="{'input': true, 'is-danger': errors.has('email')}"
                     v-validate="'required|email'" v-model="email"
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="field">
-                <label for="password" class="label">Password</label>
+                <label for="password" class="label">{{ $t('form.labels.password') }}</label>
                 <div class="control">
                   <input  :class="{'input': true, 'is-danger': errors.has('password') }"
                     v-validate="'required|min:6'" v-model="password"
@@ -37,10 +37,10 @@
               </div>
               <hr />
               <div class="field is-flex has-justify-content-between">
-                <router-link :to="{ name: 'signup' }" class="button is-text">I don't have an account</router-link>
+                <router-link :to="{ name: 'signup' }" class="button is-text">{{ $t('form.labels.withoutAccount') }}</router-link>
                 <button :class="{'is-loading': loading}" :disabled="loading"
                   type="submit" class="button is-link" >
-                  Sign in
+                  {{ $t('auth.signIn') }}
                 </button>
               </div>
             </form>

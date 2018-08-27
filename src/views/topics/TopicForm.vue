@@ -1,16 +1,16 @@
 <template>
   <div>
-    <route-link-action :route="{ name: 'topics' }">List</route-link-action>
+    <route-link-action :route="{ name: 'topics' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
-          <b-field label='Name'>
+          <b-field :label="$t('form.labels.title')">
             <b-input v-model="newTopic.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
           <div class="is-divider" />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit') }}</button>
             </div>
           </b-field>
         </form>

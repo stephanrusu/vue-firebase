@@ -8,7 +8,6 @@ i18next
     fallbackLng: 'en',
     resources: {
       en: { translation: locales.en },
-      de: { translation: locales.de },
       ro: { translation: locales.ro },
     },
   });

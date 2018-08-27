@@ -16,25 +16,29 @@
           <div class="navbar-end" v-if="userUid !== ''" >
             <router-link :to="{ name: 'messages' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Messages
+                {{ $t('navigation.messages') }}
             </router-link>
             <router-link :to="{ name: 'sponsors' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Sponsors
+                {{ $t('navigation.sponsors') }}
             </router-link>
             <router-link :to="{ name: 'pharmacies' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Pharmacies
+                {{ $t('navigation.pharmacies') }}
             </router-link>
             <router-link :to="{ name: 'notifications' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Notifications
+                {{ $t('navigation.notifications') }}
             </router-link>
             <router-link :to="{ name: 'topics' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Topics
+                {{ $t('navigation.topics') }}
             </router-link>
-            <a href="#" class="navbar-item" @click="signOut">Sign out </a>
+            <language-change></language-change>
+            <a href="#" class="navbar-item" @click="signOut">{{ $t('auth.signOut') }}</a>
+          </div>
+          <div class="navbar-end" v-else>
+            <language-change></language-change>
           </div>
         </div>
       </div>
@@ -42,12 +46,17 @@
 </template>
 
 <script>
+import LanguageChange from '@/views/header/LanguageChange.vue';
+
 export default {
   name: 'NavigationTop',
   data() {
     return {
       isMobileActive: false,
     };
+  },
+  components: {
+    LanguageChange,
   },
   computed: {
     userUid() {

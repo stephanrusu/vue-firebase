@@ -1,27 +1,27 @@
 <template>
   <div>
-    <route-link-action :route="{ name: 'pharmacies' }">List</route-link-action>
+    <route-link-action :route="{ name: 'pharmacies' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
-          <b-field label="Title">
+          <b-field :label="$t('form.labels.title')">
             <b-input v-model="newPharmacy.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <b-field label="Latitude">
+          <b-field :label="$t('form.labels.latitude')">
             <b-input type='number' v-model="newPharmacy.location.latitude" step="0.000000001"
               maxlength="12" required :has-counter="false" name="latitude" />
           </b-field>
-          <b-field label="Longitude">
+          <b-field :label="$t('form.labels.longitude')">
             <b-input type='number' v-model="newPharmacy.location.longitude" step="0.000000001"
             maxlength="12" required :has-counter="false" name="longitude" />
           </b-field>
-          <b-field label="Description">
+          <b-field :label="$t('form.labels.description')">
             <b-input v-model="newPharmacy.description" type="textarea" name="description" />
           </b-field>
           <div class="is-divider" />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit') }}</button>
             </div>
           </b-field>
         </form>

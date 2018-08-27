@@ -1,17 +1,17 @@
 <template>
   <div>
-    <route-link-action :route="{ name: 'notifications' }">List</route-link-action>
+    <route-link-action :route="{ name: 'notifications' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
-          <b-field label='Title'>
+          <b-field :label="$t('form.labels.title')">
             <b-input v-model="newNotification.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <b-field label="Description">
+          <b-field :label="$t('form.labels.description')">
             <b-input type="textarea" v-model="newNotification.description"
               maxlength="140" required :has-counter="false" name="description" />
           </b-field>
-          <b-field label="Topic">
+          <b-field :label="$t('form.labels.topic')">
             <div class="block">
               <b-radio v-for="topic in topics" :key="topic['.key']"
                 type="is-info" :native-value="topic.id"
@@ -22,7 +22,7 @@
           <div class='is-divider' />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit') }}</button>
             </div>
           </b-field>
         </form>

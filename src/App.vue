@@ -55,11 +55,6 @@ html, body {
   }
 
   .card-footer {
-    // flex-direction: column;
-
-    // @include from($tablet) {
-    //   flex-direction: row;
-    // }
     .create-date {
       flex-basis: 75%;
     }

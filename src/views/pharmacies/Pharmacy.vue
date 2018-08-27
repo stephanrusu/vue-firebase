@@ -9,18 +9,20 @@
       <div class="content">
         <p>{{ pharmacy.description }}</p>
         <p>
-          Location:&ensp;<b>{{ pharmacy.location.latitude }}, {{ pharmacy.location.longitude }}</b>
+          {{ $t('form.labels.location') }}:&ensp;<b>{{ pharmacy.location.latitude }}, {{ pharmacy.location.longitude }}</b>
         </p>
       </div>
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<moment-date :date="pharmacy.date" />
+        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="pharmacy.date" />
       </span>
       <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}" class="card-footer-item">
-        Edit
+        {{ $t('actions.edit') }}
       </router-link>
-      <a href="#" class="card-footer-item" @click.prevent="deletePharmacy">Delete</a>
+      <a href="#" class="card-footer-item" @click.prevent="deletePharmacy">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>

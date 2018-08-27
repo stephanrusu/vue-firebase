@@ -7,12 +7,14 @@
     </header>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp; <moment-date :date="topic.date" />
+        {{ $t('form.labels.created') }}:&ensp; <moment-date :date="topic.date" />
       </span>
       <router-link :to="{ name: 'topicEdit', params: { id: editId }}" class="card-footer-item">
-        Edit
+        {{ $t('actions.edit') }}
       </router-link>
-      <a href="#" class="card-footer-item" @click="deleteTopic">Delete</a>
+      <a href="#" class="card-footer-item" @click="deleteTopic">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>

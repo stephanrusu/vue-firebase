@@ -1,27 +1,27 @@
 <template>
   <div>
-    <route-link-action :route="{ name: 'messages' }">List</route-link-action>
+    <route-link-action :route="{ name: 'messages' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
-          <b-field label="Title">
+          <b-field :label="$t('form.labels.title')">
             <b-input v-model="newMessage.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <b-field label="Description">
+          <b-field :label="$t('form.labels.description')">
             <b-input v-model="newMessage.message" type="textarea" maxlength="200" :has-counter="false" name="description" />
           </b-field>
-          <b-field label="Importance">
+          <b-field :label="$t('form.labels.importance')">
             <div class="block">
               <b-radio v-for="(item, key) in legend"
                 :key="item.level" v-model="newMessage.importance"
                 type="is-info" :native-value="key" name="importance"
-              > {{ item.label }} </b-radio>
+              >{{ $t('form.labels.level.'+item.label) }}</b-radio>
             </div>
           </b-field>
           <div class="is-divider" />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit')}}</button>
             </div>
           </b-field>
         </form>

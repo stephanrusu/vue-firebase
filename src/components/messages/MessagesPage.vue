@@ -1,10 +1,6 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="lengthMessages" />
-    <!-- <div>{{ $t('title') }}</div>
-    <a @click="changeLanguage('de')">DE</a> |
-    <a @click="changeLanguage('en')">EN</a> |
-    <a @click="changeLanguage('ro')">RO</a>-->
+    <page-header :title="$t('header.messages')" :results="lengthMessages" />
     <transition name="fade" mode="out-in" :duration="300" appear >
       <router-view :legend="legend" />
     </transition>
@@ -18,7 +14,6 @@ export default {
   name: 'MessagesPage',
   data() {
     return {
-      title: 'messages',
       legend: {
         1: { level: 'light', label: 'informative' },
         2: { level: 'success', label: 'low' },
@@ -34,11 +29,6 @@ export default {
   computed: {
     lengthMessages() {
       return this.$store.getters.messagesLength;
-    },
-  },
-  methods: {
-    changeLanguage(lang) {
-      this.$i18n.i18next.changeLanguage(lang);
     },
   },
   created() {

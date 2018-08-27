@@ -1,6 +1,6 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="lengthSponsors" />
+    <page-header :title="$t('header.sponsors')" :results="lengthSponsors" />
     <transition name="fade" mode="out-in" :duration="300" appear >
       <router-view />
     </transition>
@@ -12,11 +12,6 @@ import PageHeader from '@/components/header/PageHeader.vue';
 
 export default {
   name: 'SponsorsPage',
-  data() {
-    return {
-      title: 'sponsors',
-    };
-  },
   components: {
     PageHeader,
   },
