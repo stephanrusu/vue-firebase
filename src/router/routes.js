@@ -1,27 +1,26 @@
 // standar importing
-import Messages from '@/components/messages/Messages.vue';
+import MessagesPage from '@/components/messages/MessagesPage.vue';
 import MessagesList from '@/views/messages/MessagesList.vue';
 import MessageForm from '@/views/messages/MessageForm.vue';
 
-import Topics from '@/components/topics/Topics.vue';
+import TopicsPage from '@/components/topics/TopicsPage.vue';
 import TopicsList from '@/views/topics/TopicsList.vue';
 import TopicForm from '@/views/topics/TopicForm.vue';
 
-import Sponsors from '@/components/sponsors/Sponsors.vue';
+import SponsorsPage from '@/components/sponsors/SponsorsPage.vue';
 import SponsorsList from '@/views/sponsors/SponsorsList.vue';
 import SponsorForm from '@/views/sponsors/SponsorForm.vue';
 
-import Notifications from '@/components/notifications/Notifications.vue';
+import NotificationsPage from '@/components/notifications/NotificationsPage.vue';
 import NotificationForm from '@/views/notifications/NotificationForm.vue';
 import NotificationsList from '@/views/notifications/NotificationsList.vue';
 
-import Pharmacies from '@/components/pharmacies/Pharmacies.vue';
+import PharmaciesPage from '@/components/pharmacies/PharmaciesPage.vue';
 import PharmaciesList from '@/views/pharmacies/PharmaciesList.vue';
 import PharmacyForm from '@/views/pharmacies/PharmacyForm.vue';
 
 import SignIn from '@/components/auth/SignIn.vue';
 import SignUp from '@/components/auth/SignUp.vue';
-
 
 // Lazy load importing
 // const Home = () => import('@/views/Home');
@@ -35,7 +34,7 @@ export default [
   },
   {
     path: '/messages',
-    component: Messages,
+    component: MessagesPage,
     children: [
       {
         path: '',
@@ -61,7 +60,7 @@ export default [
   },
   {
     path: '/sponsors',
-    component: Sponsors,
+    component: SponsorsPage,
     children: [
       {
         path: '',
@@ -87,7 +86,7 @@ export default [
   },
   {
     path: '/topics',
-    component: Topics,
+    component: TopicsPage,
     children: [
       {
         path: '',
@@ -113,7 +112,7 @@ export default [
   },
   {
     path: '/notifications',
-    component: Notifications,
+    component: NotificationsPage,
     children: [
       {
         path: '',
@@ -139,7 +138,7 @@ export default [
   },
   {
     path: '/pharmacies',
-    component: Pharmacies,
+    component: PharmaciesPage,
     children: [
       {
         path: '',

@@ -1,35 +1,33 @@
 <template>
   <div>
     <div class="has-text-right">
-      <router-link :to="{ name: 'sponsorCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+      <route-link-action :route="{ name: 'sponsorCreate' }">{{ $t('actions.create') }}</route-link-action>
     </div>
     <div class="card-list">
-      <sponsor-card v-for="item in sponsors" :key="item['.key']"
-        :sponsor="item" :editId="item['.key']"
-      ></sponsor-card>
+      <transition-group name="fade" mode="out-in" :duration="300" appear >
+        <sponsor-card v-for="item in sponsors" :key="item['.key']" :editId="item['.key']" />
+      </transition-group>
     </div>
-    <br/>
-    <b-pagination v-if="this.total > this.perPage"
-      :total="total"
-      :current.sync="current"
-      order="is-centered"
-      :per-page="perPage">
-    </b-pagination>
+    <br />
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
 <script>
 import SponsorCard from '@/views/sponsors/Sponsor.vue';
+import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'SponsorsList',
   components: {
     SponsorCard,
+    RouteLinkAction,
   },
   data() {
     return {
       current: 1,
-      perPage: 5,
+      perPage: PAGE_SIZE,
     };
   },
   computed: {

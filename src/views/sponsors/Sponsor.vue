@@ -9,32 +9,48 @@
         </div>
         <div class="media-content">
           <div class="content">
-            <p class="">
-              {{ sponsor.title }}
-            </p>
+            <p>{{ sponsor.title }}</p>
           </div>
+        </div>
+        <div class="media-right" v-show="activeSponsor.skey === editId">
+          <b-tag type="is-info">{{ $t('actions.active') }}</b-tag>
         </div>
       </article>
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ sponsor.date | moment('HH:MM DD MMM, YYYY') }}</b>
+        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="sponsor.date" />
       </span>
-      <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}"
-        class="card-footer-item">
-        Edit
+      <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
+        {{ $t('actions.edit') }}
       </router-link>
-      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">Active</a>
-      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">Inactive</a>
-      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">Delete</a>
+      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">
+        {{ $t('actions.active') }}
+      </a>
+      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">
+        {{ $t('actions.inactive')}}
+      </a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>
 
 <script>
+import MomentDate from '@/views/common/MomentDate.vue';
+
 export default {
   name: 'Sponsor',
-  props: ['editId'],
+  components: {
+    MomentDate,
+  },
+  props: {
+    editId: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
     sponsor() {
       return this.$store.getters.loadSingleSponsor(this.editId);

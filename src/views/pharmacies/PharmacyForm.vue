@@ -1,25 +1,27 @@
 <template>
   <div>
-    <router-link :to="{ name: 'pharmacies' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'pharmacies' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
-        <form>
-          <b-field label="Title">
-            <b-input v-model="newPharmacy.title"></b-input>
+        <form @submit.prevent="submitData">
+          <b-field :label="$t('form.labels.title')">
+            <b-input v-model="newPharmacy.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <b-field label="Latitude">
-            <b-input v-model="newPharmacy.location.latitude"></b-input>
+          <b-field :label="$t('form.labels.latitude')">
+            <b-input type='number' v-model="newPharmacy.location.latitude" step="0.000000001"
+              maxlength="12" required :has-counter="false" name="latitude" />
           </b-field>
-          <b-field label="Longitude">
-            <b-input v-model="newPharmacy.location.longitude"></b-input>
+          <b-field :label="$t('form.labels.longitude')">
+            <b-input type='number' v-model="newPharmacy.location.longitude" step="0.000000001"
+            maxlength="12" required :has-counter="false" name="longitude" />
           </b-field>
-          <b-field label="Description">
-            <b-input v-model="newPharmacy.description" type="textarea"></b-input>
+          <b-field :label="$t('form.labels.description')">
+            <b-input v-model="newPharmacy.description" type="textarea" name="description" />
           </b-field>
-          <div class="is-divider"></div>
+          <div class="is-divider" />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit') }}</button>
             </div>
           </b-field>
         </form>
@@ -29,8 +31,13 @@
 </template>
 
 <script>
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+
 export default {
   name: 'PharmacyForm',
+  components: {
+    RouteLinkAction,
+  },
   created() {
     if (this.newPharmacy === undefined) {
       this.$router.push({ name: 'pharmacies' });

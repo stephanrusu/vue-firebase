@@ -1,6 +1,7 @@
-import { findIndex } from 'lodash';
+import { findIndex, orderBy } from 'lodash';
 import { database } from '../../firebase';
 import { TYPE_TOPICS } from '../constants';
+import { firebaseObjectToArray } from '../../helpers';
 
 const topics = {
   state: {
@@ -8,54 +9,63 @@ const topics = {
   },
   actions: {
     loadTopics({ commit }) {
-      database.ref(TYPE_TOPICS).orderByChild('date').once('value', (snapshot) => {
-        const items = snapshot.val();
-        if (items !== null) {
-          const temp = [];
-          // eslint-disable-next-line
-          for (const key in items) {
-            if ({}.hasOwnProperty.call(items, key)) {
-              temp.push({ '.key': key, ...items[key] });
-            }
+      database
+        .ref(TYPE_TOPICS)
+        .orderByChild('date')
+        .once('value', (snapshot) => {
+          const items = snapshot.val();
+          if (items !== null) {
+            const temp = firebaseObjectToArray(items);
+            commit('setLoadedTopics', temp);
           }
-          commit('setLoadedTopics', temp);
-        }
-      });
+        });
     },
     processTopic({ commit }, payload) {
       const key = payload['.key'];
       const newTopic = Object.assign({}, payload);
       if (key === undefined) {
         newTopic.date = new Date().getTime();
-        database.ref(TYPE_TOPICS).push(newTopic).then((snapshot) => {
-          newTopic['.key'] = snapshot.key;
-          commit('createTopic', newTopic);
-        });
+        database
+          .ref(TYPE_TOPICS)
+          .push(newTopic)
+          .then((snapshot) => {
+            newTopic['.key'] = snapshot.key;
+            commit('createTopic', newTopic);
+          });
       } else {
         delete newTopic['.key'];
-        database.ref(TYPE_TOPICS).child(key).update(newTopic).then(() => {
-          commit('updateTopic', payload);
-        });
+        database
+          .ref(TYPE_TOPICS)
+          .child(key)
+          .update(newTopic)
+          .then(() => {
+            commit('updateTopic', payload);
+          });
       }
     },
     removeTopic({ commit }, payload) {
-      database.ref(TYPE_TOPICS).child(payload).remove().then(() => {
-        commit('removeTopic', payload);
-      });
+      database
+        .ref(TYPE_TOPICS)
+        .child(payload)
+        .remove()
+        .then(() => {
+          commit('removeTopic', payload);
+        });
     },
   },
   getters: {
     loadedTopics: state => state.topics.sort((itemA, itemB) => itemA.date < itemB.date),
     topicsLength: state => state.topics.length,
     loadSingleTopic: state => key => state.topics.find(topic => topic['.key'] === key),
-    paginateTopics: state => (pageSize, pageNumber) => state.topics.slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
+    paginateTopics: state => (pageSize, pageNumber) => orderBy(state.topics, 'date', 'desc')
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
     setLoadedTopics(state, payload) {
       state.topics = payload;
     },
     createTopic(state, payload) {
-      state.topics.push(payload);
+      state.topics.splice(0, 0, payload);
     },
     updateTopic(state, payload) {
       const index = findIndex(state.topics, { '.key': payload['.key'] });

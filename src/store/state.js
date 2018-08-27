@@ -1,5 +1,8 @@
 const state = {
-  user: '',
+  user: {
+    uid: '',
+    error: '',
+  },
 };
 
 export default state;

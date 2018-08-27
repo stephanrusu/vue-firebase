@@ -1,16 +1,16 @@
 <template>
   <div>
-    <router-link :to="{ name: 'topics' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'topics' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
-          <b-field label='Name'>
-            <b-input v-model="newTopic.title"></b-input>
+          <b-field :label="$t('form.labels.title')">
+            <b-input v-model="newTopic.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <div class="is-divider"></div>
+          <div class="is-divider" />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit') }}</button>
             </div>
           </b-field>
         </form>
@@ -20,8 +20,13 @@
 </template>
 
 <script>
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+
 export default {
   name: 'TopicForm',
+  components: {
+    RouteLinkAction,
+  },
   created() {
     if (this.newTopic === undefined) {
       this.$router.push({ name: 'topics' });
@@ -38,6 +43,7 @@ export default {
   },
   methods: {
     submitData() {
+      this.newTopic.id = this.newTopic.title.toLowerCase().replace(' ', '-');
       this.$store.dispatch('processTopic', this.newTopic);
       this.$router.push({ name: 'topics' });
     },

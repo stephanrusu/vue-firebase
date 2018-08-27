@@ -1,40 +1,37 @@
 <template>
   <div>
     <div class="has-text-right">
-      <router-link :to="{ name: 'notificationCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+      <route-link-action :route="{ name: 'notificationCreate' }">{{ $t('actions.create') }}</route-link-action>
     </div>
     <div class="card-list">
-      <notification-card v-for="item in notifications"
-        :key="item['.key']" :editId="item['.key']"
-      ></notification-card>
+      <transition-group name="fade" mode="out-in" :duration="300" appear >
+        <notification-card v-for="item in notifications" :key="item['.key']" :editId="item['.key']" />
+      </transition-group>
     </div>
-    <br/>
-    <b-pagination v-if="this.total > this.perPage"
-      :total="total"
-      :current.sync="current"
-      order="is-centered"
-      :per-page="perPage">
-    </b-pagination>
+    <br />
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
 <script>
 import NotificationCard from '@/views/notifications/Notification.vue';
+import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'NotificationsList',
   components: {
     NotificationCard,
+    RouteLinkAction,
   },
   data() {
     return {
       current: 1,
-      perPage: 5,
+      perPage: PAGE_SIZE,
     };
   },
   computed: {
     notifications() {
-      // return this.$store.getters.loadedNotifications;
       return this.$store.getters.paginateNotifications(this.perPage, this.current);
     },
     total() {

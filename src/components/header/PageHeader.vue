@@ -1,14 +1,12 @@
 <template>
   <section class="hero is-info">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <p class="title">
-          {{ title }}
-        </p>
-        <p class="subtitle" v-show="results > 0">
-          {{ results }} results
-        </p>
-      </div>
+    <div class="hero-body has-text-centered">
+      <p class="title">
+        {{ title | capitalize }}
+      </p>
+      <p class="subtitle" v-show="results > 0">
+        {{ $t("header.results", {total: this.results}) }}
+      </p>
     </div>
   </section>
 </template>
@@ -16,7 +14,16 @@
 <script>
 export default {
   name: 'PageHeader',
-  props: ['title', 'results'],
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    results: {
+      type: Number,
+      required: true,
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -29,7 +36,6 @@ export default {
 
     .title {
       font-size: 1.5rem;
-      text-transform: capitalize;
     }
     .subtitle {
       font-size: 1rem;

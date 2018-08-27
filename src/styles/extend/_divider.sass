@@ -10,6 +10,7 @@ $divider-color: $grey-lighter !default
   height: $divider-thickness
   margin: 1.5rem 0
   text-align: center
+
   &[data-content]::after
     background: $white
     color: $divider-color
@@ -31,6 +32,7 @@ $divider-color: $grey-lighter !default
     position: relative
     border-top: none
     min-height: 2rem
+
     &::before
       border-left: $divider-thickness solid $divider-background-color
       bottom: 1rem
@@ -40,6 +42,7 @@ $divider-color: $grey-lighter !default
       position: absolute
       top: 1rem
       transform: translateX(-50%)
+
     &[data-content]::after
       position: absolute
       left: 50%

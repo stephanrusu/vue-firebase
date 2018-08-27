@@ -1,7 +1,9 @@
 <template>
   <div class="column">
-    <page-header :title="title" :results="lengthPharmacies" />
-    <router-view></router-view>
+    <page-header :title="$t('header.pharmacies')" :results="lengthPharmacies" />
+    <transition name="fade" mode="out-in" :duration="300" appear >
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -9,10 +11,7 @@
 import PageHeader from '@/components/header/PageHeader.vue';
 
 export default {
-  name: 'Pharmacies',
-  data: () => ({
-    title: 'pharmacies',
-  }),
+  name: 'PharmaciesPage',
   components: {
     PageHeader,
   },

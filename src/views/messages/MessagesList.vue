@@ -1,42 +1,43 @@
 <template>
   <div>
     <div class="has-text-right">
-      <router-link :to="{ name: 'messageCreate' }" class="button is-link has-margin-bottom-low">Create</router-link>
+      <route-link-action :route="{ name: 'messageCreate' }">{{ $t('actions.create') }}</route-link-action>
     </div>
     <div class="card-list">
-      <message-card
-        v-for="item in messages" :key="item['.key']"
-        :legend="legend" :editId="item['.key']"
-      ></message-card>
+      <transition-group name="fade" mode="out-in" :duration="300" appear>
+        <message-card v-for="item in messages" :key="item['.key']" :legend="legend" :editId="item['.key']" />
+      </transition-group>
     </div>
     <br />
-    <b-pagination v-if="this.total > this.perPage"
-      :total="total"
-      :current.sync="current"
-      order="is-centered"
-      :per-page="perPage">
-    </b-pagination>
+    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
 <script>
 import MessageCard from '@/views/messages/Message.vue';
+import { PAGE_SIZE } from '@/constants';
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'MessageList',
-  props: ['legend'],
+  props: {
+    legend: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       current: 1,
-      perPage: 5,
+      perPage: PAGE_SIZE,
     };
   },
   components: {
+    RouteLinkAction,
     MessageCard,
   },
   computed: {
     messages() {
-      // return this.$store.getters.loadedMessages;
       return this.$store.getters.paginateMessages(this.perPage, this.current);
     },
     total() {

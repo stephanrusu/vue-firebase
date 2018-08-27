@@ -1,12 +1,17 @@
 <template>
   <router-link :to="route" class="button is-link has-margin-bottom-low">
-    {{ label }}
+    <slot />
   </router-link>
 </template>
 
 <script>
 export default {
   name: 'RouteLinkAction',
-  props: ['route', 'label'],
+  props: {
+    route: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>

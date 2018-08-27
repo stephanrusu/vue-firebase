@@ -4,8 +4,8 @@
       <p class="card-header-title">
         {{ message.title }}
       </p>
-      <b-tag :type="`is-${legend[message.importance].level}`" class="is-capitalized">
-        {{ legend[message.importance].label }}
+      <b-tag :type="`is-${legend[message.importance].level}`">
+        {{ $t('form.labels.level.'+legend[message.importance].label) }}
       </b-tag>
     </header>
     <div class="card-content">
@@ -15,21 +15,36 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        Created:&ensp;<b>{{ message.date | moment('HH:MM DD MMM, YYYY') }}</b>
+        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="message.date" />
       </span>
-      <router-link :to="{ name: 'messageEdit', params: { id: editId }}"
-        class="card-footer-item">
-        Edit
+      <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">
+        {{ $t('actions.edit') }}
       </router-link>
-      <a href="#" class="card-footer-item" @click.prevent="deleteMessage">Delete</a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteMessage">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>
 
 <script>
+import MomentDate from '@/views/common/MomentDate.vue';
+
 export default {
   name: 'Message',
-  props: ['legend', 'editId'],
+  components: {
+    MomentDate,
+  },
+  props: {
+    editId: {
+      type: String,
+      required: true,
+    },
+    legend: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
     message() {
       return this.$store.getters.loadSingleMessage(this.editId);

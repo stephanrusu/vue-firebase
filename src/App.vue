@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <Navigation />
+    <navigation-top />
     <section class="section is-extra-low">
       <div class="container">
         <div class="columns">
-          <router-view/>
+          <transition name="fade" mode="out-in" :duration="800" appear>
+            <router-view />
+          </transition>
         </div>
       </div>
     </section>
@@ -12,13 +14,13 @@
 </template>
 
 <script>
-import Navigation from '@/views/header/Navigation.vue';
+import NavigationTop from '@/views/header/NavigationTop.vue';
 import { auth } from './firebase';
 
 export default {
   name: 'App',
   components: {
-    Navigation,
+    NavigationTop,
   },
   created() {
     auth.onAuthStateChanged((user) => {
@@ -53,14 +55,17 @@ html, body {
   }
 
   .card-footer {
-    // flex-direction: column;
-
-    // @include from($tablet) {
-    //   flex-direction: row;
-    // }
     .create-date {
       flex-basis: 75%;
     }
   }
+
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
 </style>

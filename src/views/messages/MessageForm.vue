@@ -1,30 +1,27 @@
 <template>
   <div>
-    <router-link :to="{ name: 'messages' }" class="button is-link has-margin-bottom-low">List</router-link>
+    <route-link-action :route="{ name: 'messages' }">{{ $t('actions.list') }}</route-link-action>
     <div class="card">
       <div class="card-content">
         <form @submit.prevent="submitData">
-          <b-field label="Title">
-            <b-input v-model="newMessage.title"></b-input>
+          <b-field :label="$t('form.labels.title')">
+            <b-input v-model="newMessage.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
-          <b-field label="Description">
-            <b-input v-model="newMessage.message" type="textarea"></b-input>
+          <b-field :label="$t('form.labels.description')">
+            <b-input v-model="newMessage.message" type="textarea" maxlength="200" :has-counter="false" name="description" />
           </b-field>
-          <b-field label="Importance">
+          <b-field :label="$t('form.labels.importance')">
             <div class="block">
-              <b-radio
-                v-for="(item, key) in legend" :key="key"
-                v-model="newMessage.importance"
-                type="is-info"
-                :native-value="key">
-                  {{ item.label }}
-              </b-radio>
+              <b-radio v-for="(item, key) in legend"
+                :key="item.level" v-model="newMessage.importance"
+                type="is-info" :native-value="key" name="importance"
+              >{{ $t('form.labels.level.'+item.label) }}</b-radio>
             </div>
           </b-field>
-          <div class="is-divider"></div>
+          <div class="is-divider" />
           <b-field>
             <div class="control">
-              <button type="submit" class="button is-info">Submit</button>
+              <button type="submit" class="button is-info">{{ $t('actions.submit')}}</button>
             </div>
           </b-field>
         </form>
@@ -34,9 +31,19 @@
 </template>
 
 <script>
+import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+
 export default {
   name: 'MessageForm',
-  props: ['legend'],
+  components: {
+    RouteLinkAction,
+  },
+  props: {
+    legend: {
+      type: Object,
+      required: true,
+    },
+  },
   created() {
     if (this.newMessage === undefined) {
       this.$router.push({ name: 'messages' });

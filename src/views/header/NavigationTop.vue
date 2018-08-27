@@ -2,9 +2,7 @@
   <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" >
       <div class="container">
         <div class="navbar-brand">
-          <router-link :to="{ name: 'home' }"
-            :class="{ 'is-active': isMobileActive }"
-            class="navbar-item">
+          <router-link :to="{ name: 'home' }" class="navbar-item">
             Pollen
           </router-link>
           <a role="button" class="navbar-burger"
@@ -15,28 +13,32 @@
           </a>
         </div>
         <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
-          <div class="navbar-end" v-if="user !== ''" >
-            <router-link :to="{ name: 'messages' }"
+          <div class="navbar-end" v-if="userUid !== ''" >
+            <router-link :to="{ name: 'messages' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Messages
+                {{ $t('navigation.messages') }}
             </router-link>
-            <router-link :to="{ name: 'sponsors' }"
+            <router-link :to="{ name: 'sponsors' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Sponsors
+                {{ $t('navigation.sponsors') }}
             </router-link>
-            <router-link :to="{ name: 'pharmacies' }"
+            <router-link :to="{ name: 'pharmacies' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Pharmacies
+                {{ $t('navigation.pharmacies') }}
             </router-link>
-            <router-link :to="{ name: 'notifications' }"
+            <router-link :to="{ name: 'notifications' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Notifications
+                {{ $t('navigation.notifications') }}
             </router-link>
-            <router-link :to="{ name: 'topics' }"
+            <router-link :to="{ name: 'topics' }" @click.native="closeMenu"
               class="navbar-item" active-class="is-active" exact >
-                Topics
+                {{ $t('navigation.topics') }}
             </router-link>
-            <a href="#" class="navbar-item" @click="signOut">Sign out </a>
+            <language-change></language-change>
+            <a href="#" class="navbar-item" @click="signOut">{{ $t('auth.signOut') }}</a>
+          </div>
+          <div class="navbar-end" v-else>
+            <language-change></language-change>
           </div>
         </div>
       </div>
@@ -44,19 +46,29 @@
 </template>
 
 <script>
+import LanguageChange from '@/views/header/LanguageChange.vue';
+
 export default {
-  name: 'Navigation',
-  data: () => ({
-    isMobileActive: false,
-  }),
+  name: 'NavigationTop',
+  data() {
+    return {
+      isMobileActive: false,
+    };
+  },
+  components: {
+    LanguageChange,
+  },
   computed: {
-    user() {
-      return this.$store.getters.user;
+    userUid() {
+      return this.$store.getters.userUid;
     },
   },
   methods: {
     toggleMenu() {
       this.isMobileActive = !this.isMobileActive;
+    },
+    closeMenu() {
+      this.isMobileActive = false;
     },
     signOut() {
       this.$store.dispatch('signOutUser');
