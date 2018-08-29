@@ -3,13 +3,13 @@
     <div class="has-text-right">
       <route-link-action :route="{ name: 'pharmacyCreate' }">{{ $t('actions.create') }}</route-link-action>
     </div>
-    <div class="card-list">
-      <transition-group name="fade" mode="out-in" :duration="300" appear >
-        <pharmacy-card v-for="item in pharmacies" :key="item['.key']" :editId="item['.key']" @deletePharmacy="deleteItem" />
-      </transition-group>
-    </div>
+    <transition-group tag="div" class="card-list" name="fade" mode="out-in" :duration="300" appear >
+      <pharmacy-card v-for="item in pharmacies" :key="item['.key']" :editId="item['.key']" @deletePharmacy="deleteItem" />
+    </transition-group>
     <br />
-    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
+    <list-pagination v-if="total > perPage"
+      :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
@@ -17,12 +17,14 @@
 import PharmacyCard from '@/views/pharmacies/Pharmacy.vue';
 import { PAGE_SIZE } from '@/constants';
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+import ListPagination from '@/views/common/ListPagination.vue';
 
 export default {
   name: 'PharmaciesList',
   components: {
     PharmacyCard,
     RouteLinkAction,
+    ListPagination,
   },
   data() {
     return {
@@ -41,6 +43,9 @@ export default {
   methods: {
     deleteItem(key) {
       this.$store.dispatch('removeMessage', key);
+    },
+    scrollTop() {
+      window.scroll(0, 0);
     },
   },
 };

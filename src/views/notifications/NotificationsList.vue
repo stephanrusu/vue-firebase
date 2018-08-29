@@ -3,13 +3,13 @@
     <div class="has-text-right">
       <route-link-action :route="{ name: 'notificationCreate' }">{{ $t('actions.create') }}</route-link-action>
     </div>
-    <div class="card-list">
-      <transition-group name="fade" mode="out-in" :duration="300" appear >
-        <notification-card v-for="item in notifications" :key="item['.key']" :editId="item['.key']" />
-      </transition-group>
-    </div>
+    <transition-group tag="div" class="card-list" name="fade" mode="out-in" :duration="300" appear >
+      <notification-card v-for="item in notifications" :key="item['.key']" :editId="item['.key']" />
+    </transition-group>
     <br />
-    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
+    <list-pagination v-if="total > perPage"
+      :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
@@ -17,12 +17,14 @@
 import NotificationCard from '@/views/notifications/Notification.vue';
 import { PAGE_SIZE } from '@/constants';
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+import ListPagination from '@/views/common/ListPagination.vue';
 
 export default {
   name: 'NotificationsList',
   components: {
     NotificationCard,
     RouteLinkAction,
+    ListPagination,
   },
   data() {
     return {
