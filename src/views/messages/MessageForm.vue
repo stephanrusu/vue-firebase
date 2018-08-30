@@ -5,10 +5,10 @@
       <div class="card-content">
         <form @submit.prevent="submitData">
           <b-field :label="$t('form.labels.title')">
-            <b-input v-model="newMessage.title" maxlength="30" required :has-counter="false" name="title" />
+            <b-input v-model="newMessage.title" maxlength="30" required name="title" />
           </b-field>
           <b-field :label="$t('form.labels.description')">
-            <b-input v-model="newMessage.message" type="textarea" maxlength="200" :has-counter="false" name="description" />
+            <b-input v-model="newMessage.message" type="textarea" maxlength="200" name="description" />
           </b-field>
           <b-field :label="$t('form.labels.importance')">
             <div class="block">
