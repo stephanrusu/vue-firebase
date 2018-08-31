@@ -45,6 +45,9 @@ export default {
     topic() {
       return this.$store.getters.loadSingleTopic(this.editId);
     },
+    role() {
+      return this.$store.getters.userRole;
+    },
   },
   methods: {
     deleteTopic() {

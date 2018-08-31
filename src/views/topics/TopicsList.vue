@@ -1,16 +1,10 @@
 <template>
   <div>
-    <div class="has-text-right">
-      <route-link-action :route="{ name: 'topicCreate' }">{{ $t('actions.create') }}</route-link-action>
-    </div>
-    <transition-group tag="div" class="card-list" name="fade" mode="out-in" :duration="300" appear >
-    </transition-group>
     <list-page :routeCreate="'topicCreate'" :items="topics">
       <topic-card slot-scope="{ item }" :editId="item['.key']" />
     </list-page>
     <br />
-    <list-pagination v-if="total > perPage"
-      :total="total" :current.sync="current"
+    <list-pagination v-if="total > perPage" :total="total" :current.sync="current"
       order="is-centered" :per-page="perPage" />
   </div>
 </template>

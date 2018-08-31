@@ -24,6 +24,7 @@ const sponsors = {
     processSponsor({ commit }, payload) {
       const key = payload['.key'];
       const newSponsor = Object.assign({}, payload);
+
       if (key === undefined) {
         newSponsor.date = new Date().getTime();
         database
@@ -58,6 +59,7 @@ const sponsors = {
           .delete()
           .then()
           .catch((error) => {
+            // eslint-disable-next-line
             console.error(error.message);
           });
       }
@@ -81,6 +83,7 @@ const sponsors = {
     markActiveSponsor({ commit }, payload) {
       const newActiveSponsor = Object.assign({}, payload);
       newActiveSponsor.skey = newActiveSponsor['.key'];
+
       delete newActiveSponsor['.key'];
       database
         .ref(TYPE_ACTIVE_SPONSOR)
@@ -91,6 +94,7 @@ const sponsors = {
     },
     markInactiveSponsor({ commit }) {
       const inactiveSponsor = { skey: '' };
+
       database
         .ref(TYPE_ACTIVE_SPONSOR)
         .set(inactiveSponsor)

@@ -23,6 +23,7 @@ const topics = {
     processTopic({ commit }, payload) {
       const key = payload['.key'];
       const newTopic = Object.assign({}, payload);
+
       if (key === undefined) {
         newTopic.date = new Date().getTime();
         database

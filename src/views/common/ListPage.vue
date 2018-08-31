@@ -5,7 +5,7 @@
     </div>
     <transition-group tag="div" class="card-list" name="fade" mode="out-in" :duration="300" appear>
       <div v-for="item in items" :key="item['.key']" class="card-container">
-        <slot :item="item"></slot>
+        <slot :item="item" />
       </div>
     </transition-group>
   </div>

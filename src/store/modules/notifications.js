@@ -23,6 +23,7 @@ const notifications = {
     processNotification({ commit }, payload) {
       const newNotification = Object.assign({}, payload);
       newNotification.date = new Date().getTime();
+
       database
         .ref(TYPE_NOTIFICATIONS)
         .push(newNotification)

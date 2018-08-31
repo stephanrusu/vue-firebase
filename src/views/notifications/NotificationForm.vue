@@ -12,7 +12,7 @@
               maxlength="140" required :has-counter="false" name="description" />
           </b-field>
           <b-field :label="$t('form.labels.topic')">
-            <div class="block">
+            <div class="block block-radio">
               <b-radio v-for="topic in topics" :key="topic['.key']"
                 type="is-info" :native-value="topic.id"
                 name="topic" v-model="newNotification.topic"

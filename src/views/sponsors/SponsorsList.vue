@@ -31,7 +31,6 @@ export default {
   },
   computed: {
     sponsors() {
-      // return this.$store.getters.loadedSponsors;
       return this.$store.getters.paginateSponsors(this.perPage, this.current);
     },
     activeSponsor() {

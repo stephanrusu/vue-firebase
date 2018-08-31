@@ -14,31 +14,33 @@
         </div>
         <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
           <div class="navbar-end" v-if="userUid !== ''" >
-            <router-link :to="{ name: 'messages' }" @click.native="closeMenu"
-              class="navbar-item" active-class="is-active" exact >
-                {{ $t('navigation.messages') }}
-            </router-link>
-            <router-link :to="{ name: 'sponsors' }" @click.native="closeMenu"
-              class="navbar-item" active-class="is-active" exact >
-                {{ $t('navigation.sponsors') }}
-            </router-link>
-            <router-link :to="{ name: 'pharmacies' }" @click.native="closeMenu"
-              class="navbar-item" active-class="is-active" exact >
-                {{ $t('navigation.pharmacies') }}
-            </router-link>
-            <router-link :to="{ name: 'notifications' }" @click.native="closeMenu"
-              class="navbar-item" active-class="is-active" exact >
-                {{ $t('navigation.notifications') }}
-            </router-link>
-            <router-link :to="{ name: 'topics' }" @click.native="closeMenu"
-              class="navbar-item" active-class="is-active" exact >
-                {{ $t('navigation.topics') }}
-            </router-link>
-            <language-change></language-change>
-            <a href="#" class="navbar-item" @click="signOut">{{ $t('auth.signOut') }}</a>
-          </div>
-          <div class="navbar-end" v-else>
-            <language-change></language-change>
+            <template v-if="userUid !== ''">
+              <router-link :to="{ name: 'messages' }" @click.native="closeMenu"
+                class="navbar-item" active-class="is-active" exact >
+                  {{ $t('navigation.messages') }}
+              </router-link>
+              <router-link :to="{ name: 'sponsors' }" @click.native="closeMenu"
+                class="navbar-item" active-class="is-active" exact >
+                  {{ $t('navigation.sponsors') }}
+              </router-link>
+              <router-link :to="{ name: 'pharmacies' }" @click.native="closeMenu"
+                class="navbar-item" active-class="is-active" exact >
+                  {{ $t('navigation.pharmacies') }}
+              </router-link>
+              <router-link :to="{ name: 'notifications' }" @click.native="closeMenu"
+                class="navbar-item" active-class="is-active" exact >
+                  {{ $t('navigation.notifications') }}
+              </router-link>
+              <router-link :to="{ name: 'topics' }" @click.native="closeMenu"
+                class="navbar-item" active-class="is-active" exact >
+                  {{ $t('navigation.topics') }}
+              </router-link>
+              <language-change />
+              <a href="#" class="navbar-item" @click="signOut">{{ $t('auth.signOut') }}</a>
+            </template>
+            <template v-else>
+              <language-change />
+            </template>
           </div>
         </div>
       </div>
@@ -77,17 +79,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import '../../styles/extend/variables';
+<style lang="sass">
+@import '../../styles/extend/variables'
 
-.navbar {
-  &.has-shadow {
-    box-shadow: 5px 5px 0 0 #f5f5f5;
-  }
-  .navbar-item {
-    &:not(.is-active) {
-      color: lighten($grey, 10%);
-    }
-  }
-}
+.navbar
+  &.has-shadow
+    box-shadow: 5px 5px 0 0 #f5f5f5
+
+  .navbar-item
+    &:not(.is-active)
+      color: lighten($grey, 10%)
+
 </style>

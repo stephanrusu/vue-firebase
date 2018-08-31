@@ -23,6 +23,7 @@ const pharmacies = {
     processPharmacy({ commit }, payload) {
       const key = payload['.key'];
       const newPharmacy = Object.assign({}, payload);
+
       if (key === undefined) {
         newPharmacy.date = new Date().getTime();
         database

@@ -11,7 +11,7 @@
             <b-input v-model="newMessage.message" type="textarea" maxlength="200" name="description" />
           </b-field>
           <b-field :label="$t('form.labels.importance')">
-            <div class="block">
+            <div class="block block-radio">
               <b-radio v-for="(item, key) in legend"
                 :key="item.level" v-model="newMessage.importance"
                 type="is-info" :native-value="key" name="importance"
@@ -67,10 +67,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.radio, .checkbox {
-  .control-label {
-    text-transform: capitalize;
-  }
-}
+<style lang="sass">
+.radio, .checkbox
+  .control-label
+    text-transform: capitalize
+
 </style>

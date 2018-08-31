@@ -69,16 +69,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import '../../styles/extend/variables';
+<style lang="sass" scoped>
+@import '../../styles/extend/variables'
 
-.tag {
-  margin: 0.75rem;
-  min-width: 75px;
+.tag
+  margin: 0.75rem
+  min-width: 75px
 
-  &.is-high {
-    background-color: $orange;
-    color: $white;
-  }
-}
+  &.is-high
+    background-color: $orange
+    color: $white
+
 </style>

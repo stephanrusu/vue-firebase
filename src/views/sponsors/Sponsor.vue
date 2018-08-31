@@ -84,10 +84,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.media {
-  .image {
-    overflow: hidden;
-  }
-}
+<style lang="sass" scoped>
+.media
+  .image
+    overflow: hidden
+
 </style>
