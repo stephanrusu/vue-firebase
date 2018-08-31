@@ -17,18 +17,21 @@
       <span class="card-footer-item create-date has-justify-content-start">
         {{ $t('form.labels.created') }}:&ensp;<moment-date :date="message.date" />
       </span>
-      <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">
-        {{ $t('actions.edit') }}
-      </router-link>
-      <a href="#" class="card-footer-item" @click.prevent="deleteMessage">
-        {{ $t('actions.delete') }}
-      </a>
+      <template v-if="role === adminRole">
+        <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">
+          {{ $t('actions.edit') }}
+        </router-link>
+        <a href="#" class="card-footer-item" @click.prevent="deleteMessage">
+          {{ $t('actions.delete') }}
+        </a>
+      </template>
     </footer>
   </div>
 </template>
 
 <script>
 import MomentDate from '@/views/common/MomentDate.vue';
+import { ADMIN_ROLE } from '@/constants';
 
 export default {
   name: 'Message',
@@ -45,9 +48,17 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      adminRole: ADMIN_ROLE,
+    };
+  },
   computed: {
     message() {
       return this.$store.getters.loadSingleMessage(this.editId);
+    },
+    role() {
+      return this.$store.getters.userRole;
     },
   },
   methods: {

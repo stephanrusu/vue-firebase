@@ -1,4 +1,5 @@
-import { auth } from '../firebase';
+import { auth, database } from '../firebase';
+import { TYPE_USERS } from '../constants';
 
 const actions = {
   signInUser({ commit }, payload) {
@@ -64,8 +65,23 @@ const actions = {
   userAlreadySignedIn({ commit }, payload) {
     commit('userSignedIn', payload);
   },
+  userWasSignedOut({ commit }) {
+    commit('userSignedOut');
+  },
   userErrorClear({ commit }) {
     commit('userAuthError', '');
+  },
+  getUserRole({ commit }, payload) {
+    database
+      .ref(TYPE_USERS)
+      .orderByChild('uid')
+      .equalTo(payload)
+      .once('value', (snapshot) => {
+        if (snapshot.val() !== null) {
+          const user = snapshot.val();
+          commit('updateUserRole', user[Object.keys(user)[0]].role);
+        }
+      });
   },
 };
 

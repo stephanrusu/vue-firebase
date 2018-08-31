@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <header class='card-header'>
-      <p class='card-header-title'>
+    <header class="card-header">
+      <p class="card-header-title">
         {{ notification.title }}
       </p>
     </header>

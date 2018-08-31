@@ -1,6 +1,6 @@
 import { orderBy } from 'lodash';
 import { database } from '../../firebase';
-import { TYPE_NOTIFICATIONS } from '../constants';
+import { TYPE_NOTIFICATIONS } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const notifications = {

@@ -21,24 +21,27 @@
       <span class="card-footer-item create-date has-justify-content-start">
         {{ $t('form.labels.created') }}:&ensp;<moment-date :date="sponsor.date" />
       </span>
-      <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
-        {{ $t('actions.edit') }}
-      </router-link>
-      <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">
-        {{ $t('actions.active') }}
-      </a>
-      <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">
-        {{ $t('actions.inactive')}}
-      </a>
-      <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">
-        {{ $t('actions.delete') }}
-      </a>
+      <template v-if="role === adminRole">
+        <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
+          {{ $t('actions.edit') }}
+        </router-link>
+        <a href="#" v-if="activeSponsor.skey !== editId" class="card-footer-item" @click.prevent="toggleActiveSponsor">
+          {{ $t('actions.active') }}
+        </a>
+        <a href="#" v-else class="card-footer-item" @click.prevent="toggleInactiveSponsor">
+          {{ $t('actions.inactive')}}
+        </a>
+        <a href="#" class="card-footer-item" @click.prevent="deleteSponsor">
+          {{ $t('actions.delete') }}
+        </a>
+      </template>
     </footer>
   </div>
 </template>
 
 <script>
 import MomentDate from '@/views/common/MomentDate.vue';
+import { ADMIN_ROLE } from '@/constants';
 
 export default {
   name: 'Sponsor',
@@ -51,9 +54,17 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      adminRole: ADMIN_ROLE,
+    };
+  },
   computed: {
     sponsor() {
       return this.$store.getters.loadSingleSponsor(this.editId);
+    },
+    role() {
+      return this.$store.getters.userRole;
     },
     activeSponsor() {
       return this.$store.getters.loadTheActiveSponsor;

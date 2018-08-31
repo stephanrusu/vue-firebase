@@ -28,8 +28,15 @@
       .button
         border-radius: 0 4px 4px 0
 
+.card-list
+  .card-container
+    margin-bottom: 1.5rem
+    &:last-child
+      margin-bottom: 0
+
 .card
   backface-visibility: hidden
+  box-shadow: 0 0 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1)
 
   .card-footer
     +mobile

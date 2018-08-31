@@ -1,6 +1,6 @@
 import { findIndex, orderBy } from 'lodash';
 import { database, storage } from '../../firebase';
-import { TYPE_SPONSORS, TYPE_ACTIVE_SPONSOR } from '../constants';
+import { TYPE_SPONSORS, TYPE_ACTIVE_SPONSOR } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const sponsors = {

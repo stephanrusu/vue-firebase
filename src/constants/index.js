@@ -9,6 +9,7 @@ export const TYPE_REGISTER = 'register';
 export const TYPE_LOGOUT = 'logout';
 export const TYPE_AUTH = 'auth';
 export const TYPE_HOME = 'home';
+export const TYPE_USERS = 'users';
 
 export const ROUTE_HOME = '/';
 export const ROUTE_MESSAGES = `/${TYPE_MESSAGES}`;
@@ -21,3 +22,5 @@ export const ROUTE_REGISTER = `/${TYPE_REGISTER}`;
 export const ROUTE_AUTH = `/${TYPE_AUTH}`;
 
 export const PAGE_SIZE = 10;
+
+export const ADMIN_ROLE = 'ADMIN';

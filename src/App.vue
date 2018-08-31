@@ -26,6 +26,9 @@ export default {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('userAlreadySignedIn', user.uid);
+        this.$store.dispatch('getUserRole', user.uid);
+      } else {
+        this.$store.dispatch('userWasSignedOut');
       }
     });
   },

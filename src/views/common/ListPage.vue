@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="has-text-right">
+    <div class="has-text-right" v-if="role === adminRole">
       <route-link-action :route="{ name: routeCreate }">{{ $t('actions.create') }}</route-link-action>
     </div>
     <transition-group tag="div" class="card-list" name="fade" mode="out-in" :duration="300" appear>
-      <div v-for="item in items" :key="item['.key']">
+      <div v-for="item in items" :key="item['.key']" class="card-container">
         <slot :item="item"></slot>
       </div>
     </transition-group>
@@ -14,6 +14,7 @@
 <script>
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 import ListPagination from '@/views/common/ListPagination.vue';
+import { ADMIN_ROLE } from '@/constants';
 
 export default {
   name: 'ListPage',
@@ -29,6 +30,16 @@ export default {
     items: {
       type: Array,
       required: true,
+    },
+  },
+  data() {
+    return {
+      adminRole: ADMIN_ROLE,
+    };
+  },
+  computed: {
+    role() {
+      return this.$store.getters.userRole;
     },
   },
 };

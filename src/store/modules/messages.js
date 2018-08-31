@@ -1,6 +1,6 @@
 import { orderBy, findIndex } from 'lodash';
 import { database } from '../../firebase';
-import { TYPE_MESSAGES } from '../constants';
+import { TYPE_MESSAGES } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const messages = {
