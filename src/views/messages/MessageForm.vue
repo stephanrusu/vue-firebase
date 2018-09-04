@@ -15,7 +15,7 @@
               <b-radio v-for="(item, key) in legend"
                 :key="item.level" v-model="newMessage.importance"
                 type="is-info" :native-value="key" name="importance"
-              >{{ $t('form.labels.level.'+item.label) }}</b-radio>
+              >{{ $t('form.labels.level.' + item.label) }}</b-radio>
             </div>
           </b-field>
           <div class="is-divider" />

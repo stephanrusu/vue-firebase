@@ -13,7 +13,7 @@
           </a>
         </div>
         <div :class="{ 'is-active': isMobileActive }" class="navbar-menu">
-          <div class="navbar-end" v-if="userUid !== ''" >
+          <div class="navbar-end">
             <template v-if="userUid !== ''">
               <router-link :to="{ name: 'messages' }" @click.native="closeMenu"
                 class="navbar-item" active-class="is-active" exact >
