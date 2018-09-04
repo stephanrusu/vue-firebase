@@ -8,6 +8,7 @@ const actions = {
     auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         commit('userSignedIn', user.user.uid);
+        commit('userAuthError', '');
       }).catch((error) => {
         const { code, message } = error;
         let errorMessage = '';
@@ -32,6 +33,7 @@ const actions = {
     auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         commit('userSignedIn', user.user.uid);
+        commit('userAuthError', '');
       }).catch((error) => {
         const { code, message } = error;
         let errorMessage = '';

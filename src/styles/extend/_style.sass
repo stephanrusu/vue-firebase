@@ -69,9 +69,12 @@ html, body
 
 .pagination
   .pagination-previous, .pagination-next
-    padding-left: .75em
-    padding-right: .75em
-    white-space: nowrap
+    display: none
+    +from($tablet)
+      display: flex
+      padding-left: .75em
+      padding-right: .75em
+      white-space: nowrap
 
 
 .fade-enter-active, .fade-leave-active
