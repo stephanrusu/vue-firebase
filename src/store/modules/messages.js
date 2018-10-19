@@ -1,7 +1,7 @@
 import { orderBy, findIndex } from 'lodash';
-import { firestore } from '../../firebase';
 import { TYPE_MESSAGES } from '../../constants';
 import { firestoreObjectToArray } from '../../helpers';
+import * as fsMethods from '../../helpers/firestore';
 
 const messages = {
   state: {
@@ -9,16 +9,8 @@ const messages = {
   },
   actions: {
     loadMessages({ commit }) {
-      // firestore
-      //   .collection(TYPE_MESSAGES)
-      //   .get()
-      //   .then((query) => {
-      //     const temp = firestoreObjectToArray(query);
-      //     commit('setLoadedMessages', temp);
-      //   });
-      firestore
-        .collection(TYPE_MESSAGES)
-        .onSnapshot((query) => {
+      fsMethods.getAllData(TYPE_MESSAGES)
+        .then((query) => {
           const temp = firestoreObjectToArray(query);
           commit('setLoadedMessages', temp);
         });
@@ -28,32 +20,23 @@ const messages = {
       const newMessage = Object.assign({}, payload);
 
       if (key === undefined) {
-        const now = new Date();
-        newMessage.date = now;
-        firestore
-          .collection(TYPE_MESSAGES)
-          .add(newMessage)
+        fsMethods.addData(TYPE_MESSAGES, newMessage)
           .then((doc) => {
+            const docData = doc.data();
             newMessage['.key'] = doc.id;
-            newMessage.date.seconds = now.getTime();
+
+            newMessage.date = docData.date;
             commit('createMessage', newMessage);
           });
       } else {
-        delete newMessage['.key'];
-        firestore
-          .collection(TYPE_MESSAGES)
-          .doc(key)
-          .set(newMessage)
+        fsMethods.updateData(TYPE_MESSAGES, newMessage)
           .then(() => {
             commit('updateMessage', payload);
           });
       }
     },
     removeMessage({ commit }, payload) {
-      firestore
-        .collection(TYPE_MESSAGES)
-        .doc(payload)
-        .delete()
+      fsMethods.deleteData(TYPE_MESSAGES, payload)
         .then(() => {
           commit('removeMessage', payload);
         });

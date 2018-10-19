@@ -1,3 +1,9 @@
+// const uniqueElementsBy = (arr, fn) =>
+//   arr.reduce((acc, v) => {
+//     if (!acc.some(x => fn(v, x))) acc.push(v);
+//     return acc;
+//   }, []);
+
 export function firebaseObjectToArray(fbObject) {
   const temp = [];
   // eslint-disable-next-line
@@ -16,9 +22,6 @@ export function firestoreObjectToArray(fsQuery) {
     temp.push({ '.key': doc.id, ...doc.data() });
   });
 
+  // return uniqueElementsBy(temp, (a, b) => a['.key'] === b['.key']);
   return temp;
-}
-
-export function test() {
-  return true;
 }
