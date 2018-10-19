@@ -11,7 +11,7 @@
             <b-field class="file is-right is-expanded">
               <label class="label">{{ $t('form.labels.fileLogo') }}</label>
               <div class="upload-el">
-                <b-upload v-model="files" name="logo" required>
+                <b-upload v-model="files" name="logo">
                   <a class="button is-info">
                     <span>{{ $t('form.labels.browse') }}</span>
                   </a>
@@ -84,6 +84,7 @@ export default {
   },
   methods: {
     submitData() {
+      const sponsorId = this.$route.params.id;
       if (this.files && this.files.length) {
         this.uploadFile(this.files[0], (result) => {
           if (result.progress) {
@@ -106,7 +107,7 @@ export default {
               case 'storage/unknown':
                 // Unknown error occurred, inspect error.serverResponse
                 // eslint-disable-next-line
-                console.error(result.error.serverResponse);
+                  console.error(result.error.serverResponse);
                 this.error = 'Unknown error occurred';
                 break;
               default:
@@ -115,6 +116,8 @@ export default {
             }
           }
         });
+      } else if (sponsorId !== undefined) {
+        this.saveForm();
       }
     },
     uploadFile(fileLogo, callback) {
