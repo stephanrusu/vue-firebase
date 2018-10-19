@@ -22,10 +22,8 @@ const messages = {
       if (key === undefined) {
         fsMethods.addData(TYPE_MESSAGES, newMessage)
           .then((doc) => {
-            const docData = doc.data();
             newMessage['.key'] = doc.id;
-
-            newMessage.date = docData.date;
+            newMessage.date = doc.data().date;
             commit('createMessage', newMessage);
           });
       } else {
@@ -36,7 +34,7 @@ const messages = {
       }
     },
     removeMessage({ commit }, payload) {
-      fsMethods.deleteData(TYPE_MESSAGES, payload)
+      fsMethods.removeData(TYPE_MESSAGES, payload)
         .then(() => {
           commit('removeMessage', payload);
         });

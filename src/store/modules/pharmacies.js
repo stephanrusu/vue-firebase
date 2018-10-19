@@ -1,7 +1,7 @@
 import { findIndex, orderBy } from 'lodash';
-import { database } from '../../firebase';
 import { TYPE_PHARMACIES } from '../../constants';
-import { firebaseObjectToArray } from '../../helpers';
+import { firestoreObjectToArray } from '../../helpers';
+import * as fsMethods from '../../helpers/firestore';
 
 const pharmacies = {
   state: {
@@ -9,15 +9,10 @@ const pharmacies = {
   },
   actions: {
     loadPharmacies({ commit }) {
-      database
-        .ref(TYPE_PHARMACIES)
-        .orderByChild('date')
-        .once('value', (snapshot) => {
-          const items = snapshot.val();
-          if (items !== null) {
-            const temp = firebaseObjectToArray(items);
-            commit('setLoadedPharmacies', temp);
-          }
+      fsMethods.getAllData(TYPE_PHARMACIES)
+        .then((query) => {
+          const temp = firestoreObjectToArray(query);
+          commit('setLoadedPharmacies', temp);
         });
     },
     processPharmacy({ commit }, payload) {
@@ -25,31 +20,23 @@ const pharmacies = {
       const newPharmacy = Object.assign({}, payload);
 
       if (key === undefined) {
-        newPharmacy.date = new Date().getTime();
-        database
-          .ref(TYPE_PHARMACIES)
-          .push(newPharmacy)
-          .then((snapshot) => {
-            newPharmacy['.key'] = snapshot.key;
+        fsMethods.addData(TYPE_PHARMACIES, newPharmacy)
+          .then((doc) => {
+            newPharmacy.key = doc.id;
+            newPharmacy.date = doc.data().date;
             commit('createPharmacy', newPharmacy);
           });
       } else {
-        delete newPharmacy['.key'];
-        database
-          .ref(TYPE_PHARMACIES)
-          .child(key)
-          .update(newPharmacy)
+        fsMethods.updateData(TYPE_PHARMACIES, newPharmacy)
           .then(() => {
             commit('updatePharmacy', payload);
           });
       }
     },
     removePharmacy({ commit }, payload) {
-      database
-        .ref(TYPE_PHARMACIES)
-        .child(payload)
-        .remove()
+      fsMethods.removeData(TYPE_PHARMACIES, payload)
         .then(() => {
+          commit('remove');
           // pharmercy xD
           commit('removePharmacy', payload);
         });

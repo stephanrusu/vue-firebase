@@ -23,7 +23,7 @@ export function getAllData(collection) {
 
 
 export function addData(collection, collectionItem) {
-  const newCollectionItem = collectionItem;
+  const newCollectionItem = Object.assign({}, collectionItem);
   newCollectionItem.date = new Date();
 
   return firestore
@@ -33,7 +33,7 @@ export function addData(collection, collectionItem) {
 
 export function updateData(collection, collectionItem) {
   const key = collectionItem['.key'];
-  const newCollectionItem = collectionItem;
+  const newCollectionItem = Object.assign({}, collectionItem);
   delete newCollectionItem['.key'];
 
   return firestore
@@ -42,7 +42,7 @@ export function updateData(collection, collectionItem) {
     .set(newCollectionItem);
 }
 
-export function deleteData(collection, key) {
+export function removeData(collection, key) {
   return firestore
     .collection(collection)
     .doc(key)

@@ -1,7 +1,7 @@
 import { findIndex, orderBy } from 'lodash';
-import { database } from '../../firebase';
 import { TYPE_TOPICS } from '../../constants';
-import { firebaseObjectToArray } from '../../helpers';
+import { firestoreObjectToArray } from '../../helpers';
+import * as fsMethods from '../../helpers/firestore';
 
 const topics = {
   state: {
@@ -9,15 +9,10 @@ const topics = {
   },
   actions: {
     loadTopics({ commit }) {
-      database
-        .ref(TYPE_TOPICS)
-        .orderByChild('date')
-        .once('value', (snapshot) => {
-          const items = snapshot.val();
-          if (items !== null) {
-            const temp = firebaseObjectToArray(items);
-            commit('setLoadedTopics', temp);
-          }
+      fsMethods.getAllData(TYPE_TOPICS)
+        .then((query) => {
+          const temp = firestoreObjectToArray(query);
+          commit('setLoadedTopics', temp);
         });
     },
     processTopic({ commit }, payload) {
@@ -25,30 +20,21 @@ const topics = {
       const newTopic = Object.assign({}, payload);
 
       if (key === undefined) {
-        newTopic.date = new Date().getTime();
-        database
-          .ref(TYPE_TOPICS)
-          .push(newTopic)
-          .then((snapshot) => {
-            newTopic['.key'] = snapshot.key;
+        fsMethods.addData(TYPE_TOPICS, newTopic)
+          .then((doc) => {
+            newTopic['.key'] = doc.id;
+            newTopic.date = doc.data().date;
             commit('createTopic', newTopic);
           });
       } else {
-        delete newTopic['.key'];
-        database
-          .ref(TYPE_TOPICS)
-          .child(key)
-          .update(newTopic)
+        fsMethods.updateData(TYPE_TOPICS, newTopic)
           .then(() => {
             commit('updateTopic', payload);
           });
       }
     },
     removeTopic({ commit }, payload) {
-      database
-        .ref(TYPE_TOPICS)
-        .child(payload)
-        .remove()
+      fsMethods.removeData(TYPE_TOPICS, payload)
         .then(() => {
           commit('removeTopic', payload);
         });

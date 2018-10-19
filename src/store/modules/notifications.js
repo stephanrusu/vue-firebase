@@ -1,7 +1,7 @@
 import { orderBy } from 'lodash';
-import { database } from '../../firebase';
 import { TYPE_NOTIFICATIONS } from '../../constants';
-import { firebaseObjectToArray } from '../../helpers';
+import { firestoreObjectToArray } from '../../helpers';
+import * as fsMethods from '../../helpers/firestore';
 
 const notifications = {
   state: {
@@ -9,26 +9,19 @@ const notifications = {
   },
   actions: {
     loadNotifications({ commit }) {
-      database
-        .ref(TYPE_NOTIFICATIONS)
-        .orderByChild('date')
-        .once('value', (snapshot) => {
-          const items = snapshot.val();
-          if (items !== null) {
-            const temp = firebaseObjectToArray(items);
-            commit('setLoadedNotifications', temp);
-          }
+      fsMethods.getAllData(TYPE_NOTIFICATIONS)
+        .then((query) => {
+          const temp = firestoreObjectToArray(query);
+          commit('setLoadedNotifications', temp);
         });
     },
     processNotification({ commit }, payload) {
       const newNotification = Object.assign({}, payload);
-      newNotification.date = new Date().getTime();
 
-      database
-        .ref(TYPE_NOTIFICATIONS)
-        .push(newNotification)
-        .then((snapshot) => {
-          newNotification['.key'] = snapshot.key;
+      fsMethods.addData(TYPE_NOTIFICATIONS, payload)
+        .then((doc) => {
+          newNotification['.key'] = doc.id;
+          newNotification.date = doc.data().date;
           commit('createNotification', newNotification);
         });
     },
