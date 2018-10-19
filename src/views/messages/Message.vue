@@ -15,7 +15,7 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="message.date" />
+        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="message.date.seconds" />
       </span>
       <template v-if="role === adminRole">
         <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">

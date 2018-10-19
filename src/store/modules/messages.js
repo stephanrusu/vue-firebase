@@ -1,7 +1,7 @@
 import { orderBy, findIndex } from 'lodash';
-import { database } from '../../firebase';
+import { firestore } from '../../firebase';
 import { TYPE_MESSAGES } from '../../constants';
-import { firebaseObjectToArray } from '../../helpers';
+import { firestoreObjectToArray } from '../../helpers';
 
 const messages = {
   state: {
@@ -9,15 +9,18 @@ const messages = {
   },
   actions: {
     loadMessages({ commit }) {
-      database
-        .ref(TYPE_MESSAGES)
-        .orderByChild('date')
-        .once('value', (snapshot) => {
-          const items = snapshot.val();
-          if (items !== null) {
-            const temp = firebaseObjectToArray(items);
-            commit('setLoadedMessages', temp);
-          }
+      // firestore
+      //   .collection(TYPE_MESSAGES)
+      //   .get()
+      //   .then((query) => {
+      //     const temp = firestoreObjectToArray(query);
+      //     commit('setLoadedMessages', temp);
+      //   });
+      firestore
+        .collection(TYPE_MESSAGES)
+        .onSnapshot((query) => {
+          const temp = firestoreObjectToArray(query);
+          commit('setLoadedMessages', temp);
         });
     },
     processMessage({ commit }, payload) {
@@ -25,30 +28,32 @@ const messages = {
       const newMessage = Object.assign({}, payload);
 
       if (key === undefined) {
-        newMessage.date = new Date().getTime();
-        database
-          .ref(TYPE_MESSAGES)
-          .push(newMessage)
-          .then((snapshot) => {
-            newMessage['.key'] = snapshot.key;
+        const now = new Date();
+        newMessage.date = now;
+        firestore
+          .collection(TYPE_MESSAGES)
+          .add(newMessage)
+          .then((doc) => {
+            newMessage['.key'] = doc.id;
+            newMessage.date.seconds = now.getTime();
             commit('createMessage', newMessage);
           });
       } else {
         delete newMessage['.key'];
-        database
-          .ref(TYPE_MESSAGES)
-          .child(key)
-          .update(newMessage)
+        firestore
+          .collection(TYPE_MESSAGES)
+          .doc(key)
+          .set(newMessage)
           .then(() => {
             commit('updateMessage', payload);
           });
       }
     },
     removeMessage({ commit }, payload) {
-      database
-        .ref(TYPE_MESSAGES)
-        .child(payload)
-        .remove()
+      firestore
+        .collection(TYPE_MESSAGES)
+        .doc(payload)
+        .delete()
         .then(() => {
           commit('removeMessage', payload);
         });

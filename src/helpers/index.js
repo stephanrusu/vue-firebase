@@ -9,6 +9,16 @@ export function firebaseObjectToArray(fbObject) {
   return temp;
 }
 
+export function firestoreObjectToArray(fsQuery) {
+  const temp = [];
+
+  fsQuery.forEach((doc) => {
+    temp.push({ '.key': doc.id, ...doc.data() });
+  });
+
+  return temp;
+}
+
 export function test() {
   return true;
 }

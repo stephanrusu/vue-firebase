@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 const config = {
   apiKey: 'AIzaSyClzjPB1OEVtHxgfXp3GIuNnZTjyVFdRkw',
@@ -27,3 +28,8 @@ export const firebaseApp = firebase.initializeApp(config);
 export const database = firebaseApp.database();
 export const storage = firebaseApp.storage();
 export const auth = firebaseApp.auth();
+export const firestore = firebaseApp.firestore();
+
+firestore.settings({
+  timestampsInSnapshots: true,
+});
