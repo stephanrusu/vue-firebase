@@ -21,10 +21,15 @@ const messages = {
 
       if (key === undefined) {
         fsMethods.addData(TYPE_MESSAGES, newMessage)
-          .then((doc) => {
-            newMessage['.key'] = doc.id;
-            newMessage.date = doc.data().date;
-            commit('createMessage', newMessage);
+          .then((docRef) => {
+            fsMethods.getDocument(TYPE_MESSAGES, docRef.id)
+              .then((doc) => {
+                if (doc.exists) {
+                  const newDocument = Object.assign({}, doc.data());
+                  newDocument['.key'] = doc.id;
+                  commit('createMessage', newDocument);
+                }
+              });
           });
       } else {
         fsMethods.updateData(TYPE_MESSAGES, newMessage)

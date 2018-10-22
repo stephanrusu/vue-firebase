@@ -5,7 +5,7 @@
         {{ title | capitalize }}
       </p>
       <p class="subtitle" v-show="results > 0">
-        {{ $t("header.results", {total: this.results}) }}
+        {{ $t("header.results", {total: results}) }}
       </p>
     </div>
   </section>

@@ -59,6 +59,7 @@ export const en = {
   },
   header: {
     results: '{{total}} results',
+    singleResult: '{{ total }} result',
     messages: 'Messages',
     sponsors: 'Sponsors',
     pharmacies: 'Pharmacies',

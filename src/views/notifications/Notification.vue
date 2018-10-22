@@ -17,7 +17,7 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        {{ $t('form.labels.created') }}:&ensp; <moment-date :date="notification.date" />
+        {{ $t('form.labels.created') }}:&ensp; <moment-date :date="notification.date.seconds" />
       </span>
     </footer>
   </div>

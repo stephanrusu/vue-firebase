@@ -16,6 +16,25 @@ export function getAllData(collection) {
   //     commit('setLoadedMessages', temp);
   //   });
 
+  // return firestore
+  //   .collection(collection)
+  //   .onSnapshot((doc) => {
+  //     doc.docChanges().forEach((snapshot) => {
+  //       switch (snapshot.type) {
+  //         case 'added':
+  //           console.info('added', snapshot);
+  //           break;
+  //         case 'removed':
+  //           console.info('removed', snapshot);
+  //           break;
+  //         case 'modified':
+  //           console.info('modified', snapshot);
+  //           break;
+  //         default: break;
+  //       }
+  //     });
+  //   });
+
   return firestore
     .collection(collection)
     .get();
@@ -47,4 +66,10 @@ export function removeData(collection, key) {
     .collection(collection)
     .doc(key)
     .delete();
+}
+
+export function getDocument(collection, documentId) {
+  const docRef = firestore.collection(collection).doc(documentId);
+
+  return docRef.get();
 }
