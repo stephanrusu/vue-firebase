@@ -14,7 +14,7 @@
 <script>
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 import ListPagination from '@/views/common/ListPagination.vue';
-import { ADMIN_ROLE } from '@/constants';
+import { ADMIN_ROLE } from '@/constants/roles';
 
 export default {
   name: 'ListPage',

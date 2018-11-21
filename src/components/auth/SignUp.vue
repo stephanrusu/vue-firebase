@@ -30,7 +30,7 @@
                   <input type="password" name="password"
                     :class="{'input': true, 'is-danger': errors.has('password') }"
                     v-validate="'required|min:6'"
-                    v-model="password"
+                    v-model="password" ref="passwordRef"
                   />
                   <span v-show="errors.has('password')" class="help is-danger">
                     {{ errors.first('password') }}
@@ -42,7 +42,7 @@
                 <div class="control">
                   <input type="password" name="confirmPassword"
                     :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
-                    v-validate="'required|min:6|is:password'"
+                    v-validate="'required|min:6|confirmed:passwordRef'"
                     v-model="confirmPassword"
                   />
                   <span v-show="errors.has('confirmPassword')" class="help is-danger">

@@ -1,5 +1,6 @@
 import { auth, database } from '../firebase';
 import { TYPE_USERS } from '../constants';
+import { USER_ROLE } from '../constants/roles';
 
 const actions = {
   signInUser({ commit }, payload) {
@@ -75,6 +76,8 @@ const actions = {
         if (snapshot.val() !== null) {
           const user = snapshot.val();
           commit('updateUserRole', user[Object.keys(user)[0]].role);
+        } else {
+          commit('updateUserRole', USER_ROLE);
         }
       });
   },

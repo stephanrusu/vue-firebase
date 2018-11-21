@@ -22,5 +22,3 @@ export const ROUTE_REGISTER = `/${TYPE_REGISTER}`;
 export const ROUTE_AUTH = `/${TYPE_AUTH}`;
 
 export const PAGE_SIZE = 10;
-
-export const ADMIN_ROLE = 'ADMIN';

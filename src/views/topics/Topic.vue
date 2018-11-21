@@ -23,7 +23,7 @@
 
 <script>
 import MomentDate from '@/views/common/MomentDate.vue';
-import { ADMIN_ROLE } from '@/constants';
+import { ADMIN_ROLE } from '@/constants/roles';
 
 export default {
   name: 'Topic',
