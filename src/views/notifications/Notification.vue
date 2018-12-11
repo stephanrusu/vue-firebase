@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <header class='card-header'>
-      <p class='card-header-title'>
+    <header class="card-header">
+      <p class="card-header-title">
         {{ notification.title }}
       </p>
     </header>
@@ -45,12 +45,10 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.card {
-  .card-content {
-    p {
-      margin-bottom: 0.75rem;
-    }
-  }
-}
+<style lang="sass" scoped>
+.card
+  .card-content
+    p
+      margin-bottom: 0.75rem
+
 </style>

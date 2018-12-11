@@ -8,6 +8,9 @@ const mutations = {
   userAuthError(state, payload) {
     state.user.error = payload;
   },
+  updateUserRole(state, payload) {
+    state.user.role = payload;
+  },
 };
 
 export default mutations;

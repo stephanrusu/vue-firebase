@@ -1,22 +1,19 @@
 <template>
   <div>
-    <div class="has-text-right">
-      <route-link-action :route="{ name: 'messageCreate' }">{{ $t('actions.create') }}</route-link-action>
-    </div>
-    <div class="card-list">
-      <transition-group name="fade" mode="out-in" :duration="300" appear>
-        <message-card v-for="item in messages" :key="item['.key']" :legend="legend" :editId="item['.key']" />
-      </transition-group>
-    </div>
+    <list-page :routeCreate="'messageCreate'" :items="messages" >
+      <message-card slot-scope="{ item }" :legend="legend" :editId="item['.key']" />
+    </list-page>
     <br />
-    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
+    <list-pagination v-if="total > perPage" :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
 <script>
 import MessageCard from '@/views/messages/Message.vue';
+import ListPage from '@/views/common/ListPage.vue';
+import ListPagination from '@/views/common/ListPagination.vue';
 import { PAGE_SIZE } from '@/constants';
-import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
 
 export default {
   name: 'MessageList',
@@ -33,8 +30,9 @@ export default {
     };
   },
   components: {
-    RouteLinkAction,
     MessageCard,
+    ListPage,
+    ListPagination,
   },
   computed: {
     messages() {
@@ -46,4 +44,3 @@ export default {
   },
 };
 </script>
-

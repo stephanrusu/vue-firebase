@@ -1,21 +1,24 @@
 {
   "rules": {
-    ".read": "true",
+    ".read": true,
     ".write": true,
-    "messages": {      
-      ".indexOn": "date",
+    "messages": {
+      ".indexOn": "date"
     },
-    "notifications": {      
-      ".indexOn": "date",
+    "notifications": {
+      ".indexOn": "date"
     },
-    "sponsors": {      
-      ".indexOn": "date",
+    "sponsors": {
+      ".indexOn": "date"
     },
-    "pharmacies": {      
-      ".indexOn": "date",
+    "pharmacies": {
+      ".indexOn": "date"
     },
-    "topics": {      
-      ".indexOn": "date",
+    "topics": {
+      ".indexOn": "date"
+    },
+    "users": {
+      ".indexOn": "uid"
     }
   }
 }

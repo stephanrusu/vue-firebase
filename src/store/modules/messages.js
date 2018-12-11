@@ -1,6 +1,6 @@
 import { orderBy, findIndex } from 'lodash';
 import { database } from '../../firebase';
-import { TYPE_MESSAGES } from '../constants';
+import { TYPE_MESSAGES } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const messages = {
@@ -23,6 +23,7 @@ const messages = {
     processMessage({ commit }, payload) {
       const key = payload['.key'];
       const newMessage = Object.assign({}, payload);
+
       if (key === undefined) {
         newMessage.date = new Date().getTime();
         database
@@ -54,13 +55,6 @@ const messages = {
     },
   },
   getters: {
-    // sort
-    // loadedMessages: state => state.messages.sort((itemA, itemB) => {
-    //   if (itemA.date > itemB.date) { return 1; } else if (itemA.date < itemB.date) { return -1; }
-    //   return 0;
-    // }),
-    // orderBy from lodash
-    // loadedMessages: state => orderBy(state.messages, ['date'], ['desc']),
     messagesLength: state => state.messages.length,
     loadSingleMessage: state => key => state.messages.find(message => message['.key'] === key),
     paginateMessages: state => (pageSize, pageNumber) => orderBy(state.messages, 'date', 'desc')

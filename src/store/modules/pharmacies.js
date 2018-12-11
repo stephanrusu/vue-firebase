@@ -1,6 +1,6 @@
 import { findIndex, orderBy } from 'lodash';
 import { database } from '../../firebase';
-import { TYPE_PHARMACIES } from '../constants';
+import { TYPE_PHARMACIES } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const pharmacies = {
@@ -23,6 +23,7 @@ const pharmacies = {
     processPharmacy({ commit }, payload) {
       const key = payload['.key'];
       const newPharmacy = Object.assign({}, payload);
+
       if (key === undefined) {
         newPharmacy.date = new Date().getTime();
         database

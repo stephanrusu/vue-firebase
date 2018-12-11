@@ -26,7 +26,7 @@ exports.addNotifications = functions.https.onRequest((request, response) => {
 });
 
 exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
-  .onCreate((snapshot, context) => {
+  .onCreate((snapshot) => {
     var data = snapshot.val();
     var payload = {
       notification: {

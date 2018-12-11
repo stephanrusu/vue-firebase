@@ -105,6 +105,7 @@ export default {
                 break;
               case 'storage/unknown':
                 // Unknown error occurred, inspect error.serverResponse
+                // eslint-disable-next-line
                 console.error(result.error.serverResponse);
                 this.error = 'Unknown error occurred';
                 break;
@@ -159,39 +160,32 @@ export default {
         this.newSponsor.photoUrl = '';
         this.newSponsor.fileRef = '';
       }).catch((error) => {
+        // eslint-disable-next-line
         console.error(error.message);
       });
     },
   },
 };
 </script>
-<style lang="scss">
-  .field.file {
-    flex-direction: column;
+<style lang="sass">
+.field.file
+  flex-direction: column
 
-    .upload-el {
-      display: flex;
-    }
-  }
+  .upload-el
+    display: flex
 
-  .delete-logo {
-    margin-top: 1rem;
-  }
+.delete-logo
+  margin-top: 1rem
 
-  .column {
-    &.sponsor-logo-display {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-  }
+.column
+  &.sponsor-logo-display
+    display: flex
+    flex-direction: column
+    justify-content: space-between
 
-  .progress {
-    &.is-custom-progress {
-      height: 1px;
-      margin: 1.5rem 0;
-    }
-  }
+.progress
+  &.is-custom-progress
+    height: 1px
+    margin: 1.5rem 0
 
 </style>
-

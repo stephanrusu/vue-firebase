@@ -1,6 +1,6 @@
 import { findIndex, orderBy } from 'lodash';
 import { database } from '../../firebase';
-import { TYPE_TOPICS } from '../constants';
+import { TYPE_TOPICS } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const topics = {
@@ -23,6 +23,7 @@ const topics = {
     processTopic({ commit }, payload) {
       const key = payload['.key'];
       const newTopic = Object.assign({}, payload);
+
       if (key === undefined) {
         newTopic.date = new Date().getTime();
         database

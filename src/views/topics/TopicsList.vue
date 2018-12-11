@@ -1,28 +1,26 @@
 <template>
   <div>
-    <div class="has-text-right">
-      <route-link-action :route="{ name: 'topicCreate' }">{{ $t('actions.create') }}</route-link-action>
-    </div>
-    <div class="card-list">
-      <transition-group name="fade" mode="out-in" :duration="300" appear >
-        <topic-card v-for="item in topics" :key="item['.key']" :editId="item['.key']" />
-      </transition-group>
-    </div>
-    <br/>
-    <b-pagination v-if="total > perPage" :total="total" :current.sync="current" order="is-centered" :per-page="perPage" />
+    <list-page :routeCreate="'topicCreate'" :items="topics">
+      <topic-card slot-scope="{ item }" :editId="item['.key']" />
+    </list-page>
+    <br />
+    <list-pagination v-if="total > perPage" :total="total" :current.sync="current"
+      order="is-centered" :per-page="perPage" />
   </div>
 </template>
 
 <script>
 import TopicCard from '@/views/topics/Topic.vue';
 import { PAGE_SIZE } from '@/constants';
-import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+import ListPage from '@/views/common/ListPage.vue';
+import ListPagination from '@/views/common/ListPagination.vue';
 
 export default {
   name: 'TopicsList',
   components: {
     TopicCard,
-    RouteLinkAction,
+    ListPage,
+    ListPagination,
   },
   data() {
     return {

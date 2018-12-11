@@ -47,6 +47,15 @@ export const en = {
         critical: 'Critical',
       },
     },
+    errors: {
+      title: 'Error',
+      'invalid-email': 'The email address is not valid',
+      'email-already-in-use': 'There already exists an account with the given email',
+      'weak-password': 'The password is not strong enough',
+      'user-disabled': 'The user corresponding to the given email has been disabled',
+      'user-not-found': 'There is no user corresponding to the given email',
+      'wrong-password': 'The password is invalid for the given email',
+    },
   },
   header: {
     results: '{{total}} results',
@@ -111,6 +120,15 @@ export const ro = {
         high: 'Ridicat',
         critical: 'Critic',
       },
+    },
+    errors: {
+      title: 'Eroare',
+      'invalid-email': 'Adresa de email este invalida',
+      'email-already-in-use': 'Exista un cont cu adresa de email furnizata',
+      'weak-password': 'Parola nu e destul de puternica',
+      'user-disabled': 'Utilizatorul cu aceasta adresa de email a fost dezactivat',
+      'user-not-found': 'Nu exista utilizator cu aceasta adresa de email',
+      'wrong-password': 'Parola e invalida pentru adresa de email furnizata',
     },
   },
   header: {

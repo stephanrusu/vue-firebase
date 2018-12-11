@@ -6,8 +6,8 @@
           <h1 class="title">
             {{ $t('auth.signIn') }}
           </h1>
-          <b-message title="Error" type="is-danger" v-if="userError !== ''" @close="userErrorClear">
-            {{ userError }}
+          <b-message :title="$t('form.errors.title')" type="is-danger" v-if="userError !== ''" @close="closeError">
+            {{ $t('form.errors.' + userError) }}
           </b-message>
           <div class="box">
             <form @submit.prevent="signInUser">

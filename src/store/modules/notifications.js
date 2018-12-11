@@ -1,6 +1,6 @@
 import { orderBy } from 'lodash';
 import { database } from '../../firebase';
-import { TYPE_NOTIFICATIONS } from '../constants';
+import { TYPE_NOTIFICATIONS } from '../../constants';
 import { firebaseObjectToArray } from '../../helpers';
 
 const notifications = {
@@ -23,6 +23,7 @@ const notifications = {
     processNotification({ commit }, payload) {
       const newNotification = Object.assign({}, payload);
       newNotification.date = new Date().getTime();
+
       database
         .ref(TYPE_NOTIFICATIONS)
         .push(newNotification)

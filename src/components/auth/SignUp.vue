@@ -6,8 +6,8 @@
           <h1 class="title">
             {{ $t('auth.signUp') }}
           </h1>
-          <b-message title="Error" type="is-danger" v-if="userError !== ''" @close="userErrorClear">
-            {{ userError }}
+          <b-message :title="$t('form.errors.title')" type="is-danger" v-if="userError !== ''" @close="closeError">
+            {{ $t('form.errors.' + userError) }}
           </b-message>
           <div class="box">
             <form @submit.prevent="signUpUser">
@@ -30,7 +30,7 @@
                   <input type="password" name="password"
                     :class="{'input': true, 'is-danger': errors.has('password') }"
                     v-validate="'required|min:6'"
-                    v-model="password"
+                    v-model="password" ref="passwordRef"
                   />
                   <span v-show="errors.has('password')" class="help is-danger">
                     {{ errors.first('password') }}
@@ -42,7 +42,7 @@
                 <div class="control">
                   <input type="password" name="confirmPassword"
                     :class="{'input': true, 'is-danger': errors.has('confirmPassword') }"
-                    v-validate="'required|min:6|is:password'"
+                    v-validate="'required|min:6|confirmed:passwordRef'"
                     v-model="confirmPassword"
                   />
                   <span v-show="errors.has('confirmPassword')" class="help is-danger">
