@@ -4,19 +4,15 @@
       <p class="card-header-title">
         {{ topic.title }}
       </p>
+      <moment-date :date="topic.date" />
     </header>
-    <footer class="card-footer">
-      <span class="card-footer-item create-date has-justify-content-start">
-        {{ $t('form.labels.created') }}:&ensp; <moment-date :date="topic.date" />
-      </span>
-      <template v-if="role === adminRole">
-        <router-link :to="{ name: 'topicEdit', params: { id: editId }}" class="card-footer-item">
-          {{ $t('actions.edit') }}
-        </router-link>
-        <a href="#" class="card-footer-item" @click="deleteTopic">
-          {{ $t('actions.delete') }}
-        </a>
-      </template>
+    <footer class="card-footer" v-if="role === adminRole">
+      <router-link :to="{ name: 'topicEdit', params: { id: editId }}" class="card-footer-item">
+        {{ $t('actions.edit') }}
+      </router-link>
+      <a href="#" class="card-footer-item" @click="deleteTopic">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>

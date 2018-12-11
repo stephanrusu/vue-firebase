@@ -19,7 +19,7 @@
     </div>
     <footer class="card-footer">
       <span class="card-footer-item create-date has-justify-content-start">
-        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="sponsor.date" />
+        <moment-date :date="sponsor.date" />
       </span>
       <template v-if="role === adminRole">
         <router-link :to="{ name: 'sponsorEdit', params: { id: editId }}" class="card-footer-item">
@@ -88,5 +88,9 @@ export default {
 .media
   .image
     overflow: hidden
+
+.card
+  .date-field
+    padding: 0
 
 </style>

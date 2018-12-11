@@ -4,27 +4,23 @@
       <p class="card-header-title">
         {{ pharmacy.title }}
       </p>
+      <moment-date :date="pharmacy.date" />
     </header>
     <div class="card-content">
       <div class="content">
         <p>{{ pharmacy.description }}</p>
         <p>
-          {{ $t('form.labels.location') }}:&ensp;<b>{{ pharmacy.location.latitude }}, {{ pharmacy.location.longitude }}</b>
+          {{ $t('form.labels.location') }}:&ensp;<span>{{ pharmacy.location.latitude }}, {{ pharmacy.location.longitude }}</span>
         </p>
       </div>
     </div>
-    <footer class="card-footer">
-      <span class="card-footer-item create-date has-justify-content-start">
-        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="pharmacy.date" />
-      </span>
-      <template v-if="role === adminRole" >
-        <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}" class="card-footer-item">
-          {{ $t('actions.edit') }}
-        </router-link>
-        <a href="#" class="card-footer-item" @click.prevent="deletePharmacy">
-          {{ $t('actions.delete') }}
-        </a>
-      </template>
+    <footer class="card-footer" v-if="role === adminRole">
+      <router-link :to="{ name: 'pharmacyEdit', params: { id: editId }}" class="card-footer-item">
+        {{ $t('actions.edit') }}
+      </router-link>
+      <a href="#" class="card-footer-item" @click.prevent="deletePharmacy">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>
