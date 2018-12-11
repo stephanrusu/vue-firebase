@@ -26,20 +26,20 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.hero {
-  margin: 1.5rem 0;
-  border-radius: 5px;
+<style lang="sass">
+@import '../../styles/extend/variables'
 
-  .hero-body {
-    padding: 1.5rem;
+.hero
+  margin: 1.5rem 0
+  border-radius: 5px
+  box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba($black,.08)
 
-    .title {
-      font-size: 1.5rem;
-    }
-    .subtitle {
-      font-size: 1rem;
-    }
-  }
-}
+  .hero-body
+    padding: 1.5rem
+
+    .title
+      font-size: 1.5rem
+
+    .subtitle
+      font-size: 1rem
 </style>
