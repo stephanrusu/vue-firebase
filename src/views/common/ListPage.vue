@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card-list-container">
     <div class="has-text-right" v-if="role === adminRole">
       <route-link-action :route="{ name: routeCreate }">{{ $t('actions.create') }}</route-link-action>
     </div>
@@ -13,14 +13,13 @@
 
 <script>
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
-import ListPagination from '@/views/common/ListPagination.vue';
+
 import { ADMIN_ROLE } from '@/constants/roles';
 
 export default {
   name: 'ListPage',
   components: {
     RouteLinkAction,
-    ListPagination,
   },
   props: {
     routeCreate: {
