@@ -13,8 +13,6 @@ export default {
 };
 </script>
 <style lang="sass">
-@import '../../styles/extend/variables'
-
 .date-field
   padding: 0.75rem
   font-size: 85%

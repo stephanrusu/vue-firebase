@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@firebase/app-types": "^0.3.3",
+    "@firebase/util": "^0.2.6",
     "@panter/vue-i18next": "^0.15.0",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
