@@ -1,19 +1,27 @@
 <template>
-  <section class="hero is-info">
-    <div class="hero-body has-text-centered">
-      <p class="title">
-        {{ title | capitalize }}
-      </p>
-      <p class="subtitle" v-show="results > 0">
-        {{ $t("header.results", {total: this.results}) }}
-      </p>
-    </div>
-  </section>
+  <div>
+    <section class="hero is-info">
+      <div class="hero-body has-text-centered">
+        <p class="title">
+          {{ title | capitalize }}
+        </p>
+        <p class="subtitle" v-show="results > 0">
+          {{ $t("header.results", {total: this.results}) }}
+        </p>
+      </div>
+    </section>
+    <breadcrumbs />
+  </div>
 </template>
 
 <script>
+import Breadcrumbs from '@/views/common/Breadcrumbs.vue';
+
 export default {
   name: 'PageHeader',
+  components: {
+    Breadcrumbs,
+  },
   props: {
     title: {
       type: String,
@@ -26,9 +34,8 @@ export default {
   },
 };
 </script>
-<style lang="sass">
-@import '../../styles/extend/variables'
 
+<style lang="sass">
 .hero
   margin: 1.5rem 0
   border-radius: 5px

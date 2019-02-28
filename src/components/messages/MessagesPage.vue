@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       legend: {
-        1: { level: 'light', label: 'informative' },
+        1: { level: 'primary', label: 'informative' },
         2: { level: 'success', label: 'low' },
         3: { level: 'warning', label: 'medium' },
         4: { level: 'high', label: 'high' },

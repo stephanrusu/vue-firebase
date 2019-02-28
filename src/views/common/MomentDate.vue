@@ -1,5 +1,5 @@
 <template>
-  <b>{{ date | moment('HH:mm DD MMM, YYYY') }}</b>
+  <span class='date-field'>{{ date | moment('DD MMM YYYY [at] HH:mm') }}</span>
 </template>
 
 <script>
@@ -12,3 +12,10 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.date-field
+  padding: 0.75rem
+  font-size: 85%
+  color: $grey
+  text-transform: lowercase
+</style>

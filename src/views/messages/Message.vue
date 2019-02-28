@@ -1,30 +1,26 @@
 <template>
   <div class="card">
     <header class="card-header">
-      <p class="card-header-title">
-        {{ message.title }}
-      </p>
       <b-tag :type="`is-${legend[message.importance].level}`">
         {{ $t('form.labels.level.'+legend[message.importance].label) }}
       </b-tag>
+      <p class="card-header-title">
+        {{ message.title }}
+      </p>
+      <moment-date :date="message.date" />
     </header>
     <div class="card-content">
       <div class="content">
         <p>{{ message.message }}</p>
       </div>
     </div>
-    <footer class="card-footer">
-      <span class="card-footer-item create-date has-justify-content-start">
-        {{ $t('form.labels.created') }}:&ensp;<moment-date :date="message.date" />
-      </span>
-      <template v-if="role === adminRole">
-        <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">
-          {{ $t('actions.edit') }}
-        </router-link>
-        <a href="#" class="card-footer-item" @click.prevent="deleteMessage">
-          {{ $t('actions.delete') }}
-        </a>
-      </template>
+    <footer class="card-footer" v-if="role === adminRole">
+      <router-link :to="{ name: 'messageEdit', params: { id: editId }}" class="card-footer-item">
+        {{ $t('actions.edit') }}
+      </router-link>
+      <a href="#" class="card-footer-item" @click.prevent="deleteMessage">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>
@@ -70,8 +66,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../styles/extend/variables'
-
 .tag
   margin: 0.75rem
   min-width: 75px

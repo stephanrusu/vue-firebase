@@ -1,4 +1,4 @@
-$has-justify-content: 'has-justify-content'
+$has-justify-content: 'has-justify-content' !default
 
 .#{$has-justify-content}-start
   justify-content: flex-start !important
@@ -11,7 +11,7 @@ $has-justify-content: 'has-justify-content'
 .#{$has-justify-content}-around
   justify-content: space-around !important
 
-$has-align-items: 'has-align-items'
+$has-align-items: 'has-align-items' !default
 
 .#{$has-align-items}-start
   align-items: flex-start !important
@@ -24,7 +24,7 @@ $has-align-items: 'has-align-items'
 .#{$has-align-items}-stretch
   align-items: stretch !important
 
-$has-align-content: 'has-align-content'
+$has-align-content: 'has-align-content' !default
 
 .#{$has-align-content}-start
   align-content: flex-start !important
@@ -39,7 +39,7 @@ $has-align-content: 'has-align-content'
 .#{$has-align-content}-stretch
   align-content: stretch !important
 
-$has-align-self: 'has-align-self'
+$has-align-self: 'has-align-self' !default
 
 .#{$has-align-self}-auto
   align-self: auto !important
@@ -53,3 +53,43 @@ $has-align-self: 'has-align-self'
   align-self: baseline !important
 .#{$has-align-self}-stretch
   align-self: stretch !important
+
+
+
+/*! utilities */
+@each $prop in 'margin', 'padding'
+  .has-#{$prop}-0
+    #{$prop}: 0 !important
+  .has-#{$prop}-horizontal-0
+    #{$prop}-left: 0 !important
+    #{$prop}-right: 0 !important
+  .has-#{$prop}-vertical-0
+    #{$prop}-top: 0 !important
+    #{$prop}-bottom: 0 !important
+  .has-#{$prop}-top-0
+    #{$prop}-top: 0 !important
+  .has-#{$prop}-right-0
+    #{$prop}-right: 0 !important
+  .has-#{$prop}-bottom-0
+    #{$prop}-bottom: 0 !important
+  .has-#{$prop}-left-0
+    #{$prop}-left: 0 !important
+
+  @each $size in $sizes
+    $i: index($sizes, $size)
+    .has-#{$prop}-#{$i}
+      #{$prop}: $size !important
+    .has-#{$prop}-top-#{$i}
+      #{$prop}-top: $size !important
+    .has-#{$prop}-right-#{$i}
+      #{$prop}-right: $size !important
+    .has-#{$prop}-bottom-#{$i}
+      #{$prop}-bottom: $size !important
+    .has-#{$prop}-left-#{$i}
+      #{$prop}-left: $size !important
+    .has-#{$prop}-horizontal-#{$i}
+      #{$prop}-left: $size !important
+      #{$prop}-right: $size !important
+    .has-#{$prop}-vertical-#{$i}
+      #{$prop}-top: $size !important
+      #{$prop}-bottom: $size !important
