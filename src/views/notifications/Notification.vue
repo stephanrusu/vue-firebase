@@ -16,11 +16,17 @@
         </b-taglist>
       </div>
     </div>
+    <footer class="card-footer" v-if="role === adminRole">
+      <a href="#" class="card-footer-item" @click.prevent="deleteNotification">
+        {{ $t('actions.delete') }}
+      </a>
+    </footer>
   </div>
 </template>
 
 <script>
 import MomentDate from '@/views/common/MomentDate.vue';
+import { ADMIN_ROLE } from '@/constants/roles';
 
 export default {
   name: 'Notification',
@@ -33,9 +39,22 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      adminRole: ADMIN_ROLE,
+    };
+  },
   computed: {
     notification() {
       return this.$store.getters.loadSingleNotification(this.editId);
+    },
+    role() {
+      return this.$store.getters.userRole;
+    },
+  },
+  methods: {
+    deleteNotification() {
+      this.$store.dispatch('removeNotification', this.editId);
     },
   },
 };

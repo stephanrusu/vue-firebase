@@ -43,6 +43,6 @@ firebase deploy
 ```
 ### Deploy only functions
 ```
-firebase deploy --only function
+firebase deploy --only functions:<function-name>,functions:<function-name>
 ```
 ### End of story

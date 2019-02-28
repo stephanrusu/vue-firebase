@@ -2,10 +2,10 @@
    <nav key="breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
     <ul>
       <router-link tag="li" :to="{ name: 'home' }">
-        <a>Home</a>
+        <a>{{ $t('navigation.home') }}</a>
       </router-link>
       <router-link tag="li" :to="{ name: $route.name }" class="is-active">
-        <a>{{ $route.name }}</a>
+        <a class="is-capitalized">{{ $route.name }}</a>
       </router-link>
     </ul>
   </nav>
