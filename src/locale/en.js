@@ -7,6 +7,18 @@ const en = {
     topics: 'Topics',
     home: 'Home',
   },
+  breadcrumbs: {
+    createMessages: 'Create messages',
+    editMessages: 'Edit messages',
+    createSponsors: 'Create sponsors',
+    editSponsors: 'Edit sponsors',
+    createNotifications: 'Create notifications',
+    editNotifications: 'Edit notifications',
+    createPharmacies: 'Create pharmacies',
+    editPharmacies: 'Edit pharmacies',
+    createTopics: 'Create topics',
+    editTopics: 'Edit topics',
+  },
   auth: {
     signIn: 'Sign in',
     signUp: 'Sign up',

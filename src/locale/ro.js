@@ -7,6 +7,18 @@ const ro = {
     topics: 'Topice',
     home: 'Acasa',
   },
+  breadcrumbs: {
+    createMessages: 'Adaugare mesaje',
+    editMessages: 'Editare mesaje',
+    createSponsors: 'adaugare sponsori',
+    editSponsors: 'Editare sponsori',
+    createNotifications: 'Adaugare notificari',
+    editNotifications: 'Editare notificari',
+    createPharmacies: 'Adaugare farmacii',
+    editPharmacies: 'Editare farmacii',
+    createTopics: 'Adaugare topice',
+    editTopics: 'Editare topice',
+  },
   auth: {
     signIn: 'Conectare',
     signUp: 'Inscriere',

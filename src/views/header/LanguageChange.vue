@@ -20,6 +20,7 @@ export default {
   methods: {
     changeLanguage(lang) {
       this.$i18n.i18next.changeLanguage(lang);
+      this.$moment.locale(lang);
     },
   },
 };

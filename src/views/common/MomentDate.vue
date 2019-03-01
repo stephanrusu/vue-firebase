@@ -1,5 +1,5 @@
 <template>
-  <span class='date-field'>{{ date | moment('DD MMM YYYY [at] HH:mm') }}</span>
+  <span class='date-field'>{{ date | moment('DD MMM YYYY [@] HH:mm') }}</span>
 </template>
 
 <script>

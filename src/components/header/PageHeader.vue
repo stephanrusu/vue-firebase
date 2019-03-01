@@ -10,18 +10,12 @@
         </p>
       </div>
     </section>
-    <breadcrumbs />
   </div>
 </template>
 
 <script>
-import Breadcrumbs from '@/views/common/Breadcrumbs.vue';
-
 export default {
   name: 'PageHeader',
-  components: {
-    Breadcrumbs,
-  },
   props: {
     title: {
       type: String,

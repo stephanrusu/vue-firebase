@@ -16,3 +16,10 @@ export default {
   name: 'Breadcrumbs',
 };
 </script>
+
+<style lang="sass">
+
+.breadcrumb
+  margin-bottom: 0.5rem
+
+</style>
