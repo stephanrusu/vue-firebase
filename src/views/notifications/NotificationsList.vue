@@ -1,7 +1,9 @@
 <template>
   <div>
     <list-page :routeCreate="'notificationCreate'" :items="notifications">
-      <notification-card slot-scope="{ item }" :key="item['.key']" :editId="item['.key']" />
+      <template v-slot="{ item }" >
+        <notification-card :key="item['.key']" :editId="item['.key']" />
+      </template>
     </list-page>
     <br />
     <list-pagination v-if="total > perPage" :total="total" :current.sync="current"

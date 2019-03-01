@@ -1,4 +1,4 @@
-import { orderBy } from 'lodash';
+import { orderBy, findIndex } from 'lodash';
 import { TYPE_NOTIFICATIONS } from '../../constants';
 import { firestoreObjectToArray } from '../../helpers';
 import * as fsMethods from '../../helpers/firestore';
@@ -25,6 +25,12 @@ const notifications = {
           commit('createNotification', newNotification);
         });
     },
+    removeMessage({ commit }, payload) {
+      fsMethods.removeData(TYPE_NOTIFICATIONS, payload)
+        .then(() => {
+          commit('removeNotification', payload);
+        });
+    },
   },
   getters: {
     notificationsLength: state => state.notifications.length,
@@ -39,6 +45,10 @@ const notifications = {
     },
     createNotification(state, payload) {
       state.notifications.splice(0, 0, payload);
+    },
+    removeNotification(state, payload) {
+      const index = findIndex(state.notifications, { '.key': payload });
+      state.notifications.splice(index, 1);
     },
   },
 };

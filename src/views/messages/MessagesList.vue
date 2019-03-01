@@ -1,7 +1,9 @@
 <template>
   <div>
     <list-page :routeCreate="'messageCreate'" :items="messages" >
-      <message-card slot-scope="{ item }" :legend="legend" :editId="item['.key']" />
+      <template v-slot="{ item }" >
+        <message-card :legend="legend" :editId="item['.key']" />
+      </template>
     </list-page>
     <br />
     <list-pagination v-if="total > perPage" :total="total" :current.sync="current"

@@ -15,16 +15,20 @@
         </b-taglist>
       </div>
     </div>
-    <footer class="card-footer">
+    <footer class="card-footer" v-if="role === adminRole">
       <span class="card-footer-item create-date has-justify-content-start">
         {{ $t('form.labels.created') }}:&ensp; <moment-date :date="notification.date.seconds" />
       </span>
+      <a href="#" class="card-footer-item" @click.prevent="deleteNotification">
+        {{ $t('actions.delete') }}
+      </a>
     </footer>
   </div>
 </template>
 
 <script>
 import MomentDate from '@/views/common/MomentDate.vue';
+import { ADMIN_ROLE } from '@/constants';
 
 export default {
   name: 'Notification',
@@ -37,9 +41,22 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      adminRole: ADMIN_ROLE,
+    };
+  },
   computed: {
     notification() {
       return this.$store.getters.loadSingleNotification(this.editId);
+    },
+    role() {
+      return this.$store.getters.userRole;
+    },
+  },
+  methods: {
+    deleteNotification() {
+      this.$store.dispatch('removeNotification', this.editId);
     },
   },
 };
