@@ -1,7 +1,9 @@
 <template>
   <div>
     <list-page :routeCreate="'pharmacyCreate'" :items="pharmacies">
-      <pharmacy-card slot-scope="{ item }" :editId="item['.key']" @deletePharmacy="deleteItem" />
+      <template v-slot="{ item }" >
+        <pharmacy-card :editId="item['.key']" @deletePharmacy="deleteItem" />
+      </template>
     </list-page>
     <br />
     <list-pagination v-if="total > perPage"
