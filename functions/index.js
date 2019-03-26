@@ -1,3 +1,5 @@
+import {TO_ALL_TOPIC} from '../src/constants';
+
 let functions = require('firebase-functions');
 let admin = require('firebase-admin');
 
@@ -28,12 +30,20 @@ exports.addNotifications = functions.https.onRequest((request, response) => {
 exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
   .onCreate((snapshot) => {
     var data = snapshot.val();
-    var payload = {
+
+    const payload = {
       notification: {
         title: data.title,
         body: data.description,
-      }
+      },
     };
 
-  return admin.messaging().sendToTopic(data.topic[0], payload);
+    if(data.toAll) {
+      payload.topic = TO_ALL_TOPIC;
+    } else {
+      const conditionTopic = `'${data.station}' in topics && ('${data.topic.join('\' in topics || \'')}' in topics)`;
+      payload.condition = conditionTopic;
+    }
+
+  return admin.messaging().send(payload);
 });

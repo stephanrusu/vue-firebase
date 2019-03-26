@@ -8,6 +8,7 @@ import router from './router';
 import store from './store';
 import App from './App.vue';
 import i18next from './locale/i18n';
+import './helpers/filters/capitalize';
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
@@ -21,12 +22,6 @@ Vue.config.productionTip = false;
 // Vue.config.silent = true;
 
 const i18n = new VueI18Next(i18next);
-
-Vue.filter('capitalize', (value) => {
-  if (!value) return '';
-  const updatedValue = value.toString();
-  return updatedValue.charAt(0).toUpperCase() + updatedValue.slice(1);
-});
 
 new Vue({
   router,

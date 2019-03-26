@@ -52,6 +52,11 @@ const ro = {
       confirmPassword: 'Comfirm parola',
       withAccount: 'Am deja cont',
       withoutAccount: 'Nu am cont',
+      station: 'Statie',
+      sendToAll: 'Trimite la toti',
+      east: 'Est',
+      west: 'Vest',
+      select: 'Selecteaza',
       level: {
         informative: 'Informativ',
         low: 'Scazut',

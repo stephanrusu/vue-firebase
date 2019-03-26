@@ -11,12 +11,23 @@
             <b-input type="textarea" v-model="newNotification.description"
               maxlength="140" required :has-counter="false" name="description" />
           </b-field>
-          <b-field :label="$t('form.labels.topic')">
+          <b-field>
+            <div class="field">
+              <b-switch type="is-info" v-model="newNotification.toAll">{{ $t('form.labels.sendToAll') }}</b-switch>
+            </div>
+          </b-field>
+          <b-field :label="$t('form.labels.station')" v-if="!newNotification.toAll">
+             <b-select :placeholder="$t('form.labels.select')" v-model="newNotification.station" expanded>
+                <option :value="PUSH_NOTIFICATION_LOCATION_TOPICS.east">{{ $t('form.labels.east') }}</option>
+                <option :value="PUSH_NOTIFICATION_LOCATION_TOPICS.west">{{ $t('form.labels.west') }}</option>
+            </b-select>
+          </b-field>
+          <b-field :label="$t('form.labels.topic')" v-if="!newNotification.toAll">
             <div class="block block-radio">
-              <b-radio v-for="topic in topics" :key="topic['.key']"
+              <b-checkbox v-for="topic in topics" :key="topic['.key']"
                 type="is-info" :native-value="topic.id"
                 name="topic" v-model="newNotification.topic"
-              >{{ topic.title }}</b-radio>
+              >{{ topic.title }}</b-checkbox>
             </div>
           </b-field>
           <div class='is-divider' />
@@ -33,6 +44,7 @@
 
 <script>
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
+import { PUSH_NOTIFICATION_LOCATION_TOPICS } from '@/constants';
 
 export default {
   name: 'NotificationForm',
@@ -41,7 +53,11 @@ export default {
   },
   data() {
     return {
-      newNotification: {},
+      PUSH_NOTIFICATION_LOCATION_TOPICS,
+      newNotification: {
+        toAll: false,
+        topic: [],
+      },
     };
   },
   created() {

@@ -52,6 +52,11 @@ const en = {
       confirmPassword: 'Confirm password',
       withAccount: 'I already have an account',
       withoutAccount: 'I don\'t have an account',
+      station: 'Station',
+      sendToAll: 'Send to all',
+      east: 'East',
+      west: 'West',
+      select: 'Select',
       level: {
         informative: 'Informative',
         low: 'Low',
