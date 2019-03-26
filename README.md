@@ -1,28 +1,31 @@
-# vue-firebase
+## vue-firebase-demo
 
-## Project setup
+### Project setup
 ```
 yarn install
 ```
 
 Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn serve
 ```
 
 Compiles and minifies for production
 ```
-yarn run build
+yarn build
 ```
 
 Lints and fixes files
 ```
-yarn run lint
+yarn lint
 ```
 
-## Firebase
+### Firebase
 
-Add your firebase project configuration in ```src/firebase/index.js```
+Add your firebase project configuration in 
+```
+src/firebase/index.js
+```
 
 Install Firebase CLI used for deploy the app
 ```
@@ -39,7 +42,7 @@ Run build first - still unsure about this :)
 yarn build
 ```
 
-To deploy the app run
+To deploy the app, run
 ```
 firebase deploy
 ```
