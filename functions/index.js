@@ -1,5 +1,3 @@
-import {TO_ALL_TOPIC} from '../src/constants';
-
 let functions = require('firebase-functions');
 let admin = require('firebase-admin');
 
@@ -39,7 +37,7 @@ exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
     };
 
     if(data.toAll) {
-      payload.topic = TO_ALL_TOPIC;
+      payload.topic = 'pollen_allerts';
     } else {
       const conditionTopic = `'${data.station}' in topics && ('${data.topic.join('\' in topics || \'')}' in topics)`;
       payload.condition = conditionTopic;
