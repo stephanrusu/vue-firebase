@@ -1,7 +1,9 @@
 <template>
   <div>
     <list-page :routeCreate="'sponsorCreate'" :items="sponsors">
-      <sponsor-card slot-scope="{ item }" :editId="item['.key']" />
+      <template v-slot="{ item }" >
+        <sponsor-card :editId="item['.key']" />
+      </template>
     </list-page>
     <br />
     <list-pagination v-if="total > perPage"

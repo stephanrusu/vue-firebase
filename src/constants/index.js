@@ -22,3 +22,21 @@ export const ROUTE_REGISTER = `/${TYPE_REGISTER}`;
 export const ROUTE_AUTH = `/${TYPE_AUTH}`;
 
 export const PAGE_SIZE = 10;
+
+export const PUSH_NOTIFICATION_POLLEN_TYPE_TOPICS = {
+  birk: 'birk_topic',
+  bynke: 'bynke_topic',
+  el: 'el_topic',
+  elm: 'elm_topic',
+  græs: 'graes_topic',
+  hassel: 'hassel_topic',
+  alternaria: 'alternaria_topic',
+  cladosporium: 'cladosporium_topic',
+};
+
+export const TO_ALL_TOPIC = 'pollen_allerts';
+
+export const PUSH_NOTIFICATION_LOCATION_TOPICS = {
+  east: '48_pollen_station_topic',
+  west: '49_pollen_station_topic',
+};
