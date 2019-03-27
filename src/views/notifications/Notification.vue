@@ -10,6 +10,9 @@
       <div class="content">
         <p>{{ notification.description }}</p>
         <b-taglist>
+          <b-tag type="is-primary">
+            {{ notification.station}}
+          </b-tag>
           <b-tag type="is-info" v-for="topic in notification.topic" :key="topic">
             {{ topic | capitalize }}
           </b-tag>

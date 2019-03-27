@@ -38,6 +38,8 @@ exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
 
     if(data.toAll) {
       payload.topic = 'pollen_allerts';
+    } else if(data.topic === undefined) {
+      payload.topic = data.station;
     } else {
       const conditionTopic = `'${data.station}' in topics && ('${data.topic.join('\' in topics || \'')}' in topics)`;
       payload.condition = conditionTopic;
