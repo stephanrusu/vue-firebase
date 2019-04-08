@@ -56,6 +56,7 @@ const en = {
       sendToAll: 'Send to all',
       east: 'East',
       west: 'West',
+      all: 'All',
       select: 'Select',
       level: {
         informative: 'Informative',

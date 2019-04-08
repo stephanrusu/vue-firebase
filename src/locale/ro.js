@@ -56,6 +56,7 @@ const ro = {
       sendToAll: 'Trimite la toti',
       east: 'Est',
       west: 'Vest',
+      all: 'Tuturor',
       select: 'Selecteaza',
       level: {
         informative: 'Informativ',
