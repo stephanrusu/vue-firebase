@@ -34,13 +34,11 @@ exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
       notification: {
         title: data.title,
         body: data.description,
-        icon: 'ic_notification'
       },
     };
 
     const options = {
       collapseKey : timestamp,
-      'apns-collapse-id': timestamp,
     }
 
     if(data.toAll) {
@@ -51,5 +49,4 @@ exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
       const conditionTopic = `'${data.station}' in topics && ('${data.topic.join('\' in topics || \'')}' in topics)`;
       return admin.messaging().sendToCondition(conditionTopic, payload, options);
     }
-
 });

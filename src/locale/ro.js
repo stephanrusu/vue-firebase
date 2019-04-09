@@ -61,7 +61,7 @@ const ro = {
       level: {
         informative: 'Informativ',
         low: 'Scazut',
-        medium: 'Medium',
+        medium: 'Mediu',
         high: 'Ridicat',
         critical: 'Critic',
       },

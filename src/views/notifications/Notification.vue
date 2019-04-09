@@ -11,7 +11,7 @@
         <p>{{ notification.description }}</p>
         <b-taglist>
           <b-tag type="is-primary" v-if="!notification.toAll">
-            {{ stationTypes[notification.station] | capitalize }}
+            {{ $t(`form.labels.${stationTypes[notification.station]}`) | capitalize }}
           </b-tag>
           <b-tag type="is-primary" v-else>
             {{ $t('form.labels.all') }}
