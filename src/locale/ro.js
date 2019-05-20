@@ -37,6 +37,7 @@ const ro = {
     labels: {
       created: 'Creat',
       title: 'Titlu',
+      id: 'Id',
       description: 'Descriere',
       importance: 'Importanta',
       location: 'Locatia',

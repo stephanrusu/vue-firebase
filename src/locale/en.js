@@ -37,6 +37,7 @@ const en = {
     labels: {
       created: 'Created',
       title: 'Title',
+      id: 'Id',
       location: 'Location',
       description: 'Description',
       importance: 'Importance',
