@@ -22,10 +22,6 @@
                 <option :value="PUSH_NOTIFICATION_LOCATION_TOPICS.west">{{ $t('form.labels.west') }}</option>
             </b-select>
           </b-field>
-          <b-field>
-            <custom-select placeholder="Select">
-            </custom-select>
-          </b-field>
           <b-field :label="$t('form.labels.topic')" v-if="!newNotification.toAll">
             <div class="block block-radio">
               <b-checkbox v-for="topic in topics" :key="topic['.key']"
@@ -48,14 +44,12 @@
 
 <script>
 import RouteLinkAction from '@/views/common/RouteLinkAction.vue';
-import CustomSelect from '@/views/common/CustomSelect.vue';
 import { PUSH_NOTIFICATION_LOCATION_TOPICS } from '@/constants';
 
 export default {
   name: 'NotificationForm',
   components: {
     RouteLinkAction,
-    CustomSelect,
   },
   data() {
     return {
