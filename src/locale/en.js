@@ -37,6 +37,7 @@ const en = {
     labels: {
       created: 'Created',
       title: 'Title',
+      id: 'Id',
       location: 'Location',
       description: 'Description',
       importance: 'Importance',
@@ -56,6 +57,7 @@ const en = {
       sendToAll: 'Send to all',
       east: 'East',
       west: 'West',
+      all: 'All',
       select: 'Select',
       level: {
         informative: 'Informative',

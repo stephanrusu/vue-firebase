@@ -16,7 +16,7 @@
             maxlength="12" required :has-counter="false" name="longitude" />
           </b-field>
           <b-field :label="$t('form.labels.description')">
-            <b-input v-model="newPharmacy.description" type="textarea" name="description" />
+            <b-input v-model="newPharmacy.description" type="textarea" :has-counter="false" rows="2" name="description" />
           </b-field>
           <div class="is-divider" />
           <b-field>

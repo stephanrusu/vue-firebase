@@ -37,6 +37,7 @@ const ro = {
     labels: {
       created: 'Creat',
       title: 'Titlu',
+      id: 'Id',
       description: 'Descriere',
       importance: 'Importanta',
       location: 'Locatia',
@@ -56,11 +57,12 @@ const ro = {
       sendToAll: 'Trimite la toti',
       east: 'Est',
       west: 'Vest',
+      all: 'Tuturor',
       select: 'Selecteaza',
       level: {
         informative: 'Informativ',
         low: 'Scazut',
-        medium: 'Medium',
+        medium: 'Mediu',
         high: 'Ridicat',
         critical: 'Critic',
       },

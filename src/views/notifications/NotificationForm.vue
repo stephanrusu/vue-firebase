@@ -8,7 +8,7 @@
             <b-input v-model="newNotification.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
           <b-field :label="$t('form.labels.description')">
-            <b-input type="textarea" v-model="newNotification.description"
+            <b-input type="textarea" v-model="newNotification.description" rows="2"
               maxlength="140" required :has-counter="false" name="description" />
           </b-field>
           <b-field>
@@ -17,7 +17,7 @@
             </div>
           </b-field>
           <b-field :label="$t('form.labels.station')" v-if="!newNotification.toAll">
-             <b-select :placeholder="$t('form.labels.select')" v-model="newNotification.station" expanded>
+            <b-select :placeholder="$t('form.labels.select')" v-model="newNotification.station" expanded>
                 <option :value="PUSH_NOTIFICATION_LOCATION_TOPICS.east">{{ $t('form.labels.east') }}</option>
                 <option :value="PUSH_NOTIFICATION_LOCATION_TOPICS.west">{{ $t('form.labels.west') }}</option>
             </b-select>

@@ -28,6 +28,7 @@ exports.addNotifications = functions.https.onRequest((request, response) => {
 exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
   .onCreate((snapshot) => {
     var data = snapshot.val();
+    var timestamp = new Date().getTime().toString();
 
     const payload = {
       notification: {
@@ -36,12 +37,16 @@ exports.sendNotifications = functions.database.ref('/notifications/{pushId}')
       },
     };
 
-    if(data.toAll) {
-      payload.topic = 'pollen_allerts';
-    } else {
-      const conditionTopic = `'${data.station}' in topics && ('${data.topic.join('\' in topics || \'')}' in topics)`;
-      payload.condition = conditionTopic;
+    const options = {
+      collapseKey : timestamp,
     }
 
-  return admin.messaging().send(payload);
+    if(data.toAll) {
+      return admin.messaging().sendToTopic('pollen_allerts', payload, options);
+    } else if(data.topic === undefined) {
+      return admin.messaging().sendToTopic(data.station, payload, options);
+    } else {
+      const conditionTopic = `'${data.station}' in topics && ('${data.topic.join('\' in topics || \'')}' in topics)`;
+      return admin.messaging().sendToCondition(conditionTopic, payload, options);
+    }
 });

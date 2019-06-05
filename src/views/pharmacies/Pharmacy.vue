@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     deletePharmacy() {
-      this.$emit('deletePharmacy', this.editId);
+      this.$store.dispatch('deletePharmacy', this.editId);
     },
   },
 };

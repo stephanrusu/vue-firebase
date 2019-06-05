@@ -7,6 +7,9 @@
           <b-field :label="$t('form.labels.title')">
             <b-input v-model="newTopic.title" maxlength="30" required :has-counter="false" name="title" />
           </b-field>
+          <b-field :label="$t('form.labels.id')">
+            <b-input v-model="newTopic.id" maxlength="30" required :has-counter="false" name="id" />
+          </b-field>
           <div class="is-divider" />
           <b-field>
             <div class="control">
@@ -43,7 +46,6 @@ export default {
   },
   methods: {
     submitData() {
-      this.newTopic.id = this.newTopic.title.toLowerCase().replace(' ', '-');
       this.$store.dispatch('processTopic', this.newTopic);
       this.$router.push({ name: 'topics' });
     },
