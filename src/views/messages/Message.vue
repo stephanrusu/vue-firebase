@@ -66,6 +66,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import "@/styles/extend/_variables.sass"
 .tag
   margin: 0.75rem
   min-width: 75px

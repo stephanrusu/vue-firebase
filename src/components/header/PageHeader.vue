@@ -30,6 +30,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import "@/styles/extend/_variables.sass"
 .hero
   margin: 1.5rem 0
   border-radius: 5px
