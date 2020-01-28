@@ -5,12 +5,12 @@
 // };
 
 
-module.exports = {
-  css: {
-    loaderOptions: {
-      sass: {
-        data: '@import "@/styles/extend/_variables.sass";',
-      },
-    },
-  },
-};
+// module.exports = {
+//   css: {
+//     loaderOptions: {
+//       sassOptions: {
+//         data: '@import "@/styles/extend/_variables.sass";',
+//       },
+//     },
+//   },
+// };

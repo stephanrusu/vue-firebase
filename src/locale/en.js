@@ -23,6 +23,8 @@ const en = {
     signIn: 'Sign in',
     signUp: 'Sign up',
     signOut: 'Sign out',
+    forgotPassword: 'Forgot password',
+    resetPassword: 'Reset password',
   },
   actions: {
     list: 'List',

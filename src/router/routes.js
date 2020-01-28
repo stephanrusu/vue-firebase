@@ -21,6 +21,9 @@ import PharmacyForm from '@/views/pharmacies/PharmacyForm.vue';
 
 import SignIn from '@/components/auth/SignIn.vue';
 import SignUp from '@/components/auth/SignUp.vue';
+import SignUpTest from '@/components/auth/SignUpTest.vue';
+import ForgotPassword from '@/components/auth/ForgotPassword.vue';
+import ResetPassword from '@/components/auth/ResetPassword.vue';
 
 // Lazy load importing
 // const Home = () => import('@/views/Home');
@@ -250,11 +253,25 @@ export default [
     path: '/signin',
     name: 'signin',
     component: SignIn,
-
   },
   {
     path: '/signup',
     name: 'signup',
     component: SignUp,
+  },
+  {
+    path: '/signuptest',
+    name: 'signuptest',
+    component: SignUpTest,
+  },
+  {
+    path: '/forgotpassword',
+    name: 'forgotpassword',
+    component: ForgotPassword,
+  },
+  {
+    path: '/resetpassword',
+    name: 'resetpassword',
+    component: ResetPassword,
   },
 ];

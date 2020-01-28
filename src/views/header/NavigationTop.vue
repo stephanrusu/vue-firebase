@@ -80,6 +80,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import "@/styles/extend/_variables.sass"
 .navbar
   &.has-shadow
     box-shadow: 5px 5px 0 0 #f5f5f5

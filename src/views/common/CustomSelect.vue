@@ -2,14 +2,6 @@
 
   <div class="control is-expanded">
     <div class="select">
-      <select class="select-source">
-        <template v-if="placeholder">
-          <option value="">
-            {{ placeholder }}
-          </option>
-        </template>
-        <slot />
-      </select>
       <div class="form-control-select" @click="toggleSelect">{{ placeholder }}</div>
       <div class="select-panel" :class="{'is-visible': selectIsVisible}">
         <ul class="select-list">
@@ -17,29 +9,6 @@
         </ul>
       </div>
     </div>
-    <!-- <span class="select" :class="spanClasses">
-      <select
-        v-model="computedValue"
-        ref="select"
-        :multiple="multiple"
-        v-bind="$attrs"
-        @blur="$emit('blur', $event) && checkHtml5Validity()"
-        @focus="$emit('focus', $event)"
-      >
-        <template v-if="placeholder">
-          <option
-            v-if="computedValue == null"
-            :value="null"
-            disabled
-            hidden
-          >
-            {{ placeholder }}
-          </option>
-        </template>
-        <slot />
-
-      </select>
-    </span> -->
   </div>
 </template>
 
@@ -47,10 +16,7 @@
 export default {
   name: 'CustomSelect',
   props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Symbol, Function],
-      default: null,
-    },
+    items: Object,
     placeholder: String,
     multiple: Boolean,
   },

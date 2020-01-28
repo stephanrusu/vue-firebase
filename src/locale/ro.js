@@ -23,6 +23,8 @@ const ro = {
     signIn: 'Conectare',
     signUp: 'Inscriere',
     signOut: 'Deconectare',
+    forgotPassword: 'Ai uitat parola',
+    resetPassword: 'Reseteaza parola',
   },
   actions: {
     list: 'Lista',

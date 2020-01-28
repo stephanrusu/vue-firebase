@@ -4,13 +4,13 @@
       <div class="columns is-vcentered">
         <div class="column is-6 is-offset-3">
           <h1 class="title">
-            {{ $t('auth.signIn') }}
+            {{ $t('auth.forgotPassword') }}
           </h1>
           <b-message :title="$t('form.errors.title')" type="is-danger" v-if="userError !== ''" @close="closeError">
             {{ $t('form.errors.' + userError) }}
           </b-message>
           <div class="box">
-            <form @submit.prevent="signInUser">
+            <form @submit.prevent="forgotPassowrd">
               <div class="field">
                 <label for="email" class="label">{{ $t('form.labels.email') }}</label>
                 <div class="control">
@@ -23,28 +23,13 @@
                   </span>
                 </div>
               </div>
-              <div class="field">
-                <label for="password" class="label">{{ $t('form.labels.password') }}</label>
-                <div class="control">
-                  <input  :class="{'input': true, 'is-danger': errors.has('password') }"
-                    v-validate="'required|min:6'" v-model="password"
-                    type="password" name="password"
-                  />
-                  <span v-show="errors.has('password')" class="help is-danger">
-                    {{ errors.first('password') }}
-                  </span>
-                </div>
-              </div>
               <hr />
               <div class="field is-flex has-justify-content-between">
-                <router-link :to="{ name: 'signup' }" class="button is-text">{{ $t('form.labels.withoutAccount') }}</router-link>
+                <router-link :to="{ name: 'signin' }" class="button is-text">{{ $t('form.labels.withAccount') }}</router-link>
                 <button :class="{'is-loading': loading}" :disabled="loading"
                   type="submit" class="button is-link" >
-                  {{ $t('auth.signIn') }}
+                  {{ $t('actions.submit') }}
                 </button>
-              </div>
-              <div class="field is-flex has-justify-content-center">
-                <router-link :to="{ name: 'forgotpassword' }" class="button is-text">{{ $t('auth.forgotPassword') }}</router-link>
               </div>
             </form>
           </div>
@@ -56,28 +41,19 @@
 
 <script>
 export default {
-  name: 'SignIn',
+  name: 'ForgotPassword',
   data() {
     return {
       email: '',
-      password: '',
       loading: false,
     };
   },
   computed: {
-    userUid() {
-      return this.$store.getters.userUid;
-    },
     userError() {
       return this.$store.getters.userError;
     },
   },
   watch: {
-    userUid(value) {
-      if (value !== null && value !== undefined) {
-        this.$router.push({ name: 'home' });
-      }
-    },
     userError(value) {
       if (value !== '') {
         this.loading = false;
@@ -85,13 +61,12 @@ export default {
     },
   },
   methods: {
-    signInUser() {
+    forgotPassword() {
       this.loading = true;
       this.$validator.validate().then((result) => {
         if (result) {
-          this.$store.dispatch('signInUser', {
+          this.$store.dispatch('forgotPasswordUser', {
             email: this.email,
-            password: this.password,
           });
         } else {
           this.loading = false;
