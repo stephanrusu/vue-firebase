@@ -270,7 +270,7 @@ export default [
     component: ForgotPassword,
   },
   {
-    path: '/resetpassword',
+    path: '/passwordReset',
     name: 'resetpassword',
     component: ResetPassword,
   },
