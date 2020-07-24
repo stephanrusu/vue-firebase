@@ -16,7 +16,7 @@ const notifications = {
         });
     },
     processNotification({ commit }, payload) {
-      const newNotification = Object.assign({}, payload);
+      const newNotification = { ...payload };
 
       fsMethods.addData(TYPE_NOTIFICATIONS, payload)
         .then((doc) => {
@@ -33,9 +33,9 @@ const notifications = {
     },
   },
   getters: {
-    notificationsLength: state => state.notifications.length,
-    loadSingleNotification: state => key => state.notifications.find(notification => notification['.key'] === key),
-    paginateNotifications: state => (pageSize, pageNumber) => orderBy(state.notifications, 'date', 'desc')
+    notificationsLength: (state) => state.notifications.length,
+    loadSingleNotification: (state) => (key) => state.notifications.find((notification) => notification['.key'] === key),
+    paginateNotifications: (state) => (pageSize, pageNumber) => orderBy(state.notifications, 'date', 'desc')
       .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
 
   },
