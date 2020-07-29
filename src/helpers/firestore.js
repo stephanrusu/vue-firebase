@@ -40,9 +40,8 @@ export function getAllData(collection) {
     .get();
 }
 
-
 export function addData(collection, collectionItem) {
-  const newCollectionItem = Object.assign({}, collectionItem);
+  const newCollectionItem = { ...collectionItem };
   newCollectionItem.date = new Date();
 
   return firestore
@@ -52,7 +51,7 @@ export function addData(collection, collectionItem) {
 
 export function updateData(collection, collectionItem) {
   const key = collectionItem['.key'];
-  const newCollectionItem = Object.assign({}, collectionItem);
+  const newCollectionItem = { ...collectionItem };
   delete newCollectionItem['.key'];
 
   return firestore
