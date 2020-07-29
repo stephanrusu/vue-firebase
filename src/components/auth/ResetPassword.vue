@@ -10,6 +10,10 @@
             {{ $t('form.errors.' + userError) }}
           </b-message>
           <div class="box">
+            <p>
+              {{ $t('form.others.resetPassword') }}
+            </p>
+            <br />
             <form @submit.prevent="resetPassword">
               <div class="field">
                 <label for="password" class="label">{{ $t('form.labels.password') }}</label>
@@ -37,8 +41,8 @@
                   </span>
                 </div>
               </div>
-              <div class="field is-flex has-justify-content-between">
-                <router-link :to="{ name: 'signin' }" class="button is-text">{{ $t('form.labels.withAccount') }}</router-link>
+              <hr />
+              <div class="field is-flex has-justify-content-end">
                 <button :class="{'is-loading': loading}" :disabled="loading"
                   type="submit" class="button is-link" >
                   {{ $t('actions.submit') }}
@@ -58,15 +62,24 @@ export default {
   data() {
     return {
       newPassword: '',
-      confirmNewPassword: false,
+      confirmNewPassword: '',
+      loading: false,
     };
   },
   computed: {
+    userUid() {
+      return this.$store.getters.userUid;
+    },
     userError() {
       return this.$store.getters.userError;
     },
   },
   watch: {
+    userUid(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push({ name: 'home' });
+      }
+    },
     userError(value) {
       if (value !== '') {
         this.loading = false;
@@ -79,9 +92,10 @@ export default {
       this.$validator.validate().then((result) => {
         if (result) {
           this.$store.dispatch('resetPasswordUser', {
-            actionCode: this.$router.query.oobCode || '',
+            actionCode: this.$route.query.oobCode || '',
             newPassword: this.newPassword,
           });
+          this.$router.push({ name: 'home' });
         } else {
           this.loading = false;
         }

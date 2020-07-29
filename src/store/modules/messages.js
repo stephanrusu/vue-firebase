@@ -22,7 +22,7 @@ const messages = {
     },
     processMessage({ commit }, payload) {
       const key = payload['.key'];
-      const newMessage = Object.assign({}, payload);
+      const newMessage = { ...payload };
 
       if (key === undefined) {
         newMessage.date = new Date().getTime();
@@ -55,9 +55,9 @@ const messages = {
     },
   },
   getters: {
-    messagesLength: state => state.messages.length,
-    loadSingleMessage: state => key => state.messages.find(message => message['.key'] === key),
-    paginateMessages: state => (pageSize, pageNumber) => orderBy(state.messages, 'date', 'desc')
+    messagesLength: (state) => state.messages.length,
+    loadSingleMessage: (state) => (key) => state.messages.find((message) => message['.key'] === key),
+    paginateMessages: (state) => (pageSize, pageNumber) => orderBy(state.messages, 'date', 'desc')
       .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {

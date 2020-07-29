@@ -78,6 +78,10 @@ const ro = {
       'user-not-found': 'Nu exista utilizator cu aceasta adresa de email',
       'wrong-password': 'Parola e invalida pentru adresa de email furnizata',
     },
+    others: {
+      forgotPassword: 'Un link cu resetarea parolei va fi trimis pe email',
+      resetPassword: 'Dupa salvare veti fi redirectionat catre formuarul de conectare',
+    },
   },
   header: {
     results: '{{total}} rezultate',

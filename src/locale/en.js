@@ -78,6 +78,10 @@ const en = {
       'user-not-found': 'There is no user corresponding to the given email',
       'wrong-password': 'The password is invalid for the given email',
     },
+    others: {
+      forgotPassword: 'A reset password link will be sent to your email',
+      resetPassword: 'After submit you\'ll be redirected to sign in form',
+    },
   },
   header: {
     results: '{{total}} results',
@@ -93,6 +97,5 @@ const en = {
     ro: 'Romanian',
   },
 };
-
 
 export default en;

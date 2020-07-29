@@ -22,7 +22,7 @@ const pharmacies = {
     },
     processPharmacy({ commit }, payload) {
       const key = payload['.key'];
-      const newPharmacy = Object.assign({}, payload);
+      const newPharmacy = { ...payload };
 
       if (key === undefined) {
         newPharmacy.date = new Date().getTime();
@@ -56,9 +56,9 @@ const pharmacies = {
     },
   },
   getters: {
-    pharmaciesLength: state => state.pharmacies.length,
-    loadSinglePharmacy: state => key => state.pharmacies.find(pharmacy => pharmacy['.key'] === key),
-    paginatePharmacy: state => (pageSize, pageNumber) => orderBy(state.pharmacies, 'date', 'desc')
+    pharmaciesLength: (state) => state.pharmacies.length,
+    loadSinglePharmacy: (state) => (key) => state.pharmacies.find((pharmacy) => pharmacy['.key'] === key),
+    paginatePharmacy: (state) => (pageSize, pageNumber) => orderBy(state.pharmacies, 'date', 'desc')
       .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {

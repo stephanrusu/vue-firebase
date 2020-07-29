@@ -107,6 +107,7 @@ const actions = {
     auth.verifyPasswordResetCode(actionCode).then(() => {
       auth.confirmPasswordReset(actionCode, newPassword).then(() => {
         commit('userPasswordReset');
+        commit('userAuthError', '');
       }).catch((error) => {
         const { code, message } = error;
         let errorMessage = '';

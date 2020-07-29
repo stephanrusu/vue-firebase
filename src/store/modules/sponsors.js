@@ -23,7 +23,7 @@ const sponsors = {
     },
     processSponsor({ commit }, payload) {
       const key = payload['.key'];
-      const newSponsor = Object.assign({}, payload);
+      const newSponsor = { ...payload };
 
       if (key === undefined) {
         newSponsor.date = new Date().getTime();
@@ -81,7 +81,7 @@ const sponsors = {
       });
     },
     markActiveSponsor({ commit }, payload) {
-      const newActiveSponsor = Object.assign({}, payload);
+      const newActiveSponsor = { ...payload };
       newActiveSponsor.skey = newActiveSponsor['.key'];
 
       delete newActiveSponsor['.key'];
@@ -104,10 +104,10 @@ const sponsors = {
     },
   },
   getters: {
-    sponsorsLength: state => state.sponsors.length,
-    loadSingleSponsor: state => key => state.sponsors.find(sponsor => sponsor['.key'] === key),
-    loadTheActiveSponsor: state => state.activeSponsor,
-    paginateSponsors: state => (pageSize, pageNumber) => orderBy(state.sponsors, 'date', 'desc')
+    sponsorsLength: (state) => state.sponsors.length,
+    loadSingleSponsor: (state) => (key) => state.sponsors.find((sponsor) => sponsor['.key'] === key),
+    loadTheActiveSponsor: (state) => state.activeSponsor,
+    paginateSponsors: (state) => (pageSize, pageNumber) => orderBy(state.sponsors, 'date', 'desc')
       .slice((pageNumber - 1) * pageSize, pageNumber * pageSize),
   },
   mutations: {
