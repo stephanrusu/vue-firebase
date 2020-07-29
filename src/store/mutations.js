@@ -5,6 +5,12 @@ const mutations = {
   userSignedOut(state) {
     state.user.uid = '';
   },
+  userPasswordReset(state) {
+    state.user.uid = '';
+  },
+  userForgotPassword(state) {
+    state.user.uid = '';
+  },
   userAuthError(state, payload) {
     state.user.error = payload;
   },

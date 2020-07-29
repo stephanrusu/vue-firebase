@@ -10,7 +10,11 @@
             {{ $t('form.errors.' + userError) }}
           </b-message>
           <div class="box">
-            <form @submit.prevent="forgotPassowrd">
+            <p>
+              {{ $t('form.others.forgotPassword') }}
+            </p>
+            <br />
+            <form @submit.prevent="forgotPassword">
               <div class="field">
                 <label for="email" class="label">{{ $t('form.labels.email') }}</label>
                 <div class="control">
@@ -49,11 +53,19 @@ export default {
     };
   },
   computed: {
+    userUid() {
+      return this.$store.getters.userUid;
+    },
     userError() {
       return this.$store.getters.userError;
     },
   },
   watch: {
+    userUid(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push({ name: 'home' });
+      }
+    },
     userError(value) {
       if (value !== '') {
         this.loading = false;
@@ -68,6 +80,7 @@ export default {
           this.$store.dispatch('forgotPasswordUser', {
             email: this.email,
           });
+          this.$router.push({ name: 'home' });
         } else {
           this.loading = false;
         }
